@@ -1,5 +1,3 @@
-import os
-import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
 from datetime import datetime, timedelta
@@ -9,7 +7,7 @@ import matplotlib.lines as mlines
 from matplotlib import collections  as mc
 import pylab as pl
 
-def draw_original_nodes(nodes, filename):
+def draw_original_nodes(nodes):
     locations=[]
     req_types=[]
     depot=nodes.pop(0)  # remove the depot!!!
@@ -28,10 +26,13 @@ def draw_original_nodes(nodes, filename):
         y = locations[i][1]
         color = 'red' if (req_types[i] == 'p') else 'blue'
         plt.scatter(x, y,c=color)
+    plt.show()
 
+    '''
+    ####### For Saving Pictures into files ###########################
     base = os.path.splitext(os.path.basename(filename))[0]+'.png'
     dir = 'pics/original/'
     save_path = dir+base
     plt.savefig(save_path)
-    #plt.show()
+    '''
 

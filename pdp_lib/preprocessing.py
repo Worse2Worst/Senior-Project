@@ -9,7 +9,7 @@ class Node:
         self.service_time = int(0)
         self.p_sib = int(pickup_siblings)
         self.d_sib = int(delivery_sibling)
-        self.req_type = 'p' if (int(demand)>0) else 'd'
+        self.req_type = 'p' if (int(demand) > 0) else 'd'
 
 def read_node(filename):
     file = open(filename, 'rt')
@@ -21,7 +21,7 @@ def read_node(filename):
 
     ######  Reading Depot (Not Used in our project) ################
     line = file.readline()  #  This is the DEPOT!! (not used in our project)
-    temp=Node(*(line.split()))
+    temp = Node(*(line.split()))
     nodes.append(temp)
 
     ######  Reading the first node ################
@@ -34,5 +34,13 @@ def read_node(filename):
         line = file.readline()
 
     file.close()
+    nodes[0].req_type='depot'
     return nodes
 
+def gen_request(nodes):
+    requests = []
+    for v in nodes:
+        #print('index= ' + str(v.index) + ',x=' + str(v.x)+ ',y=' + str(v.y))
+        if v.req_type == 'p':
+            requests.append([v,nodes[v.d_sib]])
+    return requests

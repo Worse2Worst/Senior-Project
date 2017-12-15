@@ -1,3 +1,5 @@
+# define Node
+# load map (nodes) and generate requests
 class Node:
     def __init__(self, index, x, y, demand, ET, LT, ServiceTime, pickup_siblings, delivery_sibling):
         self.index = index
@@ -11,11 +13,10 @@ class Node:
         self.d_sib = int(delivery_sibling)
         self.req_type = 'p' if (int(demand) > 0) else 'd'
 
-def read_node(filename):
+def load_node(filename):
     file = open(filename, 'rt')
     line = file.readline()
     num_vehicles, load_capacities, speed = line.split() # not used
-
     nodes = []  # List of nodes
     req = []  # List of requests
 
@@ -37,7 +38,7 @@ def read_node(filename):
     nodes[0].req_type='depot'
     return nodes
 
-def gen_request(nodes):
+def generate_request(nodes):
     requests = []
     for v in nodes:
         #print('index= ' + str(v.index) + ',x=' + str(v.x)+ ',y=' + str(v.y))

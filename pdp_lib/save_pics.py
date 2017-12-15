@@ -1,5 +1,6 @@
 import os
-from pdp_lib import preprocess
+import time
+from pdp_lib import preprocessing
 import matplotlib.pyplot as plt
 from collections import namedtuple
 from datetime import datetime, timedelta
@@ -35,11 +36,14 @@ def save_original_nodes(nodes, filename):
     plt.savefig(save_path)
 
 def save_all_pics(dir_main= 'pdp_instances/LiLim/'):
+    #start_time = time.time()
     for dir_sub in os.listdir(dir_main):
         if not os.path.isfile(dir_main + dir_sub + '/'):
             directory = dir_main + dir_sub + '/'
             for fn in os.listdir(directory):
                 fn = directory + fn
-                nodes = preprocess.read_node(fn)
+                print('processing '+fn)
+                nodes = preprocessing.load_node(fn)
                 save_original_nodes(nodes, fn)
-
+                print ('used : '+ '%s seconds'% (time.time() - start_time))
+                #start_time = time.time()

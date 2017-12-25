@@ -17,16 +17,52 @@ def create_distance_matrix(nodes):
     return distances
 
 
-#sort requests by ET of pickup nodes
+#sort requests by LT of pickup nodes
 def sort_requests(requests):
-    requests.sort(key=lambda r: r[0].ET)
+    requests.sort(key=lambda r: r[0].LT)
 
 def clustering_requests(requests) :
     clusters = []
     added = {}
     sort_requests(requests)
-    clusters.append(requests[0]) # the first one
+    clusters.append([requests[0]]) # the first one
     added.add(requests[0])
-    #for r in requests:
+    '''
+    for r in requests:
+        if should_merge():
+    '''
 
 
+# should merge only if the merged(new) ones produce the shorter distance
+def should_merge(r1,r2):
+    p1,d1 = r1[0],r1[1]
+    p2,d2 = r2[0],r2[1]
+    old_distance = 2 * (distance(p1,d1)+distance(p2,d2))
+    new_distance=merged_distance(p1,p2,d1,d2)
+    if(new_distance<old_distance):
+        return True
+    return False
+
+# There are 6 permutations
+def merged_distance(p1,p2,d1,d2):
+    dist = circular_distance(p1,p2,d1,d2)
+    dist = min(dist,circular_distance(p1,d1,p2,d2))
+    dist = min(dist,circular_distance(p1,p2,d1,d2))
+    dist = min(dist,circular_distance(p2,p1,d2,d1))
+    dist = min(dist,circular_distance(p2,p1,d1,d2))
+    dist = min(dist,circular_distance(p2,d2,p1,d1))
+    return dist
+
+# calculate distance of a route that visit all nodes
+def circular_distance (v1,v2,v3,v4):
+    if (not time_feasible(v1,v2)) or (not time_feasible(v2,v3)) or (not time_feasible(v3,v4)): return 99999999999999
+    return distance(v1,v2)+distance(v2,v3)+distance(v3,v4)+distance(v4,v1)
+
+def time_feasible(v1,v2,speed=1):
+    # used time = distance/speed
+    limit_time = v2.LT - v1.ET
+    dist=distance(v1,v2)
+    used_time=(dist/speed)
+    if (used_time > limit_time):
+        return False
+    return True

@@ -36,7 +36,7 @@ def print_requests(requests):
         res += 'ET = ' + str(r[0].ET) + ' ,'
         res += 'LT = ' + str(r[0].LT) + ' ,'+'\t\t\t'
         res += 'd_node = ' + str(r[1].index) + ' ,'
-        res += 'at(' + str(r[1].x)+',' + str(r[1].y) + ')'
+        res += 'at(' + str(r[1].x)+',' + str(r[1].y) + ')'+','
         res += 'ET = ' + str(r[1].ET) + ' ,'
         res += 'LT = ' + str(r[1].LT) + ' ,' + '\t\t\t'
         print (res)

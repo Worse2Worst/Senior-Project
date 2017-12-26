@@ -1,4 +1,5 @@
 import math
+from pdp_lib import util
 from operator import itemgetter
 
 # calculate distances between nodes
@@ -21,16 +22,43 @@ def create_distance_matrix(nodes):
 def sort_requests(requests):
     requests.sort(key=lambda r: r[0].LT)
 
+
+############# Clustering (merge all version) ##########################
 def clustering_requests(requests) :
     clusters = []
     added = {}
-    sort_requests(requests)
-    clusters.append([requests[0]]) # the first one
-    added.add(requests[0])
-    '''
+    sort_requests(requests) # requests are sorted by LT of pickups
+    iter=1
     for r in requests:
-        if should_merge():
-    '''
+        added = False
+        for c in clusters:
+            for rc in c:
+                if should_merge(r,rc) and (not added):
+                    c.append(r)
+                    added = True
+        if (not added):
+            clusters.append([r])
+        iter+=1
+    return clusters
+
+
+############ Clustering (merge only first node version) ##########################
+def clustering_requests_only_first(requests):
+    clusters = []
+    added = {}
+    sort_requests(requests)  # requests are sorted by LT of pickups
+    iter = 1
+    for r in requests:
+        added = False
+        for c in clusters:
+            rc = c[0]
+            if should_merge(r, rc) and (not added):
+                c.append(r)
+                added = True
+        if (not added):
+            clusters.append([r])
+        iter += 1
+    return clusters
 
 
 # should merge only if the merged(new) ones produce the shorter distance

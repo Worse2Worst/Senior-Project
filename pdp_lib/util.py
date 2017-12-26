@@ -1,8 +1,11 @@
 from matplotlib import patches as patches, pyplot as plt
+from pylab import *
+from pdp_lib import hover_lib
 import matplotlib.cm as cm
 from matplotlib import colors
 from itertools import cycle
 import numpy as np
+
 
 def print_node(v):
     res = ''
@@ -41,8 +44,19 @@ def print_requests(requests):
         res += 'LT = ' + str(r[1].LT) + ' ,' + '\t\t\t'
         print (res)
 
+def print_clusters(clusters):
+    n = len(clusters)
+    print ('Have '+ str(n)+' clusters')
+    for i in range(n):
+        print ('#cluster #'+str(i+1)+'-----------')
+        print_requests(clusters[i])
+        print ('--------------------------')
 
 def draw_original_nodes(nodes):
+    # Description text
+    fig, ax = plt.subplots()
+    ax.set_title("The original nodes")
+    #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
     locations = []
     req_types = []
     depot = nodes[0]  # get the depot!!!
@@ -62,11 +76,14 @@ def draw_original_nodes(nodes):
         plt.scatter(x, y,c=color)
 
     plt.scatter(depot.x, depot.y, c='silver')  # draw the depot, just in case
+    figtext(.02, .02, 'Have ' + str(len(nodes)) + ' nodes')
     plt.show()
+
 
 def draw_requests(requests):
     c=[] # array 'c' to remeber the colors
-
+    fig, ax = plt.subplots()
+    ax.set_title("The Requests, separated by colors")
     # Separate requests by color
     colormap = plt.cm.gist_ncar  # nipy_spectral, Set1,Paired
     colorst = [colormap(i) for i in np.linspace(0, 0.9, len(requests))]
@@ -77,9 +94,12 @@ def draw_requests(requests):
     for i in range(len(requests)):
         p = requests[i][0]
         d = requests[i][1]
-        plt.scatter(p.x, p.y,color=c[i])
-        plt.scatter(d.x, d.y,color=c[i])
+        sc = plt.scatter(p.x, p.y,color=c[i])
+        sc = plt.scatter(d.x, d.y,color=c[i])
+    figtext(.02, .02, 'Have ' + str(len(requests)) + ' requests')
+
     plt.show()
+
     '''
     ####### For Saving Pictures into files ###########################
     base = os.path.splitext(os.path.basename(filename))[0]+'.png'
@@ -87,3 +107,26 @@ def draw_requests(requests):
     save_path = dir+base
     plt.savefig(save_path)
     '''
+
+def draw_clusters(clusters):
+    fig, ax = plt.subplots()
+    ax.set_title("The clusters, separated by colors")
+    #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
+    c=[] # array 'c' to remeber the colors
+    # Separate clusters by color
+    colormap = plt.cm.gist_ncar  # nipy_spectral, Set1,Paired
+    colorst = [colormap(i) for i in np.linspace(0, 0.9, len(clusters))]
+    for t, j1 in enumerate(clusters):
+        c.append(colorst[t])
+
+    # drawing the clusters
+    i=0
+    for cluster in clusters:
+        for j in range(len(cluster)):
+            p = cluster[j][0]
+            d = cluster[j][1]
+            plt.scatter(p.x, p.y,color=c[i])
+            plt.scatter(d.x, d.y,color=c[i])
+        i+=1
+    figtext(.02, .02, 'Have ' + str(len(clusters)) + ' clusters')
+    plt.show()

@@ -28,9 +28,12 @@ distances = processing.create_distance_matrix(nodes)
 
 
 processing.sort_requests(requests)
-util.print_requests(requests)
-#util.draw_requests(requests)
-
+#util.print_requests(requests)
+clusters = processing.clustering_requests_only_first(requests)
+#clusters = processing.clustering_requests(requests)
+#util.print_clusters(clusters)
+util.draw_requests(requests)
+util.draw_clusters(clusters)
 
 
 

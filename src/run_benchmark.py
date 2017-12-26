@@ -20,7 +20,8 @@ util.print_distances(distances)
 # maximum distance that a vehicle can travel
 MAX_DISTANCE = 1415
 
-filename = 'pdp_instances/Worse2Worst/dummy01.txt'
+# use 'relative path' in filename
+filename = 'pdp_instances/LiLim/pdptw800/LRC2_8_10.txt'
 #filename = 'pdp_instances/LiLim/pdptw1000/LR2_10_7.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
@@ -32,11 +33,10 @@ processing.sort_requests(requests)
 clusters = processing.clustering_requests_only_first(requests)
 #clusters = processing.clustering_requests(requests)
 #util.print_clusters(clusters)
-util.draw_requests(requests)
-util.draw_clusters(clusters)
-
-
-
+# util.draw_requests(requests)
+# util.draw_clusters(clusters)
+# request_distances=processing.request_distances(requests)
+# print (request_distances)
 
 
 '''

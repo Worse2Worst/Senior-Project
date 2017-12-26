@@ -17,6 +17,11 @@ def create_distance_matrix(nodes):
             distances[i].append(int(distance(nodes[i],nodes[j])))
     return distances
 
+def request_distances(requests):
+    dist = 0
+    for r in requests:
+        dist += distance(r[0],r[1])
+    return dist
 
 #sort requests by LT of pickup nodes
 def sort_requests(requests):
@@ -26,38 +31,47 @@ def sort_requests(requests):
 ############# Clustering (merge all version) ##########################
 def clustering_requests(requests) :
     clusters = []
-    added = {}
     sort_requests(requests) # requests are sorted by LT of pickups
-    iter=1
     for r in requests:
         added = False
+        merge_index = -1
+        c_index = 0
+        c_size = 99999999999999
         for c in clusters:
             for rc in c:
                 if should_merge(r,rc) and (not added):
-                    c.append(r)
+                    if (len(c) < c_size):
+                        c_size = len(c)
+                        merge_index = c_index
                     added = True
         if (not added):
             clusters.append([r])
-        iter+=1
+        else:
+            clusters[merge_index].append(r)
     return clusters
 
 
 ############ Clustering (merge only first node version) ##########################
 def clustering_requests_only_first(requests):
     clusters = []
-    added = {}
     sort_requests(requests)  # requests are sorted by LT of pickups
-    iter = 1
     for r in requests:
         added = False
+        merge_index = -1
+        c_index=0
+        c_size=99999999999999
         for c in clusters:
             rc = c[0]
             if should_merge(r, rc) and (not added):
-                c.append(r)
+                if (len(c)<c_size):
+                    c_size=len(c)
+                    merge_index = c_index
                 added = True
+            c_index+=1
         if (not added):
             clusters.append([r])
-        iter += 1
+        else:
+            clusters[merge_index].append(r)
     return clusters
 
 
@@ -94,3 +108,11 @@ def time_feasible(v1,v2,speed=1):
     if (used_time > limit_time):
         return False
     return True
+
+def maximum_distance_in_requests(requests):
+    max_r = -1
+    for r in requests:
+        d = distance(r[0], r[1])
+        if d > max_r:
+            max_r = d
+    return max_r

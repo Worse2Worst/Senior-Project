@@ -45,3 +45,4 @@ def generate_request(nodes):
         if v.req_type == 'p':
             requests.append([v,nodes[v.d_sib]])
     return requests
+

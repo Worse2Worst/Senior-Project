@@ -116,3 +116,4 @@ def maximum_distance_in_requests(requests):
         if d > max_r:
             max_r = d
     return max_r
+

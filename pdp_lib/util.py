@@ -1,10 +1,10 @@
 from matplotlib import patches as patches, pyplot as plt
 from pylab import *
-from pdp_lib import hover_lib
 import matplotlib.cm as cm
 from matplotlib import colors
 from itertools import cycle
 import numpy as np
+import mplcursors
 
 
 def print_node(v):
@@ -76,7 +76,8 @@ def draw_original_nodes(nodes):
         plt.scatter(x, y,c=color)
 
     plt.scatter(depot.x, depot.y, c='silver')  # draw the depot, just in case
-    figtext(.02, .02, 'Have ' + str(len(nodes)) + ' nodes')
+    figtext(.02, .02, 'Have ' + str(len(nodes)-1) + ' nodes (not counting the depot)')
+    mplcursors.cursor(hover=True)
     plt.show()
 
 
@@ -130,3 +131,4 @@ def draw_clusters(clusters):
         i+=1
     figtext(.02, .02, 'Have ' + str(len(clusters)) + ' clusters')
     plt.show()
+

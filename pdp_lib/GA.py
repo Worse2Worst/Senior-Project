@@ -11,6 +11,12 @@ global nodes
 global requests
 global distances
 
+def jobs_to_chromosome(jobs,nodes):
+    max_vehicles = len(nodes)-1
+    chromosome = [None] * max_vehicles
+    for i in range(len(jobs)):
+        chromosome[i]=jobs[i]
+    return chromosome
 
 def clusters_to_jobs(clusters):
     jobs = [] # array of integer!!!
@@ -50,29 +56,27 @@ def precedence_correction(job,nodes):
         if nodes[i].req_type == 'p':
             visited.append(i)
         else: # nodes[i] is delivery
-            pickup_pair = pair_node(job,node,nodes)
-            if (not pickup_pair in visited):
-                wrong_list.append((node,node.index,pickup_pair.index))
+            pickup_sibling = sibling(i,nodes)
+            if (not pickup_sibling in visited):
+                wrong_list.append((i,pickup_sibling))
             else:
-                visited.append(node)
+                visited.append(i)
     i = 0
     for v in visited:
         for w in wrong_list:
-            if (int(w[2]) == int(v.index)):
+            if (int(w[1]) == int(v)):
                 visited.insert(i+1,w[0])
         i += 1
 
     job = visited
     return job
 
-def pair_node(job,v,nodes):
+def sibling(v,nodes):
     if nodes[v].req_type == 'p':
         sib = int(nodes[v].d_sib)
     else:
         sib = int(nodes[v].p_sib)
-    for i in job:
-        if (sib == int(i)):
-            return i
+    return sib
 
 
 

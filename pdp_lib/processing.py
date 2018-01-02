@@ -1,4 +1,5 @@
 import math
+import numpy
 from pdp_lib import util
 from operator import itemgetter
 
@@ -9,12 +10,11 @@ def distance(v1,v2):
 # create distance matrix (a complete graph of distances between every nodes)
 def create_distance_matrix(nodes):
     n = len(nodes)
-    distances = []
+    distances = numpy.zeros((n, n))
     # create nxn matrix to memo the distances between nodes
     for i in range(n):
-        distances.append([])
         for j in range(n):
-            distances[i].append(int(distance(nodes[i],nodes[j])))
+            distances[i][j] = distance(nodes[i],nodes[j])
     return distances
 
 def request_distances(requests):

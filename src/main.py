@@ -4,7 +4,7 @@ from pdp_lib import preprocessing
 from pdp_lib import save_pics
 from pdp_lib import util
 from pdp_lib import processing
-from pdp_lib import GA
+from pdp_lib import GA2
 '''
 filename='pdp_instances/LiLim/pdp_100/lrc207.txt'
 nodes = preprocessing.load_node(filename)
@@ -20,7 +20,6 @@ util.print_distances(distances)
 
 # maximum distance that a vehicle can travel
 MAX_DISTANCE = 1415
-
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
 #filename = 'pdp_instances/LiLim/pdptw1000/LR2_10_7.txt'
@@ -39,6 +38,6 @@ clusters = processing.clustering_requests_only_first(requests)
 # util.draw_clusters(clusters)
 # request_distances=processing.request_distances(requests)
 # print (request_distances)
-
+jobs = GA2.clusters_to_jobs(clusters)
 
 

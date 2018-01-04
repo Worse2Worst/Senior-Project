@@ -22,8 +22,10 @@ util.print_distances(distances)
 
 # maximum distance that a vehicle can travel
 MAX_DISTANCE = 1415
+
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdptw1000/LRC2_10_10.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+
 #GA2.set_files(filename) # set filename to GA
 #filename = 'pdp_instances/LiLim/pdptw1000/LR2_10_7.txt'
 nodes = preprocessing.load_node(filename)
@@ -41,7 +43,7 @@ clusters = processing.clustering_requests_only_first(requests)
 # util.draw_clusters(clusters)
 # request_distances=processing.request_distances(requests)
 # print (request_distances)
-
+unoptimized_distances = processing.request_distances(requests)
 jobs = GA.clusters_to_jobs(clusters)
 print (GA.total_distances(jobs,distances))
 # GA.swap(job, 2, 9)
@@ -57,3 +59,12 @@ print (GA.total_distances(jobs,distances))
 # print('============================================')
 # GA.total_distances(jobs,distances)
 print(GA.jobs_to_chromosome(jobs,nodes))
+
+'''
+for j in range(len(cluster)):
+    p = cluster[j][0]
+    d = cluster[j][1]
+    plt.scatter(p.x, p.y)
+    plt.scatter(d.x, d.y)
+plt.show()
+'''

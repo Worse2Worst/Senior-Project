@@ -132,3 +132,5 @@ def draw_clusters(clusters):
     figtext(.02, .02, 'Have ' + str(len(clusters)) + ' clusters')
     plt.show()
 
+def draw_cluster(cluster):
+    draw_requests(cluster)

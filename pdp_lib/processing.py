@@ -21,7 +21,8 @@ def request_distances(requests):
     dist = 0
     for r in requests:
         dist += distance(r[0],r[1])
-    return dist
+    #multiple dist by 2 to get a round-trip distance
+    return 2*dist
 
 #sort requests by LT of pickup nodes
 def sort_requests(requests):
@@ -59,12 +60,12 @@ def clustering_requests_only_first(requests):
         added = False
         merge_index = -1
         c_index=0
-        c_size=99999999999999
-        for c in clusters:
-            rc = c[0]
+        time_gap=99999999999999
+        for cluster in clusters:
+            rc = cluster[0]
             if should_merge(r, rc) and (not added):
-                if (len(c)<c_size):
-                    c_size=len(c)
+                if (abs(r[1].LT - rc[1].LT) < time_gap):
+                    time_gap=abs(r[1].LT-rc[1].LT)
                     merge_index = c_index
                 added = True
             c_index+=1

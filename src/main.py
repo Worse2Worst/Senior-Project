@@ -24,7 +24,7 @@ util.print_distances(distances)
 MAX_DISTANCE = 1415
 
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+filename = 'pdp_instances/LiLim/pdptw1000/LC1_10_6.txt'
 
 #GA2.set_files(filename) # set filename to GA
 #filename = 'pdp_instances/LiLim/pdptw1000/LR2_10_7.txt'
@@ -33,7 +33,9 @@ requests = preprocessing.generate_request(nodes)
 max_vehicles = len(requests)
 distances = processing.create_distance_matrix(nodes)
 #util.draw_original_nodes(nodes)
-
+couples=GA.requests_to_couples(requests)
+print(couples)
+'''
 processing.sort_requests(requests)
 #util.print_requests(requests)
 clusters = processing.clustering_requests_only_first(requests)
@@ -46,6 +48,7 @@ clusters = processing.clustering_requests_only_first(requests)
 unoptimized_distances = processing.request_distances(requests)
 jobs = GA.clusters_to_jobs(clusters)
 print (GA.total_distances(jobs,distances))
+
 # GA.swap(job, 2, 9)
 # GA.swap(job, 5, 4)
 # GA.swap(job, 8, 7)
@@ -59,7 +62,7 @@ print (GA.total_distances(jobs,distances))
 # print('============================================')
 # GA.total_distances(jobs,distances)
 print(GA.jobs_to_chromosome(jobs,nodes))
-
+'''
 '''
 for j in range(len(cluster)):
     p = cluster[j][0]

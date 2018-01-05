@@ -11,6 +11,12 @@ global nodes
 global requests
 global distances
 
+def requests_to_couples(requests):
+    couples=[]
+    for req in requests:
+        couples.append((req[0].index,req[1].index))
+    return couples
+
 def jobs_to_chromosome(jobs,nodes):
     max_vehicles = len(nodes)-1
     chromosome = [None] * max_vehicles

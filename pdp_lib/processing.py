@@ -118,3 +118,6 @@ def maximum_distance_in_requests(requests):
             max_r = d
     return max_r
 
+
+#def add_depots(nodes):
+

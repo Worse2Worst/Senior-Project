@@ -36,7 +36,7 @@ def load_node(filename):
 
     file.close()
     nodes[0].req_type='depot'
-    return tuple(nodes)
+    return nodes
 
 def generate_request(nodes):
     requests = []

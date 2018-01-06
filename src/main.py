@@ -35,6 +35,7 @@ distances = processing.create_distance_matrix(nodes)
 #util.draw_original_nodes(nodes)
 couples=GA.requests_to_couples(requests)
 print(couples)
+
 '''
 processing.sort_requests(requests)
 #util.print_requests(requests)
@@ -71,3 +72,5 @@ for j in range(len(cluster)):
     plt.scatter(d.x, d.y)
 plt.show()
 '''
+added_nodes=processing.add_depots(nodes)
+util.print_node(added_nodes[-3])

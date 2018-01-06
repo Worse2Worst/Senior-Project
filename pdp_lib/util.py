@@ -52,6 +52,37 @@ def print_clusters(clusters):
         print_requests(clusters[i])
         print ('--------------------------')
 
+def draw_added_nodes(nodes):
+    # Description text
+    fig, ax = plt.subplots()
+    ax.set_title("The original nodes")
+    #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
+    locations = []
+    req_types = []
+    depots = nodes[-5:]  # get the depots!!!
+    ##### Legends ###############################
+    red_patch = patches.Patch(color='red', label='Pickup nodes')
+    blue_patch = patches.Patch(color='blue', label='Delivery nodes')
+    #plt.legend(handles=[blue_patch])
+    plt.legend([red_patch, blue_patch], ['Pickup nodes', 'Delivery nodes'])
+
+    for p in nodes:
+        locations.append([p.x,p.y])
+        req_types.append(p.req_type)
+    for i in range(len(locations)):
+        x = locations[i][0]
+        y = locations[i][1]
+        color = 'red' if (req_types[i] == 'p') else 'blue'
+        plt.scatter(x, y,c=color)
+
+    # draw the depots
+    for d in depots:
+        plt.scatter(d.x, d.y, c='silver')
+
+    figtext(.02, .02, 'Have ' + str(len(nodes)-6) + ' nodes (not counting the depots)')
+    mplcursors.cursor(hover=True)
+    plt.show()
+
 def draw_original_nodes(nodes):
     # Description text
     fig, ax = plt.subplots()
@@ -74,6 +105,7 @@ def draw_original_nodes(nodes):
         y = locations[i][1]
         color = 'red' if (req_types[i] == 'p') else 'blue'
         plt.scatter(x, y,c=color)
+
 
     plt.scatter(depot.x, depot.y, c='silver')  # draw the depot, just in case
     figtext(.02, .02, 'Have ' + str(len(nodes)-1) + ' nodes (not counting the depot)')

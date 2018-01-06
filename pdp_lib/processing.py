@@ -1,6 +1,7 @@
 import math
 import numpy
 from pdp_lib import util
+from pdp_lib import preprocessing
 from operator import itemgetter
 
 # calculate distances between nodes
@@ -119,5 +120,30 @@ def maximum_distance_in_requests(requests):
     return max_r
 
 
-#def add_depots(nodes):
+def add_depots(nodes):
+    depots=[]
+    d0=nodes[0]
 
+    index=len(nodes)
+    size = -1
+    if (len(nodes)>=1000): size=500
+    elif (len(nodes)>=800):size=400
+    elif (len(nodes)>=600):size=300
+    elif (len(nodes)>=400):size=200
+    elif (len(nodes)>=200):size=140
+    else:size=100
+
+    d1 = preprocessing.Node(d0.index, int(size/4),int(size/4),d0.demand,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d2 = preprocessing.Node(d0.index, int(size*3/4),int(size/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d3 = preprocessing.Node(d0.index, int(size/4),int(size*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d4 = preprocessing.Node(d0.index, int(size*3/4),int(size*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d1.req_type=d0.req_type
+    d2.req_type = d0.req_type
+    d3.req_type = d0.req_type
+    d4.req_type = d0.req_type
+    nodes.append(d0)
+    nodes.append(d1)
+    nodes.append(d2)
+    nodes.append(d3)
+    nodes.append(d4)
+    return nodes

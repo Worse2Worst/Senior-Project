@@ -16,7 +16,8 @@ def print_node(v):
     res += 'LT = ' + str(v.LT) + ' ,'
     res += 'p_sibling = ' + str(v.p_sib) + ' ,'
     res += 'd_sibling = ' + str(v.d_sib) + ' ,'
-    res += 'req_type = ' + str(v.req_type)
+    res += 'req_type = ' + str(v.req_type)+' ,'
+    res += 'depot_num =' + str(v.depot)
     print(res)
 
 def print_distances(dis):
@@ -55,7 +56,7 @@ def print_clusters(clusters):
 def draw_added_nodes(nodes):
     # Description text
     fig, ax = plt.subplots()
-    ax.set_title("The original nodes")
+    ax.set_title("The nodes, added depots")
     #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
     locations = []
     req_types = []
@@ -166,3 +167,45 @@ def draw_clusters(clusters):
 
 def draw_cluster(cluster):
     draw_requests(cluster)
+
+def draw_nodes_depots(nodes):
+    # Description text
+    fig, ax = plt.subplots()
+    ax.set_title("The nodes, separated by depots")
+    locations = []
+    depot_num = []
+    depots = nodes[-5:]  # get the depots!!!
+    dep=[0]*5
+    ##### Legends ###############################
+    red_patch = patches.Patch(color='red', label='Depot 0')
+    blue_patch = patches.Patch(color='blue', label='Depot 1')
+    green_patch = patches.Patch(color='green', label='Depot 2')
+    yellow_patch = patches.Patch(color='yellow', label='Depot 3')
+    purple_patch = patches.Patch(color='purple', label='Depot 4')
+    # plt.legend(handles=[blue_patch])
+    plt.legend([red_patch, blue_patch,green_patch,yellow_patch,purple_patch], ['Depot 0','Depot 1','Depot 2','Depot 3','Depot 4'])
+
+    for v in nodes:
+        locations.append([v.x, v.y])
+        depot_num.append(v.depot)
+        dep[int(v.depot)] +=1
+    for i in range(len(locations)):
+        x = locations[i][0]
+        y = locations[i][1]
+        color = 'black'
+        if (depot_num[i] == 0): color = 'red'
+        elif (depot_num[i] == 1): color = 'blue'
+        elif (depot_num[i] == 2): color = 'green'
+        elif (depot_num[i] == 3): color = 'yellow'
+        elif (depot_num[i] == 4): color = 'purple'
+        plt.scatter(x, y, c=color)
+
+    # draw the depots
+    for d in depots:
+        plt.scatter(d.x, d.y, c='silver')
+    dep_stat=''
+    dep_stat += str(dep[0])+','+str(dep[1])+','+str(dep[2])+','+str(dep[3])+','+str(dep[4])
+    figtext(.02,.02, 'Have ' + str(len(nodes) - 6) + ' nodes (not counting the depots), '+'Depot 0,1,2,3,4 have '+dep_stat)
+    mplcursors.cursor(hover=True)
+    plt.show()
+

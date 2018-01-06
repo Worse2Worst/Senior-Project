@@ -12,6 +12,7 @@ class Node:
         self.p_sib = int(p_sibling)
         self.d_sib = int(d_sibling)
         self.req_type = 'p' if (int(demand) > 0) else 'd'
+        self.depot = -99999999
 
 
 

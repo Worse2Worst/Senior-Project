@@ -120,10 +120,8 @@ def maximum_distance_in_requests(requests):
     return max_r
 
 
-def add_depots(nodes):
+def make_depots(nodes):
     depots=[]
-    d0=nodes[0]
-
     index=len(nodes)
     size = -1
     if (len(nodes)>=1000): size=500
@@ -132,18 +130,57 @@ def add_depots(nodes):
     elif (len(nodes)>=400):size=200
     elif (len(nodes)>=200):size=140
     else:size=100
-
+    d0 = nodes[0]
     d1 = preprocessing.Node(d0.index, int(size/4),int(size/4),d0.demand,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
     d2 = preprocessing.Node(d0.index, int(size*3/4),int(size/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
     d3 = preprocessing.Node(d0.index, int(size/4),int(size*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
     d4 = preprocessing.Node(d0.index, int(size*3/4),int(size*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+
+    '''
+    # special case for size = 100
+    if (size==100):
+        d0.x+=10
+    '''
+
     d1.req_type=d0.req_type
     d2.req_type = d0.req_type
     d3.req_type = d0.req_type
     d4.req_type = d0.req_type
-    nodes.append(d0)
-    nodes.append(d1)
-    nodes.append(d2)
-    nodes.append(d3)
-    nodes.append(d4)
+    d0.depot=0
+    d1.depot=1
+    d2.depot=2
+    d3.depot=3
+    d4.depot=4
+    depots.append(d0)
+    depots.append(d1)
+    depots.append(d2)
+    depots.append(d3)
+    depots.append(d4)
+    print(len(depots))
+    return depots
+
+def add_depots_to_nodes(nodes, depots):
+    for d in depots:
+        nodes.append(d)
     return nodes
+
+def assign_depot(clusters,depots,nodes):
+    for c in clusters:
+        depot_num=closest_depot(c,depots)
+        for v in c:
+            nodes[int(v[0].index)].depot=depot_num
+            nodes[int(v[1].index)].depot = depot_num
+
+def closest_depot(cluster,depots):
+    min_dist = 9999999999999999
+    min_depot = 10000000000000
+    i=0
+    for d in depots:
+        dist=0
+        for req in cluster:
+            dist=distance(req[0],req[1])+distance(d,req[0])+distance(d,req[1])
+        if(dist < min_dist):
+            min_dist=dist
+            min_depot=i
+        i+=1
+    return int(min_depot)

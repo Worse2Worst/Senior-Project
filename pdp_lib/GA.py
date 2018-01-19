@@ -1,5 +1,7 @@
 import os
 import time
+import numpy as np
+from random import randrange
 from pdp_lib import preprocessing
 from pdp_lib import save_pics
 from pdp_lib import util
@@ -11,11 +13,58 @@ global nodes
 global requests
 global distances
 
+# A couple is the indices of all requests
 def requests_to_couples(requests):
     couples=[]
     for req in requests:
-        couples.append((req[0].index,req[1].index))
+        couples.append((int(req[0].index),int(req[1].index)))
     return couples
+
+# node_index is the indices of all nodes
+def couples_to_node_index(couples):
+    node_index = []
+    for x in couples:
+        node_index.append(int(x[0]))
+        node_index.append(int(x[1]))
+    return node_index
+
+# p_vehicle  is the population of vehicles, N is the population size
+def initialize_p_vehicle(couples,N=100,max_vehicles=100,restricted_requests = 1000):
+    # actually we have unlimited vehicles, but let's be realistic here
+    # no retricted_requests for now
+    p_vehicle = [None]*N # the initial population (size=N)
+    for i in range (N):
+        p_vehicle[i] = [0]*max_vehicles
+        remain = len(couples)
+        vehicle_index = 0
+        while (remain>0):
+            # nodes_visited is the numbers of node visited by that vehicle
+            nodes_visited = randrange(1, remain+1)
+            nodes_visited = min(remain,nodes_visited)
+            p_vehicle[i][vehicle_index] = (nodes_visited*2)
+            vehicle_index +=1
+            remain -= nodes_visited
+    return p_vehicle
+
+
+
+# p_node is the population of nodes, N is the population size
+def initialize_p_node(couples,nodes,N=100):
+    node_index = couples_to_node_index(couples)
+    p_node = [None] * N
+    for i in range(N):
+        p_node[i] = np.random.permutation(node_index).tolist()
+        precedence_correction(p_node[i],couples)
+    return p_node
+
+
+# random operator for GA
+def mutate(chromosome):
+    random1 = randrange(0, len(chromosome))
+    random2=random1
+    while (random2==random1):
+        random2 = randrange(0, len(chromosome))
+    swap(chromosome,random1,random2)
 
 def jobs_to_chromosome(jobs,nodes):
     max_vehicles = len(nodes)-1
@@ -54,6 +103,7 @@ def total_distances(jobs,distances):
         d += job_distance(job,distances)
     return d
 
+'''
 def precedence_correction(job,nodes):
     wrong_list = []
     visited = []
@@ -76,24 +126,46 @@ def precedence_correction(job,nodes):
 
     job = visited
     return job
+'''
+def precedence_correction(node_index,couples):
+    visited = []
+    for i in range(len(node_index)):
+        v = node_index[i]
+        couple = [item for item in couples if v in item][0]
+        pickup = couple[0] # pickup node
+        delivery = couple[1] # delivery node
+        if (v == delivery): # v is delivery
+            if (not pickup in visited): # the pickup node is not visited
+                pickup_index = node_index.index(pickup)
+                pickup = node_index.pop(pickup_index) # still equals without assignment!!
+                node_index.insert(i,pickup)
+                visited.append(pickup)
+                visited.append(v)
+            else: # the sibling is visited
+                visited.append(v)
+        else: # v is pickup
+            visited.append(v)
+    return visited
 
-def sibling(v,nodes):
-    if nodes[v].req_type == 'p':
-        sib = int(nodes[v].d_sib)
-    else:
-        sib = int(nodes[v].p_sib)
-    return sib
+
+def pickup_sibling(index,couples):
+    sib = [item[0] for item in couples if index in item]
+    return sib[0]
+
+def delivery_sibling(index,couples):
+    sib = [item[1] for item in couples if index in item]
+    return sib[0]
+
+def swap(array, i, j):
+    array[i], array[j]= array[j], array[i]
 
 
-
-def swap(job,i,j):
-    job[i],job[j]=job[j],job[i]
-
+## below is junk !!!
 def set_files(fn):
     #print (fn)
     filename = fn
     nodes = tuple(preprocessing.load_node(filename))
     requests = preprocessing.generate_request(nodes)
-    distances = processing.create_distance_matrix(nodes)
+    distances = processing.create_distance_table(nodes)
 
 

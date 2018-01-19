@@ -24,19 +24,22 @@ util.print_distances(distances)
 MAX_DISTANCE = 1415
 
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_100/lrc107.txt'
+filename = 'pdp_instances/Worse2Worst/trivial01.txt'
 
 
 nodes = preprocessing.load_node(filename)
-print(len(nodes))
 requests = preprocessing.generate_request(nodes)
-max_vehicles = len(requests)
-distances = processing.create_distance_matrix(nodes)
+distances = processing.create_distance_table(nodes)
 couples=GA.requests_to_couples(requests)
 
 clusters = processing.clustering_requests_only_first(requests)
 depots=processing.make_depots(nodes)
 processing.assign_depot(clusters,depots,nodes)
 added_nodes=processing.add_depots_to_nodes(nodes, depots)
-util.draw_nodes_depots(nodes)
-
+util.draw_requests(requests)
+# solving the problems !!!!
+couples = GA.requests_to_couples(requests)
+p_vehicle = GA.initialize_p_vehicle(couples)
+p_node = GA.initialize_p_node(couples,nodes)
+for i in range(len(p_node)):
+    print (p_node[i])

@@ -1,5 +1,6 @@
 import math
 import numpy
+import copy
 from pdp_lib import util
 from pdp_lib import preprocessing
 from operator import itemgetter
@@ -8,8 +9,21 @@ from operator import itemgetter
 def distance(v1,v2):
     return math.sqrt((v1.x - v2.x)**2 + (v1.y - v2.y)**2)
 
+def duration(v1,v2,speed):
+    return (distance(v1,v2)/speed)
+
+# create duration matrix
+def create_duration_table(nodes, speed=1):
+    n = len(nodes)
+    durations = numpy.zeros((n, n))
+    # create nxn matrix to memo the distances between nodes
+    for i in range(n):
+        for j in range(n):
+            durations[i][j] = duration(nodes[i], nodes[j],speed)
+    return durations
+
 # create distance matrix (a complete graph of distances between every nodes)
-def create_distance_matrix(nodes):
+def create_distance_table(nodes):
     n = len(nodes)
     distances = numpy.zeros((n, n))
     # create nxn matrix to memo the distances between nodes
@@ -156,13 +170,13 @@ def make_depots(nodes):
     depots.append(d2)
     depots.append(d3)
     depots.append(d4)
-    print(len(depots))
     return depots
 
 def add_depots_to_nodes(nodes, depots):
+    added_nodes = copy.deepcopy(nodes)
     for d in depots:
-        nodes.append(d)
-    return nodes
+        added_nodes.append(d)
+    return added_nodes
 
 def assign_depot(clusters,depots,nodes):
     for c in clusters:
@@ -184,3 +198,22 @@ def closest_depot(cluster,depots):
             min_depot=i
         i+=1
     return int(min_depot)
+
+def closest_depot_distance(req,depots):
+    min_dist = 9999999999999999
+    min_depot = 10000000000000
+    i=0
+    for d in depots:
+        dist=distance(req[0],req[1])+distance(d,req[0])+distance(d,req[1])
+        if(dist < min_dist):
+            min_dist=dist
+            min_depot=i
+        i+=1
+    return min_dist
+
+# calculate the total unoptimized distance
+def unoptimized_distance(requests,depots):
+    dist=0
+    for req in requests:
+        dist += closest_depot_distance(req,depots)
+    return dist

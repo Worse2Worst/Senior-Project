@@ -168,14 +168,13 @@ def draw_clusters(clusters):
 def draw_cluster(cluster):
     draw_requests(cluster)
 
-def draw_nodes_depots(nodes):
+def draw_nodes_depots(nodes,depots):
     # Description text
     fig, ax = plt.subplots()
     ax.set_title("The nodes, separated by depots")
     locations = []
     depot_num = []
-    depots = nodes[-5:]  # get the depots!!!
-    dep=[0]*5
+    dep = [0] * len(depots)
     ##### Legends ###############################
     red_patch = patches.Patch(color='red', label='Depot 0')
     blue_patch = patches.Patch(color='blue', label='Depot 1')
@@ -205,7 +204,7 @@ def draw_nodes_depots(nodes):
         plt.scatter(d.x, d.y, c='silver')
     dep_stat=''
     dep_stat += str(dep[0])+','+str(dep[1])+','+str(dep[2])+','+str(dep[3])+','+str(dep[4])
-    figtext(.02,.02, 'Have ' + str(len(nodes) - 6) + ' nodes (not counting the depots), '+'Depot 0,1,2,3,4 have '+dep_stat)
+    figtext(.02,.02, 'Have ' + str(len(nodes) - 1) + ' nodes (not counting the depots), '+'Depot 0,1,2,3,4 have '+dep_stat)
     mplcursors.cursor(hover=True)
     plt.show()
 

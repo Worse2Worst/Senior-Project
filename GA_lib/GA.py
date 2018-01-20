@@ -29,7 +29,7 @@ def couples_to_node_index(couples):
     return node_index
 
 # p_couples is the population of couples, N is the population size
-def create_p_couples(couples, N=5):
+def create_p_couples(couples, N=10):
     p_couples = [None] * N
     for i in range(N):
         p_couples[i] = np.random.permutation(couples).tolist()
@@ -38,7 +38,7 @@ def create_p_couples(couples, N=5):
 
 
 # p_vehicle  is the population of vehicles, N is the population size
-def create_p_vehicles(couples, N=5, max_vehicles=100, restricted_requests = 1000):
+def create_p_vehicles(couples, N=10, max_vehicles=100, restricted_requests = 1000):
     # actually we have unlimited vehicles, but let's be realistic here
     # no retricted_requests for now
     p_vehicle = [None]*N # the initial population (size=N)
@@ -73,7 +73,7 @@ def create_p_nodes(couples, N=5):
 
 
 # final population!!!
-def create_p_jobs(p_couples_vehicles,N=5):
+def create_p_jobs(p_couples_vehicles,N=10):
     # 'p_couples_vehicles' is an array of chromosome of couples
     p_jobs = [None]*len(p_couples_vehicles) * N
     i = 0
@@ -172,6 +172,27 @@ def swap(array, i, j):
     array[i], array[j]= array[j], array[i]
 
 
+# eval distance of all p_jobs
+def eval_distance (p_jobs,distances,depot,nodes):
+    res = []
+    for jobs in p_jobs:
+        res.append(jobs_distance(jobs,distances,depot,nodes))
+    return res
+
+# distance of 'jobs' by all vehicles
+def jobs_distance(jobs, distances, depot,nodes):
+    dist = 0
+    for job in jobs:
+        dist += job_distance(job,distances,depot,nodes)
+    return dist
+
+# distance of just one 'job' by one vehicle
+def job_distance(job,distances,depot,nodes):
+    dist = 0
+    for i in range(len(job)-1):
+        dist += distances[job[i]][job[i+1]]
+    dist += processing.distance(nodes[job[0]],depot)+processing.distance(nodes[job[-1]],depot)
+    return dist
 
 
 ## below is junk !!!

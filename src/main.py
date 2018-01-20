@@ -1,4 +1,5 @@
 import time
+import numpy as np
 from GA_lib import GA
 from pdp_lib import preprocessing
 from pdp_lib import processing
@@ -21,8 +22,8 @@ util.print_distances(distances)
 MAX_DISTANCE = 1415
 
 # use 'relative path' in filename
-filename = 'pdp_instances/Worse2Worst/trivial01.txt'
-#filename = 'pdp_instances/LiLim/pdp_200/LRC2_2_5.txt'
+#filename = 'pdp_instances/Worse2Worst/trivial01.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lrc204.txt'
 
 
 nodes = preprocessing.load_node(filename)
@@ -39,14 +40,18 @@ added_nodes=processing.add_depots_to_nodes(nodes, depots)
 start_time = time.time()
 # solving the problems !!!!
 couples = GA.requests_to_couples(requests)
-p_vehicles = GA.create_p_vehicles(couples)
-p_node = GA.create_p_nodes(couples)
-p_couples = GA.create_p_couples(couples)
+p_vehicles = GA.create_p_vehicles(couples,N=20)
+p_couples = GA.create_p_couples(couples,N=20)
 p_couples_vehicles = GA.create_p_couples_vehicles(p_couples,p_vehicles)
-p_jobs = GA.create_p_jobs(p_couples_vehicles)
+p_jobs = GA.create_p_jobs(p_couples_vehicles,N=20)
 
+
+d = GA.eval_distance(p_jobs, distances, depots[0],nodes)
+res = min(d)
+index_min = np.argmin(d)
+depots = [depots[0]]
 print("--- %s seconds ---" % (time.time() - start_time))
 
-
-for i in range(len(p_jobs)):
-    print (p_jobs[i])
+print (processing.unoptimized_distance(requests,depots))
+print (res)
+print (p_jobs[index_min])

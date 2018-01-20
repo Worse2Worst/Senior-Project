@@ -28,8 +28,17 @@ def couples_to_node_index(couples):
         node_index.append(int(x[1]))
     return node_index
 
+# p_couples is the population of couples, N is the population size
+def initialize_p_couples(couples,N=50):
+    p_couples = [None] * N
+    for i in range(N):
+        p_couples[i] = np.random.permutation(couples).tolist()
+        #p_couples[i] = [tuple(l) for l in p_couples[i]] # to tuple
+    return p_couples
+
+
 # p_vehicle  is the population of vehicles, N is the population size
-def initialize_p_vehicle(couples,N=100,max_vehicles=100,restricted_requests = 1000):
+def initialize_p_vehicle(couples,N=50,max_vehicles=100,restricted_requests = 1000):
     # actually we have unlimited vehicles, but let's be realistic here
     # no retricted_requests for now
     p_vehicle = [None]*N # the initial population (size=N)
@@ -38,18 +47,23 @@ def initialize_p_vehicle(couples,N=100,max_vehicles=100,restricted_requests = 10
         remain = len(couples)
         vehicle_index = 0
         while (remain>0):
-            # nodes_visited is the numbers of node visited by that vehicle
-            nodes_visited = randrange(1, remain+1)
-            nodes_visited = min(remain,nodes_visited)
-            p_vehicle[i][vehicle_index] = (nodes_visited*2)
+            # couples_visited is the numbers of couples visited by that vehicle
+            couples_visited = randrange(1, remain+1)
+            couples_visited = min(remain,couples_visited)
+            p_vehicle[i][vehicle_index] = (couples_visited)
+            #p_vehicle[i].append(couples_visited)
             vehicle_index +=1
-            remain -= nodes_visited
+            remain -= couples_visited
+        p_vehicle[i].sort(reverse = True)
+
+        #strip out all useless zeros!!!
+        p_vehicle[i] = list(filter(lambda a: a != 0, p_vehicle[i]))
     return p_vehicle
 
 
 
 # p_node is the population of nodes, N is the population size
-def initialize_p_node(couples,nodes,N=100):
+def initialize_p_node(couples,nodes,N=50):
     node_index = couples_to_node_index(couples)
     p_node = [None] * N
     for i in range(N):
@@ -57,6 +71,21 @@ def initialize_p_node(couples,nodes,N=100):
         precedence_correction(p_node[i],couples)
     return p_node
 
+# create p_couples_vehicles, representing vehicles visiting couples
+def create_p_couples_vehicles(p_couples,p_vehicles):
+    res = [None]*len(p_vehicles)*len(p_couples) # the result will be size N1*N2
+    i = 0
+    for couples in p_couples:
+        pos = 0
+        for num_vehicle in p_vehicles:
+            res[i] = []
+            for num in num_vehicle:
+                #print(num)
+                res[i].append(couples[pos:num])
+                print(res[i])
+                pos += num
+        i += 1
+    return res
 
 # random operator for GA
 def mutate(chromosome):
@@ -66,25 +95,7 @@ def mutate(chromosome):
         random2 = randrange(0, len(chromosome))
     swap(chromosome,random1,random2)
 
-def jobs_to_chromosome(jobs,nodes):
-    max_vehicles = len(nodes)-1
-    chromosome = [None] * max_vehicles
-    for i in range(len(jobs)):
-        chromosome[i]=jobs[i]
-    return chromosome
 
-def clusters_to_jobs(clusters):
-    jobs = [] # array of integer!!!
-    for cluster in clusters:
-        jobs.append(cluster_to_job(cluster))
-    return jobs
-
-def cluster_to_job(cluster):
-    job=[]
-    for req in cluster:
-        job.append(int(req[0].index))
-        job.append(int(req[1].index))
-    return job
 
 
 def job_distance(job,distances):
@@ -103,30 +114,7 @@ def total_distances(jobs,distances):
         d += job_distance(job,distances)
     return d
 
-'''
-def precedence_correction(job,nodes):
-    wrong_list = []
-    visited = []
-    carrier = 0
-    for i in job:
-        if nodes[i].req_type == 'p':
-            visited.append(i)
-        else: # nodes[i] is delivery
-            pickup_sibling = sibling(i,nodes)
-            if (not pickup_sibling in visited):
-                wrong_list.append((i,pickup_sibling))
-            else:
-                visited.append(i)
-    i = 0
-    for v in visited:
-        for w in wrong_list:
-            if (int(w[1]) == int(v)):
-                visited.insert(i+1,w[0])
-        i += 1
 
-    job = visited
-    return job
-'''
 def precedence_correction(node_index,couples):
     visited = []
     for i in range(len(node_index)):
@@ -160,7 +148,10 @@ def swap(array, i, j):
     array[i], array[j]= array[j], array[i]
 
 
+
+
 ## below is junk !!!
+'''
 def set_files(fn):
     #print (fn)
     filename = fn
@@ -169,3 +160,24 @@ def set_files(fn):
     distances = processing.create_distance_table(nodes)
 
 
+def jobs_to_chromosome(jobs,nodes):
+    max_vehicles = len(nodes)-1
+    chromosome = [None] * max_vehicles
+    for i in range(len(jobs)):
+        chromosome[i]=jobs[i]
+    return chromosome
+
+def clusters_to_jobs(clusters):
+    jobs = [] # array of integer!!!
+    for cluster in clusters:
+        jobs.append(cluster_to_job(cluster))
+    return jobs
+
+def cluster_to_job(cluster):
+    job=[]
+    for req in cluster:
+        job.append(int(req[0].index))
+        job.append(int(req[1].index))
+    return job
+
+'''

@@ -29,7 +29,7 @@ def couples_to_node_index(couples):
     return node_index
 
 # p_couples is the population of couples, N is the population size
-def initialize_p_couples(couples,N=50):
+def create_p_couples(couples, N=5):
     p_couples = [None] * N
     for i in range(N):
         p_couples[i] = np.random.permutation(couples).tolist()
@@ -38,7 +38,7 @@ def initialize_p_couples(couples,N=50):
 
 
 # p_vehicle  is the population of vehicles, N is the population size
-def initialize_p_vehicle(couples,N=50,max_vehicles=100,restricted_requests = 1000):
+def create_p_vehicles(couples, N=5, max_vehicles=100, restricted_requests = 1000):
     # actually we have unlimited vehicles, but let's be realistic here
     # no retricted_requests for now
     p_vehicle = [None]*N # the initial population (size=N)
@@ -63,28 +63,52 @@ def initialize_p_vehicle(couples,N=50,max_vehicles=100,restricted_requests = 100
 
 
 # p_node is the population of nodes, N is the population size
-def initialize_p_node(couples,nodes,N=50):
-    node_index = couples_to_node_index(couples)
+def create_p_nodes(couples, N=5):
+    nodes = couples_to_node_index(couples)
     p_node = [None] * N
     for i in range(N):
-        p_node[i] = np.random.permutation(node_index).tolist()
+        p_node[i] = np.random.permutation(nodes).tolist()
         precedence_correction(p_node[i],couples)
     return p_node
 
+
+# final population!!!
+def create_p_jobs(p_couples_vehicles,N=5):
+    # 'p_couples_vehicles' is an array of chromosome of couples
+    p_jobs = [None]*len(p_couples_vehicles) * N
+    i = 0
+    for chromosome in p_couples_vehicles:
+        num_vehicles = len(chromosome)
+        for _ in range (N):
+            p_jobs[i] = [None] * num_vehicles
+            j = 0
+            for couples in chromosome:
+                nodes = couples_to_node_index(couples)
+                job = np.random.permutation(nodes).tolist()
+                job = precedence_correction(job, couples)
+                # print('-----jobs -----------------')
+                # print(job)
+                # print('***************************')
+                p_jobs[i][j] = job
+                j += 1
+            i += 1
+    return p_jobs
+
 # create p_couples_vehicles, representing vehicles visiting couples
+# 'p_couples' has sex with 'p_vehicles'
 def create_p_couples_vehicles(p_couples,p_vehicles):
     res = [None]*len(p_vehicles)*len(p_couples) # the result will be size N1*N2
     i = 0
     for couples in p_couples:
-        pos = 0
-        for num_vehicle in p_vehicles:
-            res[i] = []
-            for num in num_vehicle:
-                #print(num)
-                res[i].append(couples[pos:num])
-                print(res[i])
+        for vehicles in p_vehicles:
+            pos = 0
+            res[i] = [None]*len(vehicles)
+            j = 0
+            for num in vehicles:
+                res[i][j] = couples[pos:(pos+num)]
                 pos += num
-        i += 1
+                j += 1
+            i += 1
     return res
 
 # random operator for GA
@@ -125,7 +149,7 @@ def precedence_correction(node_index,couples):
         if (v == delivery): # v is delivery
             if (not pickup in visited): # the pickup node is not visited
                 pickup_index = node_index.index(pickup)
-                pickup = node_index.pop(pickup_index) # still equals without assignment!!
+                node_index.pop(pickup_index)
                 node_index.insert(i,pickup)
                 visited.append(pickup)
                 visited.append(v)
@@ -133,7 +157,7 @@ def precedence_correction(node_index,couples):
                 visited.append(v)
         else: # v is pickup
             visited.append(v)
-    return visited
+    return node_index
 
 
 def pickup_sibling(index,couples):

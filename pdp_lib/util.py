@@ -208,3 +208,12 @@ def draw_nodes_depots(nodes,depots):
     mplcursors.cursor(hover=True)
     plt.show()
 
+'''
+    #print job
+    def print_sol(p_jobs):
+        i = 0
+        for tour in p_jobs:
+            s = 'Vehicle ' + str(i) +' :'
+            for node in tour:
+                s+=str(node) + '->'
+'''

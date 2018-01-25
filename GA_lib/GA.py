@@ -1,7 +1,8 @@
 import os
 import time
 import numpy as np
-from random import randrange
+import random
+from random import randrange,randint
 from pdp_lib import preprocessing
 from pdp_lib import save_pics
 from pdp_lib import util
@@ -29,7 +30,7 @@ def couples_to_node_index(couples):
     return node_index
 
 # p_couples is the population of couples, N is the population size
-def create_p_couples(couples, N=10):
+def create_p_couples(couples, N=5):
     p_couples = [None] * N
     for i in range(N):
         p_couples[i] = np.random.permutation(couples).tolist()
@@ -38,7 +39,7 @@ def create_p_couples(couples, N=10):
 
 
 # p_vehicle  is the population of vehicles, N is the population size
-def create_p_vehicles(couples, N=10, max_vehicles=100, restricted_requests = 1000):
+def create_p_vehicles(couples, N=5, max_vehicles=100, restricted_requests = 1000):
     # actually we have unlimited vehicles, but let's be realistic here
     # no retricted_requests for now
     p_vehicle = [None]*N # the initial population (size=N)
@@ -48,7 +49,7 @@ def create_p_vehicles(couples, N=10, max_vehicles=100, restricted_requests = 100
         vehicle_index = 0
         while (remain>0):
             # couples_visited is the numbers of couples visited by that vehicle
-            couples_visited = randrange(1, remain+1)
+            couples_visited = randint(1, remain)
             couples_visited = min(remain,couples_visited)
             p_vehicle[i][vehicle_index] = (couples_visited)
             #p_vehicle[i].append(couples_visited)
@@ -73,26 +74,23 @@ def create_p_nodes(couples, N=5):
 
 
 # final population!!!
-def create_p_jobs(p_couples_vehicles,N=10):
-    # 'p_couples_vehicles' is an array of chromosome of couples
-    p_jobs = [None]*len(p_couples_vehicles) * N
+def create_p_tours(p_couples_vehicles, N=5):
+    # 'p_couples_vehicles' is an array of p_coup_veh of couples
+    p_tours = [None]*len(p_couples_vehicles) * N
     i = 0
-    for chromosome in p_couples_vehicles:
-        num_vehicles = len(chromosome)
+    for p_coup_veh in p_couples_vehicles:
+        num_vehicles = len(p_coup_veh)
         for _ in range (N):
-            p_jobs[i] = [None] * num_vehicles
+            p_tours[i] = [None] * num_vehicles
             j = 0
-            for couples in chromosome:
+            for couples in p_coup_veh:
                 nodes = couples_to_node_index(couples)
-                job = np.random.permutation(nodes).tolist()
-                job = precedence_correction(job, couples)
-                # print('-----jobs -----------------')
-                # print(job)
-                # print('***************************')
-                p_jobs[i][j] = job
+                tour = np.random.permutation(nodes).tolist()
+                tour = precedence_correction(tour, couples)
+                p_tours[i][j] = tour
                 j += 1
             i += 1
-    return p_jobs
+    return p_tours
 
 # create p_couples_vehicles, representing vehicles visiting couples
 # 'p_couples' has sex with 'p_vehicles'

@@ -158,6 +158,7 @@ def precedence_correction(node_index,couples):
     return node_index
 
 
+
 def pickup_sibling(index,couples):
     sib = [item[0] for item in couples if index in item]
     return sib[0]
@@ -171,27 +172,41 @@ def swap(array, i, j):
 
 
 # eval distance of all p_jobs
-def eval_distance (p_jobs,distances,depot,nodes):
+def eval_distance (p_jobs,distances,durations,depot,nodes):
     res = []
-    for jobs in p_jobs:
-        res.append(jobs_distance(jobs,distances,depot,nodes))
+    for tours in p_jobs:
+        res.append(tours_distance(tours,distances,durations,depot,nodes))
     return res
 
-# distance of 'jobs' by all vehicles
-def jobs_distance(jobs, distances, depot,nodes):
+# distance of 'tours' by all vehicles
+def tours_distance(tours, distances,durations, depot,nodes):
     dist = 0
-    for job in jobs:
-        dist += job_distance(job,distances,depot,nodes)
+    for tour in tours:
+        dist += tour_distance(tour,distances,durations,depot,nodes)
     return dist
 
 # distance of just one 'job' by one vehicle
-def job_distance(job,distances,depot,nodes):
+def tour_distance(tour,distances,durations,depot,nodes):
     dist = 0
-    for i in range(len(job)-1):
-        dist += distances[job[i]][job[i+1]]
-    dist += processing.distance(nodes[job[0]],depot)+processing.distance(nodes[job[-1]],depot)
+    for i in range(len(tour)-1):
+        dist += distances[tour[i]][tour[i+1]]
+
+    dist += processing.distance(nodes[tour[0]],depot)+processing.distance(nodes[tour[-1]],depot)
+    # penalty for the 'time violated' tour
+    if (time_violated(tour,durations,nodes)):
+        dist *= 2
     return dist
 
+def time_violated(tour,durations,nodes):
+    cur_time = 0
+    for i in range(len(tour) - 1):
+        cur_ET = nodes[tour[i]].ET
+        cur_LT = nodes[tour[i]].LT
+        time_arrived = cur_time+durations[tour[i]][tour[i+1]]
+        if (time_arrived>nodes[tour[i]].LT): #VIOLATED!!!!!
+            return True
+        cur_time = max(time_arrived,nodes[tour[i]].ET)
+    return False
 
 ## below is junk !!!
 '''

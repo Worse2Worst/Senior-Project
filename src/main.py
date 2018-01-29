@@ -28,6 +28,7 @@ filename = 'pdp_instances/Worse2Worst/trivial01.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
 distances = processing.create_distance_table(nodes)
+durations = processing.create_duration_table(nodes)
 clusters = processing.clustering_requests_only_first(requests)
 depots=processing.make_depots(nodes)
 processing.assign_depot(clusters,depots,nodes)
@@ -57,7 +58,7 @@ print(" p tours time --- %s seconds ---" % (time.time() - start_time))
 
 
 start_time = time.time()
-d = GA.eval_distance(p_tours, distances, depots[0], nodes)
+d = GA.eval_distance(p_tours, distances,durations, depots[0], nodes)
 res = min(d)
 index_min = np.argmin(d)
 depots = [depots[0]]
@@ -66,3 +67,5 @@ print("eval time --- %s seconds ---" % (time.time() - start_time))
 print (processing.unoptimized_distance(requests,depots))
 print (res)
 print (p_tours[index_min])
+util.draw_requests(requests)
+util.draw_original_nodes(nodes)

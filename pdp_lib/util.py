@@ -1,5 +1,7 @@
 from matplotlib import patches as patches, pyplot as plt
 from pylab import *
+from matplotlib import collections  as mc
+import pylab as pl
 import matplotlib.cm as cm
 from matplotlib import colors
 from itertools import cycle
@@ -206,6 +208,40 @@ def draw_nodes_depots(nodes,depots):
     dep_stat += str(dep[0])+','+str(dep[1])+','+str(dep[2])+','+str(dep[3])+','+str(dep[4])
     figtext(.02,.02, 'Have ' + str(len(nodes) - 1) + ' nodes (not counting the depots), '+'Depot 0,1,2,3,4 have '+dep_stat)
     mplcursors.cursor(hover=True)
+    plt.show()
+
+def draw_tours(tours, nodes,depot):
+    line_array = []
+    for tour in tours:
+        lines = []
+        x_depot, y_depot = depot.x, depot.y
+        x_first, y_first = nodes[tour[0]].x, nodes[tour[0]].y
+        x_last, y_last = nodes[tour[-1]].x, nodes[tour[-1]].y
+        dep = [x_depot,y_depot]
+        first_point = [x_first,y_first]
+        last_point = [x_last,y_last]
+
+        lines.append((dep,first_point))
+        for i in range(len(tour) - 1):
+            from_index, to_index = int(tour[i]), int(tour[i + 1])
+            x_from, y_from = nodes[from_index].x, nodes[from_index].y
+            a = [x_from, y_from]
+            x_to, y_to = nodes[to_index].x, nodes[to_index].y
+            b = [x_to, y_to]
+            point = (a, b)
+            lines.append(point)
+
+        lines.append((dep,last_point))
+        line_array.append(lines)
+    # flat out list
+    flat_list = [item for sublist in line_array for item in sublist]
+
+    lc = mc.LineCollection(flat_list, linewidths=2)
+    fig, ax = pl.subplots()
+    ax.add_collection(lc)
+    ax.autoscale()
+    ax.margins(0.1)
+        #plt.scatter(depot.x, depot.y, s=30)
     plt.show()
 
 '''

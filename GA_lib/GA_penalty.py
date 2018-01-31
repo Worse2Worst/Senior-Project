@@ -195,8 +195,8 @@ def tour_distance(tour,distances,durations,depot,nodes):
     # penalty for the 'time violated' tour
     penalty = time_penalty(tour, durations, nodes)
     dist *= penalty
-    if(penalty>1): print('penalty is' + str(penalty))
-    else: print('tour is :'+str(tour))
+    #if(penalty>1): print('penalty is' + str(penalty))
+    #else: print('tour is :'+str(tour))
     return dist
 
 def time_penalty(tour, durations, nodes):
@@ -214,7 +214,7 @@ def time_penalty(tour, durations, nodes):
         cur_time += travel_time
         if (cur_time > next_LT): #VIOLATED!!!!!
             penalty_point += 1
-            print(str(cur_node.index)+'->' + str(next_node.index))
+            #print(str(cur_node.index)+'->' + str(next_node.index))
     return penalty_point
 
 ## below is junk !!!

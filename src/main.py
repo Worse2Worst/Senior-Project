@@ -24,7 +24,7 @@ MAX_DISTANCE = 1415
 start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/Worse2Worst/dummy01.txt'
-#filename = 'pdp_instances/LiLim/pdp_100/lc102.txt'
+#filename = 'pdp_instances/LiLim/pdp_200/LC1_2_3.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
 distances = processing.create_distance_table(nodes)

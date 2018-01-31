@@ -189,9 +189,9 @@ def time_violated_index(tour,durations,nodes):
 def time_violated_nodes(tour,durations,couples,nodes):
     res = []
     index = []
-    if (len(tour) == 0):
-        print ('BUGGGG!!!!!!!!!!!!!!!')
-        return res
+    # if (len(tour) == 0):
+    #     print ('BUGGGG!!!!!!!!!!!!!!!')
+    #     return res
     cur_time = 0
     # print (tour)
     # print (cur_time)
@@ -208,7 +208,7 @@ def time_violated_nodes(tour,durations,couples,nodes):
 
         if (time_arrived > next_LT):  # VIOLATED!!!!!
             # debug ---------------------------------------
-            print('##########################################Voilated!!!####################')
+            print('################ Voilated!!! ####################')
             print(str(cur_pos) + '->' + str(next_pos))
             print('Arrived at '+str(time_arrived))
             print('ET='+str(next_ET)+',LT='+str(next_LT))

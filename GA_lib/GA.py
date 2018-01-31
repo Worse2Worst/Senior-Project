@@ -26,11 +26,7 @@ def requests_to_couples(requests):
 
 # node_index is the indices of all nodes
 def couples_to_node_index(couples):
-    node_index = []
-    for x in couples:
-        node_index.append(int(x[0]))
-        node_index.append(int(x[1]))
-    return node_index
+    return [item for sublist in couples for item in sublist]
 
 # p_couples is the population of couples, N is the population size
 def create_p_couples(couples, N=5):

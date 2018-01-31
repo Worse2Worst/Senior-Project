@@ -25,85 +25,60 @@ def requests_to_couples(requests):
 def couples_to_node_index(couples):
     return [item for sublist in couples for item in sublist]
 
-# p_couples is the population of couples, N is the population size
-def create_p_couples(couples, N=5):
-    p_couples = [None] * N
+
+# p_node is the population of nodes, N is the population size
+def create_p_nodes(couples, N=5):
+    nodes = couples_to_node_index(couples)
+    p_nodes = [None] * N
     for i in range(N):
-        p_couples[i] = np.random.permutation(couples).tolist()
-        #p_couples[i] = [tuple(l) for l in p_couples[i]] # to tuple
-    return p_couples
+        p_nodes[i] = np.random.permutation(nodes).tolist()
+        precedence_correction(p_nodes[i],couples)
+    return p_nodes
 
 
 # p_vehicle  is the population of vehicles, N is the population size
 def create_p_vehicles(couples, N=5, max_vehicles=100, restricted_requests = 1000):
     # actually we have unlimited vehicles, but let's be realistic here
     # no retricted_requests for now
-    p_vehicle = [None]*N # the initial population (size=N)
+    p_vehicles = [None]*N # the initial population (size=N)
     for i in range (N):
-        p_vehicle[i] = [0]*max_vehicles
+        p_vehicles[i] = [0]*max_vehicles
         remain = len(couples)
         vehicle_index = 0
         while (remain>0):
             # couples_visited is the numbers of couples visited by that vehicle
             couples_visited = randint(1, remain)
             couples_visited = min(remain,couples_visited)
-            p_vehicle[i][vehicle_index] = (couples_visited)
-            #p_vehicle[i].append(couples_visited)
+            p_vehicles[i][vehicle_index] = (couples_visited*2)
+            #p_vehicles[i].append(couples_visited)
             vehicle_index +=1
             remain -= couples_visited
-        p_vehicle[i].sort(reverse = True)
-
         #strip out all useless zeros!!!
-        p_vehicle[i] = list(filter(lambda a: a != 0, p_vehicle[i]))
-    return p_vehicle
-
-
-
-# p_node is the population of nodes, N is the population size
-def create_p_nodes(couples, N=5):
-    nodes = couples_to_node_index(couples)
-    p_node = [None] * N
-    for i in range(N):
-        p_node[i] = np.random.permutation(nodes).tolist()
-        precedence_correction(p_node[i],couples)
-    return p_node
+        p_vehicles[i] = list(filter(lambda a: a != 0, p_vehicles[i]))
+    return p_vehicles
 
 
 # final population!!!
-def create_p_tours(p_couples_vehicles,nodes,durations, N=5):
-    # 'p_couples_vehicles' is an array of p_coup_veh of couples
-    p_tours = [None]*len(p_couples_vehicles) * N
-    i = 0
-    for p_coup_veh in p_couples_vehicles:
-        num_vehicles = len(p_coup_veh)
-        for _ in range (N):
-            p_tours[i] = [None] * num_vehicles
-            j = 0
-            for couples in p_coup_veh:
-                nodes = couples_to_node_index(couples)
-                tour = np.random.permutation(nodes).tolist()
-                tour = precedence_correction(tour, couples)
-                p_tours[i][j] = tour
-                j += 1
-            i += 1
+def create_p_tours(p_nodes,p_vehicles):
+
+    # # 'p_couples_vehicles' is an array of p_coup_veh of couples
+    # p_tours = [None]*len(p_couples_vehicles) * N
+    # i = 0
+    # for p_coup_veh in p_couples_vehicles:
+    #     num_vehicles = len(p_coup_veh)
+    #     for _ in range (N):
+    #         p_tours[i] = [None] * num_vehicles
+    #         j = 0
+    #         for couples in p_coup_veh:
+    #             nodes_index = couples_to_node_index(couples)
+    #             tour = np.random.permutation(nodes_index).tolist()
+    #             tour = precedence_correction(tour, couples)
+    #             p_tours[i][j] = tour
+    #             j += 1
+    #         i += 1
     return p_tours
 
-# create p_couples_vehicles, representing vehicles visiting couples
-# 'p_couples' has sex with 'p_vehicles'
-def create_p_couples_vehicles(p_couples,p_vehicles):
-    res = [None]*len(p_vehicles)*len(p_couples) # the result will be size N1*N2
-    i = 0
-    for couples in p_couples:
-        for vehicles in p_vehicles:
-            pos = 0
-            res[i] = [None]*len(vehicles)
-            j = 0
-            for num in vehicles:
-                res[i][j] = couples[pos:(pos+num)]
-                pos += num
-                j += 1
-            i += 1
-    return res
+
 
 # random operator for GA
 def mutate(chromosome):
@@ -112,8 +87,6 @@ def mutate(chromosome):
     while (random2==random1):
         random2 = randrange(0, len(chromosome))
     swap(chromosome,random1,random2)
-
-
 
 
 def job_distance(job,distances):
@@ -190,7 +163,7 @@ def tour_distance(tour,distances,durations,depot,nodes):
     dist += processing.distance(nodes[tour[0]],depot)+processing.distance(nodes[tour[-1]],depot)
     # penalty for the 'time violated' tour
     penalty = time_penalty(tour, durations, nodes)
-    #dist *= penalty
+    dist *= penalty*1000000
     return dist
 
 def time_penalty(tour, durations, nodes):

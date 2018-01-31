@@ -23,8 +23,8 @@ MAX_DISTANCE = 1415
 
 start_time = time.time()
 # use 'relative path' in filename
-#filename = 'pdp_instances/Worse2Worst/dummy01.txt'
-filename = 'pdp_instances/LiLim/pdp_600/LC1_6_2.txt'
+filename = 'pdp_instances/Worse2Worst/dummy01.txt'
+#filename = 'pdp_instances/LiLim/pdptw1000/LR1_10_4.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
 distances = processing.create_distance_table(nodes)
@@ -47,34 +47,38 @@ start_time = time.time()
 p_vehicles = GA_time_repair.create_p_vehicles(couples, N=10)
 print(" p vehicle time --- %s seconds ---" % (time.time() - start_time))
 start_time = time.time()
-p_couples = GA_time_repair.create_p_couples(couples, N=10)
-print(" p couple time --- %s seconds ---" % (time.time() - start_time))
+p_nodes = GA_time_repair.create_p_nodes(couples, N=50)
+print(" p nodes time --- %s seconds ---" % (time.time() - start_time))
 start_time = time.time()
-p_couples_vehicles = GA_time_repair.create_p_couples_vehicles(p_couples, p_vehicles)
-print(" p couple-vehicle time --- %s seconds ---" % (time.time() - start_time))
-start_time = time.time()
-p_tours = GA_time_repair.create_p_tours(p_couples_vehicles, nodes, durations, N=10)
-print(" p tours time --- %s seconds ---" % (time.time() - start_time))
 
+for x in p_vehicles:
+    print(x)
 
-############################################################################
-
-start_time = time.time()
-d = GA_time_repair.eval_distance(p_tours, distances, durations, depots[0], nodes)
-res = min(d)
-index_min = np.argmin(d)
-depots = [depots[0]]
-print("eval time --- %s seconds ---" % (time.time() - start_time))
-
-
-
-# tour = [5, 7, 8, 10, 9, 6, 2, 4]
-# dist = GA_penalty.tour_distance(tour,distances,durations,depots[0],nodes)
-
-print (processing.unoptimized_distance(requests,depots))
-print (res)
-print (p_tours[index_min])
-util.draw_requests(requests)
-util.draw_original_nodes(nodes)
-
+# p_nodes_vehicles = GA_long.create_p_couples_vehicles(p_nodes, p_vehicles)
+# print(" p couple-vehicle time --- %s seconds ---" % (time.time() - start_time))
+# start_time = time.time()
+# p_tours = GA_long.create_p_tours(p_nodes_vehicles, nodes, durations, N=10)
+# print(" p tours time --- %s seconds ---" % (time.time() - start_time))
+#
+#
+# ############################################################################
+#
+# start_time = time.time()
+# d = GA_long.eval_distance(p_tours, distances, durations, depots[0], nodes)
+# res = min(d)
+# index_min = np.argmin(d)
+# depots = [depots[0]]
+# print("eval time --- %s seconds ---" % (time.time() - start_time))
+#
+#
+#
+# # tour = [5, 7, 8, 10, 9, 6, 2, 4]
+# # dist = GA_penalty.tour_distance(tour,distances,durations,depots[0],nodes)
+#
+# print (processing.unoptimized_distance(requests,depots))
+# print (res)
+# print (p_tours[index_min])
+# # util.draw_requests(requests)
+# # util.draw_original_nodes(nodes)
+#
 # util.draw_tours(p_tours[index_min],nodes,depots[0])

@@ -182,7 +182,7 @@ def assign_depot(clusters,depots,nodes):
     for c in clusters:
         depot_num=closest_depot(c,depots)
         for v in c:
-            nodes[int(v[0].index)].depot=depot_num
+            nodes[int(v[0].index)].depot = depot_num
             nodes[int(v[1].index)].depot = depot_num
 
 def closest_depot(cluster,depots):

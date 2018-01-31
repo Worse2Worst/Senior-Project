@@ -233,14 +233,27 @@ def draw_tours(tours, nodes,depot):
 
         lines.append((dep,last_point))
         line_array.append(lines)
-    # flat out list
-    flat_list = [item for sublist in line_array for item in sublist]
 
-    lc = mc.LineCollection(flat_list, linewidths=2)
+    # flat out list
+    #flat_list = [item for sublist in line_array for item in sublist]
+
+
     fig, ax = pl.subplots()
-    ax.add_collection(lc)
-    ax.autoscale()
-    ax.margins(0.1)
+    ax.set_title("The Routes(Tours), separated by colors")
+    # gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
+    c = []  # array 'c' to remeber the colors
+    # Separate clusters by color
+    colormap = plt.cm.gist_ncar  # nipy_spectral, Set1,Paired
+    colorst = [colormap(i) for i in np.linspace(0, 0.9, len(line_array))]
+    for t, j1 in enumerate(line_array):
+        c.append(colorst[t])
+    i = 0
+    for lines in line_array:
+        lc = mc.LineCollection(lines,colors=c[i], linewidths=2)
+        ax.add_collection(lc)
+        ax.autoscale()
+        ax.margins(0.1)
+        i += 1
         #plt.scatter(depot.x, depot.y, s=30)
     plt.show()
 

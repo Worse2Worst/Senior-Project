@@ -23,8 +23,8 @@ MAX_DISTANCE = 1415
 
 start_time = time.time()
 # use 'relative path' in filename
-filename = 'pdp_instances/Worse2Worst/dummy01.txt'
-#filename = 'pdp_instances/LiLim/pdp_200/LC1_2_3.txt'
+#filename = 'pdp_instances/Worse2Worst/dummy01.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
 distances = processing.create_distance_table(nodes)
@@ -71,10 +71,12 @@ depots = [depots[0]]
 print("eval time --- %s seconds ---" % (time.time() - start_time))
 
 
-# print (processing.unoptimized_distance(requests,depots))
-# print (res)
-# print (p_tours[index_min])
+print (processing.unoptimized_distance(requests,depots))
+print (res)
+print (p_tours[index_min])
+util.draw_tours(p_tours[index_min],nodes,depots[0])
+
+
 # util.draw_requests(requests)
 # util.draw_original_nodes(nodes)
 #
-# util.draw_tours(p_tours[index_min],nodes,depots[0])

@@ -2,13 +2,13 @@
 # load map (nodes) and generate requests
 class Node:
     def __init__(self, index, x, y, demand, ET, LT, ServiceTime, p_sibling, d_sibling):
-        self.index = index
+        self.index = int(index)
         self.x = int(x)
         self.y = int(y)
         self.demand = int(demand)
         self.ET = int(ET)
         self.LT = int(LT)
-        self.service_time = int(0)
+        self.service_time = ServiceTime
         self.p_sib = int(p_sibling)
         self.d_sib = int(d_sibling)
         self.req_type = 'p' if (int(demand) > 0) else 'd'
@@ -39,6 +39,7 @@ def load_node(filename):
 
     file.close()
     nodes[0].req_type='depot'
+    nodes[0].LT=9999999999999999999999999999999999
     return nodes
 
 def generate_request(nodes):

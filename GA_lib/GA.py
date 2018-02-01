@@ -54,7 +54,6 @@ def create_p_vehicles(couples, N=5, max_vehicles=100, restricted_requests = 1000
             #p_vehicle[i].append(couples_visited)
             vehicle_index +=1
             remain -= couples_visited
-        p_vehicle[i].sort(reverse = True)
 
         #strip out all useless zeros!!!
         p_vehicle[i] = list(filter(lambda a: a != 0, p_vehicle[i]))
@@ -128,21 +127,6 @@ def sort_by_mean_time(tour,nodes):
     res = [x for _, x in sorted(zip(mean_time, tour))]
     return res
 
-def job_distance(job,distances):
-    if len(job) <= 0: return 0
-    d = 0
-    last_node = int(job[-1])
-    n = len(job)
-    for i in range(n-1):
-        d += distances[job[i]][job[i+1]]
-    d += distances[job[0]][last_node] # complete the circle
-    return d
-
-def total_distances(jobs,distances):
-    d = 0
-    for job in jobs:
-        d += job_distance(job,distances)
-    return d
 
 
 def precedence_correction(tour, couples):
@@ -166,6 +150,72 @@ def precedence_correction(tour, couples):
     return tour
 
 
+
+
+
+def pickup_sibling(index,couples):
+    sib = [item[0] for item in couples if index in item]
+    return sib[0]
+
+def delivery_sibling(index,couples):
+    sib = [item[1] for item in couples if index in item]
+    return sib[0]
+
+
+
+# eval distance of all p_jobs
+def eval_distance (p_jobs,distances,depot,nodes):
+    res = []
+    for tours in p_jobs:
+        res.append(tours_distance(tours,distances,depot,nodes))
+    return res
+
+# distance of 'tours' by all vehicles
+def tours_distance(tours, distances, depot,nodes):
+    dist = 0
+    for tour in tours:
+        dist += tour_distance(tour,distances,depot,nodes)
+    return dist
+
+# distance of just one 'job' by one vehicle
+def tour_distance(tour,distances,depot,nodes):
+    dist = 0
+    for i in range(len(tour)-1):
+        dist += distances[tour[i]][tour[i+1]]
+    dist += processing.distance(nodes[tour[0]],depot)+processing.distance(nodes[tour[-1]],depot)
+    return dist
+
+
+
+## below is junk !!!
+'''
+def set_files(fn):
+    #print (fn)
+    filename = fn
+    nodes = tuple(preprocessing.load_node(filename))
+    requests = preprocessing.generate_request(nodes)
+    distances = processing.create_distance_table(nodes)
+
+
+def jobs_to_chromosome(jobs,nodes):
+    max_vehicles = len(nodes)-1
+    chromosome = [None] * max_vehicles
+    for i in range(len(jobs)):
+        chromosome[i]=jobs[i]
+    return chromosome
+
+def clusters_to_jobs(clusters):
+    jobs = [] # array of integer!!!
+    for cluster in clusters:
+        jobs.append(cluster_to_job(cluster))
+    return jobs
+
+def cluster_to_job(cluster):
+    job=[]
+    for req in cluster:
+        job.append(int(req[0].index))
+        job.append(int(req[1].index))
+    return job
 
 def time_violated_index(tour,durations,nodes):
     cur_time = 0
@@ -294,71 +344,20 @@ def current_duration(tour,nodes,durations,stop) :
         cur_time += durations[tour[i]][tour[i+1]]
         cur_time = max(cur_time,nodes[tour[i+1]].ET)
     return cur_time
+def job_distance(job,distances):
+    if len(job) <= 0: return 0
+    d = 0
+    last_node = int(job[-1])
+    n = len(job)
+    for i in range(n-1):
+        d += distances[job[i]][job[i+1]]
+    d += distances[job[0]][last_node] # complete the circle
+    return d
 
-def pickup_sibling(index,couples):
-    sib = [item[0] for item in couples if index in item]
-    return sib[0]
-
-def delivery_sibling(index,couples):
-    sib = [item[1] for item in couples if index in item]
-    return sib[0]
-
-
-
-# eval distance of all p_jobs
-def eval_distance (p_jobs,distances,depot,nodes):
-    res = []
-    for tours in p_jobs:
-        res.append(tours_distance(tours,distances,depot,nodes))
-    return res
-
-# distance of 'tours' by all vehicles
-def tours_distance(tours, distances, depot,nodes):
-    dist = 0
-    for tour in tours:
-        dist += tour_distance(tour,distances,depot,nodes)
-
-    return dist
-
-# distance of just one 'job' by one vehicle
-def tour_distance(tour,distances,depot,nodes):
-    dist = 0
-    for i in range(len(tour)-1):
-        dist += distances[tour[i]][tour[i+1]]
-
-    dist += processing.distance(nodes[tour[0]],depot)+processing.distance(nodes[tour[-1]],depot)
-    return dist
-
-
-
-## below is junk !!!
-'''
-def set_files(fn):
-    #print (fn)
-    filename = fn
-    nodes = tuple(preprocessing.load_node(filename))
-    requests = preprocessing.generate_request(nodes)
-    distances = processing.create_distance_table(nodes)
-
-
-def jobs_to_chromosome(jobs,nodes):
-    max_vehicles = len(nodes)-1
-    chromosome = [None] * max_vehicles
-    for i in range(len(jobs)):
-        chromosome[i]=jobs[i]
-    return chromosome
-
-def clusters_to_jobs(clusters):
-    jobs = [] # array of integer!!!
-    for cluster in clusters:
-        jobs.append(cluster_to_job(cluster))
-    return jobs
-
-def cluster_to_job(cluster):
-    job=[]
-    for req in cluster:
-        job.append(int(req[0].index))
-        job.append(int(req[1].index))
-    return job
+def total_distances(jobs,distances):
+    d = 0
+    for job in jobs:
+        d += job_distance(job,distances)
+    return d
 
 '''

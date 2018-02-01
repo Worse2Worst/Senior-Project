@@ -78,7 +78,24 @@ def create_p_tours(p_nodes,p_vehicles):
     #         i += 1
     return p_tours
 
+def create_initial_solution(node,dep,nodes,distances,durations):
+    p_node = node[:] # copy
+    sols = [[dep]]
+    sols[0].append(p_node.pop(0))
+    while(len(p_node)>0):
+        v = p_node.pop(0)
+        if (nodes[v].req_type =='p'):
+            d_sib = v.d_sib
+            p_node.remove(d_sib)
+            for sol in sols:
+                ind = insert_indices(v, sol, nodes, distances)
+                if(len(ind)>=0):
+                    sol_temp = sol[:]
 
+                    if()
+        else:
+            p_sib = v.p_sib
+            p_node.remove(p_sib)
 
 # random operator for GA
 def mutate(chromosome):

@@ -24,8 +24,8 @@ MAX_DISTANCE = 1415
 
 start_time = time.time()
 # use 'relative path' in filename
-#filename = 'pdp_instances/Worse2Worst/dummy01.txt'
-filename = 'pdp_instances/LiLim/pdp_600/LC1_6_8.txt'
+filename = 'pdp_instances/Worse2Worst/dummy01.txt'
+#filename = 'pdp_instances/LiLim/pdp_600/LC1_6_8.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
 distances = processing.create_distance_table(nodes)
@@ -52,8 +52,11 @@ p_nodes = GA_time_repair.create_p_nodes(couples, N=150)
 print(" p nodes time --- %s seconds ---" % (time.time() - start_time))
 start_time = time.time()
 
-# for x in p_vehicles:
-#     print(x)
+
+print(p_vehicles)
+
+
+print(p_nodes)
 
 # p_nodes_vehicles = GA_time_repair.create_p_couples_vehicles(p_nodes, p_vehicles)
 # print(" p couple-vehicle time --- %s seconds ---" % (time.time() - start_time))

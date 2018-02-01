@@ -203,8 +203,8 @@ def closest_depot_distance(req,depots):
     min_dist = 9999999999999999
     min_depot = 10000000000000
     i=0
-    for d in depots:
-        dist=distance(req[0],req[1])+distance(d,req[0])+distance(d,req[1])
+    for dep in depots:
+        dist=distance(req[0],req[1])+distance(dep,req[0])+distance(dep,req[1])
         if(dist < min_dist):
             min_dist=dist
             min_depot=i

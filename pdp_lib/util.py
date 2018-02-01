@@ -144,31 +144,7 @@ def draw_requests(requests):
     plt.savefig(save_path)
     '''
 
-def draw_clusters(clusters):
-    fig, ax = plt.subplots()
-    ax.set_title("The clusters, separated by colors")
-    #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
-    c=[] # array 'c' to remeber the colors
-    # Separate clusters by color
-    colormap = plt.cm.gist_ncar  # nipy_spectral, Set1,Paired
-    colorst = [colormap(i) for i in np.linspace(0, 0.9, len(clusters))]
-    for t, j1 in enumerate(clusters):
-        c.append(colorst[t])
 
-    # drawing the clusters
-    i=0
-    for cluster in clusters:
-        for j in range(len(cluster)):
-            p = cluster[j][0]
-            d = cluster[j][1]
-            plt.scatter(p.x, p.y,color=c[i])
-            plt.scatter(d.x, d.y,color=c[i])
-        i+=1
-    figtext(.02, .02, 'Have ' + str(len(clusters)) + ' clusters')
-    plt.show()
-
-def draw_cluster(cluster):
-    draw_requests(cluster)
 
 def draw_nodes_depots(nodes,depots):
     # Description text
@@ -189,23 +165,23 @@ def draw_nodes_depots(nodes,depots):
     for v in nodes:
         locations.append([v.x, v.y])
         depot_num.append(v.depot)
-        dep[int(v.depot)] +=1
+        # dep[int(v.depot)] +=1
     for i in range(len(locations)):
         x = locations[i][0]
         y = locations[i][1]
         color = 'black'
-        if (depot_num[i] == 0): color = 'red'
-        elif (depot_num[i] == 1): color = 'blue'
-        elif (depot_num[i] == 2): color = 'green'
-        elif (depot_num[i] == 3): color = 'yellow'
-        elif (depot_num[i] == 4): color = 'purple'
+        if (depot_num[i] == 1+len(nodes)): color = 'red'
+        elif (depot_num[i] == 2+len(nodes)): color = 'blue'
+        elif (depot_num[i] == 3+len(nodes)): color = 'green'
+        elif (depot_num[i] == 4+len(nodes)): color = 'yellow'
+        elif (depot_num[i] == 5+len(nodes)): color = 'purple'
         plt.scatter(x, y, c=color)
 
     # draw the depots
     for d in depots:
         plt.scatter(d.x, d.y, c='silver')
     dep_stat=''
-    dep_stat += str(dep[0])+','+str(dep[1])+','+str(dep[2])+','+str(dep[3])+','+str(dep[4])
+    # dep_stat += str(dep[0])+','+str(dep[1])+','+str(dep[2])+','+str(dep[3])+','+str(dep[4])
     figtext(.02,.02, 'Have ' + str(len(nodes) - 1) + ' nodes (not counting the depots), '+'Depot 0,1,2,3,4 have '+dep_stat)
     mplcursors.cursor(hover=True)
     plt.show()
@@ -255,6 +231,8 @@ def draw_tours(tours, nodes,depot):
         ax.margins(0.1)
         i += 1
         #plt.scatter(depot.x, depot.y, s=30)
+    figtext(.02, .02,
+            'Have ' + str(len(tours)) + ' tours. ')
     plt.show()
 
 '''
@@ -265,4 +243,33 @@ def draw_tours(tours, nodes,depot):
             s = 'Vehicle ' + str(i) +' :'
             for node in tour:
                 s+=str(node) + '->'
+                
+'''
+'''
+def draw_clusters(clusters):
+    fig, ax = plt.subplots()
+    ax.set_title("The clusters, separated by colors")
+    #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
+    c=[] # array 'c' to remeber the colors
+    # Separate clusters by color
+    colormap = plt.cm.gist_ncar  # nipy_spectral, Set1,Paired
+    colorst = [colormap(i) for i in np.linspace(0, 0.9, len(clusters))]
+    for t, j1 in enumerate(clusters):
+        c.append(colorst[t])
+
+    # drawing the clusters
+    i=0
+    for cluster in clusters:
+        for j in range(len(cluster)):
+            p = cluster[j][0]
+            d = cluster[j][1]
+            plt.scatter(p.x, p.y,color=c[i])
+            plt.scatter(d.x, d.y,color=c[i])
+        i+=1
+    figtext(.02, .02, 'Have ' + str(len(clusters)) + ' clusters')
+    plt.show()
+
+def draw_cluster(cluster):
+    draw_requests(cluster)
+
 '''

@@ -4,10 +4,11 @@ import random
 
 
 # CrossOver, using Single-Point, MUST BE list of INT!!!!
-def cxOnePoint(ind1, ind2):
-    if(set(ind1)!=set(ind2)):
+def cxOnePoint(in1, in2):
+    if(set(in1)!=set(in2)):
         print('BUGG!!!!!!!!!!!!!!!')
         return False
+    ind1, ind2 = in1[:], in2[:]
     size = min(len(ind1), len(ind2))
     cxpoint1 = cxpoint2 = int(len(ind1)/2)
     temp1 = ind2[0:cxpoint2+1] + ind1
@@ -24,7 +25,8 @@ def cxOnePoint(ind1, ind2):
     return ind1, ind2
 
 # CrossOver, using Partialy Matched, MUST BE list of INT!!!!
-def cxPartialyMatched(ind1, ind2):
+def cxPartialyMatched(in1, in2):
+    ind1,ind2 = in1[:],in2[:]
     size = min(len(ind1), len(ind2))
     cxpoint1, cxpoint2 = sorted(random.sample(range(size), 2))
     temp1 = ind1[cxpoint1:cxpoint2+1] + ind2
@@ -54,9 +56,11 @@ def mutate(chromosome):
     swap(chromosome,random1,random2)
 
 # flat out tours to a long chromosome
-def tours_to_chrommosome(tours):
+def pTours_to_chrommosome(tours):
     return [item for sublist in tours for item in sublist]
 
+def pTours_to_pVehicles(p_tours):
+    return [len(sublist) for sublist in p_tours]
 
 # Swap
 def swap(array, i, j):
@@ -89,3 +93,6 @@ def precedence_correction(tour, couples):
         else: # v is pickup
             visited.append(v)
     return tour
+
+
+

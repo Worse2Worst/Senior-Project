@@ -5,6 +5,7 @@ from GA_lib import evaluate_new as eval
 from GA_lib import oper as op
 from pdp_lib import preprocessing
 from pdp_lib import processing
+from random import shuffle
 from pdp_lib import util
 from itertools import permutations
 '''
@@ -22,7 +23,7 @@ util.print_distances(distances)
 
 start_time = time.time()
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_100/lc103.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lr202.txt'
 #filename = 'pdp_instances/LiLim/pdp_100/lc102.txt'
 nodes = preprocessing.load_node(filename)
 requests = preprocessing.generate_request(nodes)
@@ -41,7 +42,7 @@ print(" processing time --- %s seconds ---" % (time.time() - start_time))
 start_time = time.time()
 
 couples = GA_new.requests_to_couples(requests)
-print(couples)
+
 
 
 # util.draw_requests(requests)
@@ -122,8 +123,7 @@ def insert_requests_into_tour(req,tour,couples,nodes):
             temp2 = temp1[:]
             temp2.insert(j,req[1])
             # now remove the bad ones
-            if (precedence_violated(temp2, couples)):
-                print ('BUG!!!!!!!')
+            # Assume that precedence not violated
             if (not time_violated(temp2,nodes,durations)):
                 candidates.append(temp2)
 
@@ -138,23 +138,39 @@ def insert_requests_into_tour(req,tour,couples,nodes):
         if(dist<min_dist):
             min_dist = dist
             min_index = i
-    return candidates[i]
+    return candidates[min_index]
 
-tour = [1,75]
-tour = insert_requests_into_tour([7,9],tour,couples,nodes)
-tour = insert_requests_into_tour([5,11],tour,couples,nodes)
-tour = insert_requests_into_tour([3,8],tour,couples,nodes)
-tour = insert_requests_into_tour([10,6],tour,couples,nodes)
-tour = insert_requests_into_tour([4,2],tour,couples,nodes)
+tour = []
+tour = insert_requests_into_tour([75,58],tour,couples,nodes)
+print(tour)
+
+
+tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
+pickup = []
+for x in tour:
+    if(nodes[x].req_type == 'p'):
+        pickup.append(x)
+req = [(p,nodes[p].d_sib)for p in pickup]
+print(req)
+tour = [96,59,92,98,85,91,14,42,2,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26]
+
+req = [(75,58)]
+for r in req:
+    tour = insert_requests_into_tour(r,tour,couples,nodes)
+
 
 
 print (tour)
+
 print('my Solution:'+str(eval.tour_distance(tour,distances)))
-tour = [5,3,7,8,10,11,9,6,4,2,1,75]
-print (tour)
 print(time_violated(tour,nodes,durations))
 print(precedence_violated(tour,couples))
-print('best solution : '+str(eval.tour_distance(tour,distances)))
-print(time_violated(tour,nodes,durations))
-print(precedence_violated(tour,couples))
+
+best_tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
+print (best_tour)
+
+print('best solution : '+str(eval.tour_distance(best_tour,distances)))
+print(time_violated(best_tour,nodes,durations))
+print(precedence_violated(best_tour,couples))
 print(" cal time --- %s seconds ---" % (time.time() - start_time))
+print ('Have equal nodes:'+str(set(tour)==set(best_tour)))

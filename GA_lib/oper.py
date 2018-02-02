@@ -1,7 +1,7 @@
 from random import randrange
 import collections
+from random import randrange,randint,sample,choice
 import random
-
 
 # CrossOver, using Single-Point, MUST BE list of INT!!!!
 def cxOnePoint(in1, in2):

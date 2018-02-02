@@ -22,11 +22,11 @@ def couples_to_node_index(couples):
     return [item for sublist in couples for item in sublist]
 
 def initialize_chromosome(num_vehicles = 25):
-    chromosome = [None]*num_vehicles
+    chromosome =[[car_num,[]] for car_num in range(num_vehicles)]
     return chromosome
 
 
-def new_tour_after_insert_requests(req, tour, couples, nodes):
+def new_tour_after_insert_requests(req,tour,nodes,distances,durations):
     candidates = []
     if(len(tour)==0):
         return [req[0],req[1]]

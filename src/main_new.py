@@ -132,7 +132,7 @@ def precedence_violated(tour,nodes):
     return False
 
 
-def new_tour_after_insert_requests(req, tour, couples, nodes):
+def new_tour_after_insert_requests(req,tour,nodes,distances,durations):
     candidates = []
     if(len(tour)==0):
         return [req[0],req[1]]
@@ -176,7 +176,7 @@ print(req)
 tour = []
 shuffle(req)
 for r in req:
-    tour = new_tour_after_insert_requests(r, tour, couples, nodes)
+    tour = new_tour_after_insert_requests(r,tour,nodes,distances,durations)
 
 
 

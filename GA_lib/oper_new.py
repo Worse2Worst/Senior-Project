@@ -1,6 +1,6 @@
 from random import randrange
 import collections
-from random import randrange,randint,sample,choice
+import copy
 import random
 
 # CrossOver, using Single-Point, MUST BE list of INT!!!!
@@ -44,18 +44,29 @@ def cxPartialyMatched(in1, in2):
 
 # A Chromosome(parents) is an array of genes(vehicles)
 # A Gene is an array of indices of requests(pickup-delivery)
-def crossover(parent1,parent2):
-    child1,child2 = parent1,parent2
-    rand_num1 = random.randint(1,len(child1))
-    rand_num2 = random.randint(1,len(child2))
-    # subpart 1
-    sub1 = random.sample(child1,rand_num1)
-     
-    #subpart 2
-    sub2 = random.sample(child2, rand_num2)
+def crossover(couples,parent1,parent2,prob = 0.8):
+    # Probability that will not crossover
+    if (random.random() > prob):
+        return parent1,parent2
+    # Else crossover
+    child1,child2 = copy.deepcopy(parent1) ,copy.deepcopy(parent2)
+    # Trim out the empty vehicles
+    child1 = [gene for gene in child1 if (len(gene[1]) > 0)]
+    child2 = [gene for gene in child2 if (len(gene[1]) > 0)]
+    # shuffle
+    random.shuffle(child1)
+    random.shuffle(child2)
+
+    # generate random range for crossover
+    range1 = random.randint(1,len(child1))
+    range2 = random.randint(1,len(child2))
+    # subpart 1,2 for crossover
+    sub1 = random.sample(child1,range1)
+    sub2 = random.sample(child2, range2)
 
     #remove subpart1 from child 1
     child1 = [x for x in child1 if x not in sub1]
     # remove subpart2 from child 2
     child2 = [x for x in child2 if x not in sub2]
+    # Unfinished!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     return child1,child2

@@ -3,9 +3,9 @@ import math
 import numpy as np
 from pip import locations
 
-from pdp_lib import processing_new as proc
-from GA_lib import GA_new
-from GA_lib import evaluate_new as eval
+from pdp_lib import processing as proc
+from GA_lib import GA
+from GA_lib import evaluate as eval
 from GA_lib import oper as op
 
 from random import shuffle

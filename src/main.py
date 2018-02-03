@@ -1,14 +1,9 @@
 import time
-import math
-import numpy as np
-from pip import locations
-
-from pdp_lib import processing_new as proc
-from GA_lib import GA_new
-from GA_lib import evaluate_new as eval
-from GA_lib import oper_new as op
 from random import shuffle
-from itertools import permutations
+from pdp_lib import processing as proc
+from GA_lib import GA
+from GA_lib import operation as op
+from GA_lib import evaluate as eval
 
 
 

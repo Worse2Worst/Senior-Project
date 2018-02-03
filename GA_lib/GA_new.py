@@ -36,6 +36,8 @@ def new_tour_after_insert_requests(req,tour,nodes,distances,durations):
     for i in range(len(tour)+1):
         temp1 = tour[:]
         temp1.insert(i,req[0])
+        if (time_violated(temp1, nodes, durations)):
+            pass
         for j in range(i+1,len(temp1)+1):
             temp2 = temp1[:]
             temp2.insert(j,req[1])

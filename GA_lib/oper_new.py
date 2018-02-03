@@ -45,28 +45,41 @@ def cxPartialyMatched(in1, in2):
 # A Chromosome(parents) is an array of genes(vehicles)
 # A Gene is an array of indices of requests(pickup-delivery)
 def crossover(couples,parent1,parent2,prob = 0.8):
-    # Probability that will not crossover
+    ##### Probability that will not crossover
     if (random.random() > prob):
         return parent1,parent2
-    # Else crossover
+    ##### Else, crossover
+    # All couples indices to visit
+    all_copules = set([i for i in range(len(couples))])
+    #
     child1,child2 = copy.deepcopy(parent1) ,copy.deepcopy(parent2)
     # Trim out the empty vehicles
     child1 = [gene for gene in child1 if (len(gene[1]) > 0)]
     child2 = [gene for gene in child2 if (len(gene[1]) > 0)]
-    # shuffle
-    random.shuffle(child1)
-    random.shuffle(child2)
 
-    # generate random range for crossover
+    # # Shuffle(not necessary)
+    # random.shuffle(child1)
+    # random.shuffle(child2)
+
+    # Generate random range for crossover
     range1 = random.randint(1,len(child1))
     range2 = random.randint(1,len(child2))
-    # subpart 1,2 for crossover
+    # Subpart 1,2 for crossover
     sub1 = random.sample(child1,range1)
     sub2 = random.sample(child2, range2)
 
-    #remove subpart1 from child 1
+    # Remove subparts from children
     child1 = [x for x in child1 if x not in sub1]
-    # remove subpart2 from child 2
     child2 = [x for x in child2 if x not in sub2]
+
+    # set1 contains all requests in sub1
+    set1 = [reqs for [vehicle, reqs] in sub1]
+    set1 = set.union(*set1)
+    set2 = [reqs for [vehicle, reqs] in sub2]
+    set2 = set.union(*set2)
+
+
     # Unfinished!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ##### this is how to select a random element from a set
+    # random.choice(tuple(my_set))
     return child1,child2

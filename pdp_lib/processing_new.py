@@ -1,8 +1,6 @@
 import math
 import numpy as np
 import copy
-from pdp_lib import util
-from operator import itemgetter
 
 # Loading a file
 def load_file(filename):

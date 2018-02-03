@@ -1,8 +1,4 @@
-from pdp_lib import preprocessing
-from pdp_lib import processing
-from GA_lib import oper as op
-import numpy as np
-
+import random
 # eval distance of all p_jobs
 def eval_distance (p_tours, distances, depot, nodes):
     res = []

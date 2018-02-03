@@ -6,10 +6,8 @@ from pip import locations
 from pdp_lib import processing_new as proc
 from GA_lib import GA_new
 from GA_lib import evaluate_new as eval
-from GA_lib import oper as op
-
+from GA_lib import oper_new as op
 from random import shuffle
-from pdp_lib import util
 from itertools import permutations
 
 

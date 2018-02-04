@@ -3,7 +3,7 @@ import random
 
 
 def initialize_chromosome(num_vehicles = 25):
-    chromosome =[[car_num,set(),[]] for car_num in range(num_vehicles)]
+    chromosome =[[car_num,[],[]] for car_num in range(num_vehicles)]
     return chromosome
 
 

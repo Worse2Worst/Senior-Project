@@ -1,5 +1,128 @@
-parent1 = [[3,{4,2,7},[7,4,2]],[8,{3,6},[6,3]],[1,{1,5,8},[5,8,1]],[2,set(),[]],[4,set(),[]],[5,set(),[]],[6,set(),[]],[7,set(),[]]]
-parent2 = [[2,{4,8},[8,4]],[1,{1,6},[1,6]],[5,{2,7},[2,7]],[8,{3,5},[3,5]],[3,set(),[]],[4,set(),[]],[6,set(),[]],[7,set(),[]]]
+import random
+import copy
+from GA_lib import operation as op
 
-sub1 = [[8, {3, 6}, [6, 3]]]
-sub2 = [[1, {1, 6}, [6, 1]], [5, {2, 7}, [2, 7]]]
+
+totalReqs = set([i+1 for i in range(8)])
+reqRemainingSet1 = totalReqs
+reqRemainingSet2 = totalReqs
+
+parent1 = [[3,[4,2,7],[7,4,2]],[8,[3,6],[6,3]],[1,[1,5,8],[5,8,1]],[2,[],[]],[4,[],[]],[5,[],[]],[6,[],[]],[7,[],[]]]
+parent2 = [[2,[4,8],[8,4]],[1,[1,6],[1,6]],[5,[2,7],[2,7]],[8,[3,5],[3,5]],[3,[],[]],[4,[],[]],[6,[],[]],[7,[],[]]]
+
+child1,child2 = copy.deepcopy(parent1) ,copy.deepcopy(parent2)
+
+partFrom1 = [[8, [3, 6], [6, 3]]]
+partFrom2 = [[1, [1, 6], [1, 6]], [5, [2, 7], [2, 7]]]
+
+
+
+
+
+
+# # Remove subparts from original parents
+# child1 = [x for x in child1 if x not in partFrom1]
+# child2 = [x for x in child2 if x not in partFrom2]
+
+
+# reqSetFrom1 is a set contains all requests in partFrom1, reqSetFrom2 contains all requests in partFrom2
+reqsFrom1 = [reqs for [vehicle,reqs,route] in partFrom1]
+reqsFrom1 = [item for sublist in reqsFrom1 for item in sublist]
+reqsFrom2 = [reqs for [vehicle, reqs, route] in partFrom2]
+reqsFrom2 = [item for sublist in reqsFrom2 for item in sublist]
+
+
+# Crossing!!!
+numVehicles1 = [x[0] for x in partFrom1]
+numVehicles2 = [x[0] for x in partFrom2]
+child1 = [x for x in child1 if x not in numVehicles2]
+child2 = [x for x in child2 if x not in numVehicles1]
+child1 += partFrom2
+child2 += partFrom1
+
+# Remove the duplicate requests in children,
+# because we are going to insert(crossing) reqSetFrom2 into children1
+# and vice versa
+op.removeRequests(child1,numVehicles2, reqsFrom2)
+op.removeRequests(child2,numVehicles1, reqsFrom1)
+
+
+
+
+
+
+# Trim out the empty vehicles
+parent1 = [gene for gene in parent1 if (len(gene[1]) > 0)]
+parent2 = [gene for gene in parent2 if (len(gene[1]) > 0)]
+
+# # Shuffle(not necessary)
+# random.shuffle(child1)
+# random.shuffle(child2)
+
+# Generate random range for crossover
+range1 = random.randint(1,len(parent1))
+range2 = random.randint(1,len(parent2))
+# Subpart 1,2 for crossover
+partFrom1 = random.sample(parent1,range1)
+partFrom2 = random.sample(parent2, range2)
+# partFrom1,partFrom2 = copy.deepcopy(partFrom1),copy.deepcopy(partFrom2)
+
+# # Remove subparts from original parents
+# child1 = [x for x in child1 if x not in partFrom1]
+# child2 = [x for x in child2 if x not in partFrom2]
+
+# reqsFrom1 is a set contains all requests in partFrom1, reqsFrom2 contains all requests in partFrom2
+reqsFrom1 = [reqs for [vehicle,reqs,route] in partFrom1]
+reqsFrom1 = [item for sublist in reqsFrom1 for item in sublist]
+reqsFrom2 = [reqs for [vehicle, reqs, route] in partFrom2]
+reqsFrom2 = [item for sublist in reqsFrom2 for item in sublist]
+
+
+# # Remove requests we cut out from the 'partFrom'
+# reqRemainingSet1 = reqRemainingSet1 - reqsFrom1
+# reqRemainingSet2 = reqRemainingSet2 - reqsFrom2
+
+
+
+############## Crossing!!! #################
+vehiclesFrom1 = set([x[0] for x in partFrom1])
+vehiclesFrom2 = set([x[0] for x in partFrom2])
+# Remove the vehicles known to be replaced
+child1 = [x for x in child1 if x[0] not in vehiclesFrom2]
+child2 = [x for x in child2 if x[0] not in vehiclesFrom1]
+# Remove the vehicles that will replace the other chromosome
+child1 = [x for x in child1 if x[0] not in vehiclesFrom1]
+child2 = [x for x in child2 if x[0] not in vehiclesFrom2]
+# Append the part of chromosome
+child1 += partFrom2
+child2 += partFrom1
+
+op.removeRequests(child1,numVehicles2,reqsFrom2)
+op.removeRequests(child2,numVehicles1,reqsFrom1)
+
+
+	
+####################### Trim out the empty vehicles ###########################################
+totalReqs = set([i for i in range(len(requests))])
+reqRemainingSet1 = totalReqs
+reqRemainingSet2 = totalReqs
+child1,child2 = copy.deepcopy(parent1) ,copy.deepcopy(parent2)
+
+parent1 = [gene for gene in parent1 if (len(gene[1]) > 0)]
+parent2 = [gene for gene in parent2 if (len(gene[1]) > 0)]
+
+# # Shuffle(not necessary)
+# random.shuffle(child1)
+# random.shuffle(child2)
+
+# Generate random range for crossover
+range1 = random.randint(1,len(parent1))
+range2 = random.randint(1,len(parent2))
+# Subpart 1,2 for crossover
+partFrom1 = random.sample(parent1,range1)
+partFrom2 = random.sample(parent2, range2)
+# partFrom1,partFrom2 = copy.deepcopy(partFrom1),copy.deepcopy(partFrom2)
+#################################################################################
+	
+	
+	

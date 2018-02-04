@@ -1,24 +1,14 @@
 import copy
 import random
-from random import randrange
+from GA_lib import modify
 import collections
 
 
-def removeRequests(chromosome, tabooVehicles, reqsToRemove, requests):
-    for [num, reqs, route] in chromosome:
-        if (not num in tabooVehicles):
-            for removingReq in reqsToRemove:
-                if (removingReq in reqs):
-                    reqs.remove(removingReq)
-                    ## Also, remove the removing requests from the route
-                    pickupNode = requests[removingReq][0]
-                    deliveryNode = requests[removingReq][1]
-                    route.remove(pickupNode)
-                    route.remove(deliveryNode)
+
 
 # A Chromosome(parents) is an array of genes(vehicles)
 # A Gene is an array of indices of requests(pickup-delivery)
-def crossover(REQUESTS, parent1, parent2, prob = 0.8):
+def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, prob = 0.8):
     ##### Probability that they will not crossover ####################
     if (random.random() > prob):
         return parent1,parent2
@@ -69,22 +59,21 @@ def crossover(REQUESTS, parent1, parent2, prob = 0.8):
     child1 += partFrom2
     child2 += partFrom1
     # Remove the duplicate requests in children,
-    removeRequests(child1, vehiclesFrom2, reqsFrom2, REQUESTS)
-    removeRequests(child2, vehiclesFrom1, reqsFrom1, REQUESTS)
+    modify.remove_requests(child1, vehiclesFrom2, reqsFrom2, REQUESTS)
+    modify.remove_requests(child2, vehiclesFrom1, reqsFrom1, REQUESTS)
     # Calculate remaining requests to insert
     usedReqs1 = [reqs for [vehicle, reqs, route] in child1]
     usedReqs1 = [item for sublist in usedReqs1 for item in sublist]
     usedReqs1 = set(usedReqs1)
-    toInsertReqs1 = totalReqs - usedReqs1
+    reqsToInsert1 = totalReqs - usedReqs1
     usedReqs2 = [reqs for [vehicle, reqs, route] in child2]
     usedReqs2 = [item for sublist in usedReqs2 for item in sublist]
     usedReqs2 = set(usedReqs2)
-    toInsertReqs2 = totalReqs - usedReqs2
+    reqsToInsert2 = totalReqs - usedReqs2
     ### Insert the remaining requests into the children ########
+    modify.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS)
+    modify.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS)
 
-    ################################## Unfinished!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    ##### this is how to select a random element from a set
-    # random.choice(tuple(my_set))
     return child1,child2
 
 

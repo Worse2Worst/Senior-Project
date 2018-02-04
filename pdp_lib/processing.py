@@ -48,7 +48,7 @@ def load_file(filename):
 def generate_request(pickupSiblings,deliverySiblings,requestType):
     requests = []
     for i in range(len(requestType)):
-        if(requestType[i]=='p'):
+        if(requestType[i]=='pickup'):
             requests.append((i,deliverySiblings[i]))
     return requests
 

@@ -27,7 +27,6 @@ REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
 DISTANCES = proc.createDistanceTable(locations)
 DURATIONS = proc.createDurationTable(locations, DISTANCES, serviceTimes, speed)
 
-print(requestType[96])
 
 print(" processing time --- %s seconds ---" % (time.time() - start_time))
 
@@ -37,31 +36,40 @@ start_time = time.time()
 
 
 
-
-
-
 start_time = time.time()
 tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
 reqs = [(tour[i],deliverySiblings[tour[i]]) for i in range(len(tour)) if requestType[tour[i]]=='pickup']
 print('The Requests are :'+str(reqs))
-tour = []
-shuffle(reqs)
-for r in reqs:
-    tour = evaluate.new_tour_after_insert_requests(r, tour, DISTANCES, DURATIONS, timeWindows)
+
+allReqs = [(96, 23), (59, 91), (92, 24), (98, 84), (85, 15), (14, 44), (42, 54), (2, 43), (75, 58), (39, 99), (38, 18), (16, 5), (61, 80), (8, 55), (86, 6), (94, 95), (97, 4), (56, 25), (12, 26)]
+tour = [59,92,98,85,91,14,42,75,39,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,56,4,54,55,25,24,80,12,26,58]
+tourReqs = [(tour[i],deliverySiblings[tour[i]]) for i in range(len(tour)) if requestType[tour[i]]=='pickup']
+tourReqsIndex = [REQUESTS.index(item) for item in tourReqs]
+insertingReqs = [(96,23),(2,43)]
+insertingReqsIndex  = [REQUESTS.index(item) for item in insertingReqs]
+
+print('Tour Requests index : '+str(tourReqsIndex))
+
+chromosome = [[10,tourReqsIndex,tour]]
+
+modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS)
+
+tour = chromosome[0][2]
 cal_time = time.time() - start_time
-
-
-print (tour)
+print ('My Tour is : '+str(tour))
+print (len(tour))
 
 print('my Solution:' + str(evaluate.tour_distance(tour, DISTANCES)))
 print('Violate time windows:' + str(evaluate.time_violated(tour, DURATIONS, timeWindows)))
 print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestType, pickupSiblings)))
 
-best_tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
-print (best_tour)
 
+best_tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
+print ('Best Tour is :'+str(best_tour))
+print (len(best_tour))
 print('best solution : ' + str(evaluate.tour_distance(best_tour, DISTANCES)))
 print('Violate time windows:' + str(evaluate.time_violated(best_tour, DURATIONS, timeWindows)))
 print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestType, pickupSiblings)))
-print(" cal time --- %s seconds ---" % (cal_time))
 print ('Have equal nodes:'+str(set(tour)==set(best_tour)))
+
+print(" cal time --- %s seconds ---" % (cal_time))

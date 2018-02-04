@@ -51,7 +51,7 @@ insertingReqsIndex  = [REQUESTS.index(item) for item in insertingReqs]
 print('Tour Requests index : '+str(tourReqsIndex))
 
 chromosome = [[10,tourReqsIndex,tour]]
-
+################################ INSERTION!!!!!!!! #######################################################
 modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS)
 
 tour = chromosome[0][2]
@@ -73,3 +73,20 @@ print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestTy
 print ('Have equal nodes:'+str(set(tour)==set(best_tour)))
 
 print(" cal time --- %s seconds ---" % (cal_time))
+
+
+############ Remove Requests !! ######################################
+start_time = time.time()
+chromosome = [[0,[],[]],[1,[],[]],[10,tourReqsIndex,tour]]
+tabooVehicles = {0}
+reqsToRemove = [47,0]
+modify.remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS)
+removedTour = chromosome[2][2]
+print ('My Tour after remove is : '+str(removedTour))
+print('Violate time windows:' + str(evaluate.time_violated(removedTour, DURATIONS, timeWindows)))
+print('Violate time precedence:'+str(evaluate.precedence_violated(removedTour,requestType, pickupSiblings)))
+
+cal_time = time.time() - start_time
+
+print(" cal time --- %s seconds ---" % (cal_time))
+

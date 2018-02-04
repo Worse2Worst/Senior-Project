@@ -1,6 +1,10 @@
 import random
 from GA_lib import evaluate
 
+#############################################################
+# This module is used to modify chromosomes.                #
+#############################################################
+
 # This function remove requests from a chromosome
 def remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS):
     for [num, reqs, route] in chromosome:

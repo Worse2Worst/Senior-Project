@@ -27,13 +27,13 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
         reqIndex = reqsIndexToInsert.pop(random.randrange(len(reqsIndexToInsert)))
         insertingReq = REQUESTS[reqIndex]
         countVehicle = 0
-        for (idx,gene) in enumerate([chromosome]):
-            route = gene[idx][2]
+        for (i,gene) in enumerate(chromosome):
+            route = gene[2]
             newRoute = evaluate.new_tour_after_insert_requests(insertingReq, route, DISTANCES, DURATIONS, timeWindows)
             if(len(newRoute) > 0): # Can insert
-                # Insert
-                chromosome[idx][1].append(reqIndex)
-                chromosome[idx][2] = newRoute
+                # Insert !!
+                chromosome[i][1].append(reqIndex)
+                chromosome[i][2] = newRoute
                 break
             countVehicle += 1
     return chromosome

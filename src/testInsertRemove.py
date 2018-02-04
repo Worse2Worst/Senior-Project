@@ -15,6 +15,7 @@ start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lr202.txt'
 
+
 numVehicles, loadCapacities, speed, data = proc.load_file(filename)
 locations = data[0]
 demands = data[1]

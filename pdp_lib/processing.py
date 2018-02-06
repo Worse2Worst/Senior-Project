@@ -78,12 +78,10 @@ def duration(v1,v2,distances,serviceTimes,speed):
 
 # Create a table that memo all durations of traveling bewtween any 2 nodes in the map
 def createDurationTable(locations,distances,serviceTimes,speed=1.0):
-    # n = len(locations)
-    # durations = np.zeros((n, n))
-    # # create nxn matrix to memo the distances between nodes
-    # for i in range(n):
-    #     for j in range(n):
-    #         durations[i][j] = distances[i][j]/speed
+    # Sometimes, the speed from instances are 'Zeros', so we will make it 'one'
+    if(speed<=0):
+        speed = 1.0
+
     durations = np.asarray(distances)
     durations = durations/float(speed)
     durations = np.ndarray.tolist(durations)

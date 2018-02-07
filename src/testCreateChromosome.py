@@ -42,3 +42,10 @@ chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows
 print (chromosome)
 cal_time = time.time() - start_time
 print("Chromosome initializing time --- %s seconds ---" % (cal_time))
+start_time = time.time()
+dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
+print('Tour Distances of chromosome: '+str(dist))
+print("Distance Calculation time --- %s seconds ---" % (time.time()-start_time))
+fitness = evaluate.chromosomeFitness(chromosome,DISTANCES)
+print('Tour Fitness of the chromosome: '+str(fitness))
+print("Fitness Calculation time --- %s seconds ---" % (time.time()-start_time))

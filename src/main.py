@@ -52,7 +52,7 @@ cal_time = time.time() - start_time
 
 
 print (tour)
-
+print('My Solution is :' + str(tour))
 print('my Solution:' + str(evaluate.tour_distance(tour, DISTANCES)))
 print('Violate time windows:' + str(evaluate.time_violated(tour, DURATIONS, timeWindows)))
 print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestType, pickupSiblings)))

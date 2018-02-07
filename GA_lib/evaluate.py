@@ -1,5 +1,5 @@
 import random
-
+import itertools
 
 # To tell whether the precedence (pickup-delivery) is violated, True is violated, False is OK
 def precedence_violated(tour,requestType, pickupSiblings):
@@ -35,20 +35,25 @@ def time_violated(tour,durations,timeWindows):
 
 
 # distance of just one 'job' by one vehicle
-def tour_distance(tour,distances,depot=0):
+def tour_distance(tour, DISTANCES, depot=0):
+    if(len(tour) == 0):
+        return 0
     dist = 0
     for i in range(len(tour)-1):
-        dist += distances[tour[i]][tour[i+1]]
-    dist += distances[depot][tour[0]]+distances[tour[-1]][depot]
+        dist += DISTANCES[tour[i]][tour[i + 1]]
+    dist += DISTANCES[depot][tour[0]] + DISTANCES[tour[-1]][depot]
     return dist
 
 
 
 # Calculate a new tour after inserting a request in to an existing tour
 # Return empty if cannot insert
-def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows):
+def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,maxSpot=10000):
     if(len(tour)==0):
         return [req[0],req[1]]
+    ## Restrict the maximum number of spots to be visited
+    # if(len(tour)+2>maxSpot):
+    #     return []
     candidate = []
     min_dist = 99999999999999999
     min_index = -999999
@@ -56,13 +61,13 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows)
     new_vehicle_dist = tour_distance(req, DISTANCES)
     old_tour_dist =  tour_distance(tour, DISTANCES)
     for i in range(len(tour)+1):
-        temp1 = tour[:] # copy tour
-        temp1 = temp1[:i]+[req[0]]+temp1[i:] # Insert
+        # Inserting 1
+        temp1 = tour[:i]+[req[0]]+tour[i:]
         if(time_violated(temp1, DURATIONS, timeWindows)):
             pass
         for j in range(i+1,len(temp1)+1):
-            temp2 = temp1[:]
-            temp2 = temp2[:j] + [req[1]] + temp2[j:]
+            # Inserting 2
+            temp2 = temp1[:j] + [req[1]] + temp1[j:]
             # now remove the bad ones
             # Assume that precedence not violated
             # Check if temp2 violate the time-window constraints
@@ -80,4 +85,11 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows)
     # else, just don't insert and return empty
     return []
 
+def chromosomeRoutesDistance(chromosome, DISTANCES, depot=0):
+    total_distances = 0
+    for [num, reqs, tour] in chromosome:
+        total_distances += tour_distance(tour, DISTANCES)
+    return total_distances
 
+def chromosomeFitness(chromosome,DISTANCES,depot=0):
+    return 1.0/chromosomeRoutesDistance(chromosome,DISTANCES,depot)

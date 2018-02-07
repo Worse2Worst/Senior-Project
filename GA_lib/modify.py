@@ -22,9 +22,12 @@ def remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS):
 # This function insert requests into a chromosome
 def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS):
     reqsIndexToInsert = list(reqsIndexToInsert)
+    ## Random things we want to insert.
+    random.shuffle(reqsIndexToInsert)
     maxVehicles = len(chromosome)
     while(len(reqsIndexToInsert) > 0):
-        reqIndex = reqsIndexToInsert.pop(random.randrange(len(reqsIndexToInsert)))
+        # reqIndex = reqsIndexToInsert.pop(random.randrange(len(reqsIndexToInsert)))
+        reqIndex = reqsIndexToInsert.pop()
         insertingReq = REQUESTS[reqIndex]
         countVehicle = 0
         for (i,gene) in enumerate(chromosome):
@@ -37,3 +40,5 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
                 break
             countVehicle += 1
     return chromosome
+
+

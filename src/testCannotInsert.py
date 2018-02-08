@@ -9,7 +9,7 @@ from GA_lib import modify
 
 
 
-
+maxSpot=1000
 
 start_time = time.time()
 # use 'relative path' in filename
@@ -45,7 +45,7 @@ insertingReqsIndex  = [REQUESTS.index(item) for item in insertingReqs]
 
 chromosome = [[0,[],[]],[1,[],[]]]
 ################################ INSERTION!!!!!!!! #######################################################
-modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS)
+modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
 
 print (chromosome)
 cal_time = time.time() - start_time

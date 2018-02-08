@@ -13,3 +13,4 @@ def initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,nu
     reqsIndexToInsert = [i for i in range(len(REQUESTS))] # Every requests,HARD Code!!!
     chromosome = modify.insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
     return chromosome
+

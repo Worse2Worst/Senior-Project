@@ -15,7 +15,7 @@ start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lr202.txt'
 
-
+maxSpot = 1000
 numVehicles, loadCapacities, speed, data = proc.load_file(filename)
 locations = data[0]
 demands = data[1]
@@ -53,7 +53,7 @@ print('Tour Requests index : '+str(tourReqsIndex))
 
 chromosome = [[10,tourReqsIndex,tour]]
 ################################ INSERTION!!!!!!!! #######################################################
-modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS)
+modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
 
 tour = chromosome[0][2]
 cal_time = time.time() - start_time

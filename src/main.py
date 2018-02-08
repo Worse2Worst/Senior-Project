@@ -3,7 +3,7 @@ from random import shuffle
 from pdp_lib import processing as proc
 from pdp_lib import util
 from GA_lib import GA
-from GA_lib import operation as op
+from GA_lib import operation
 from GA_lib import evaluate
 from GA_lib import modify
 
@@ -38,7 +38,7 @@ start_time = time.time()
 
 
 
-
+maxSpot = 1000
 
 
 start_time = time.time()
@@ -48,7 +48,7 @@ print('The Requests are :'+str(reqs))
 tour = []
 shuffle(reqs)
 for r in reqs:
-    tour = evaluate.new_tour_after_insert_requests(r, tour, DISTANCES, DURATIONS, timeWindows)
+    tour = evaluate.new_tour_after_insert_requests(r, tour, DISTANCES, DURATIONS, timeWindows,maxSpot)
 cal_time = time.time() - start_time
 
 
@@ -67,3 +67,51 @@ print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestTy
 print(" cal time --- %s seconds ---" % (cal_time))
 print ('Have equal nodes:'+str(set(tour)==set(best_tour)))
 
+############### SOLVING THE PROBLEMS !!!!!!!! ######################################
+
+## Initialize the populations
+population_size = 100
+populations = []
+for i in range(population_size):
+    chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles,maxSpot=1000)
+    populations.append(chromosome)
+print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
+
+## Crossovers and mutate
+start_time = time.time()
+generations = 100
+fitness = []
+maxSpot = 1000
+for gen in range(generations):
+    fitness=[]
+    for chromosome in populations:
+        fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))
+    populations = [x for _,x in sorted(zip(fitness,populations),reverse=True)]
+    populations.pop()
+    populations.pop()
+    elite1 = populations.pop(0)
+    elite2 = populations.pop(0)
+    # id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
+    # parent1,parent2 = populations[id1],populations[id2]
+    parent1,parent2 = elite1,elite2
+    child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2,maxSpot)
+    populations.append(child1)
+    populations.append(child2)
+    populations.append(elite1)
+    populations.append(elite2)
+
+
+fitness=[]
+for chromosome in populations:
+    fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))
+populations = [x for _,x in sorted(zip(fitness,populations),reverse=True)]
+print("Crossovers time --- %s seconds ---" % (time.time()-start_time))
+
+dist = evaluate.chromosomeRoutesDistance(populations[0],DISTANCES)
+print('Distances of the best chromosome: '+str(dist))
+print (populations[0])
+dist = evaluate.chromosomeRoutesDistance(populations[len(populations)-1],DISTANCES)
+print('Distances of the worst chromosome: '+str(dist))
+print(populations[len(populations)-1])
+
+#################################################################################################

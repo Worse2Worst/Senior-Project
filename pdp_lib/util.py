@@ -85,9 +85,9 @@ def draw_tours(chromosome, LOCATIONS, depot=0):
                 b = [x_to, y_to]
                 point = (a, b)
                 lines.append(point)
-                lines.append((dep,last_point)) # Draw a line that connects last point to depot
-            line_array.append(lines)
+            lines.append((dep,last_point)) # Draw a line that connects last point to depot
             numberOfTours += 1
+            line_array.append(lines)
     # flat out list
     #flat_list = [item for sublist in line_array for item in sublist]
 

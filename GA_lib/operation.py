@@ -8,7 +8,7 @@ import collections
 
 # A Chromosome(parents) is an array of genes(vehicles)
 # A Gene is an array of indices of requests(pickup-delivery)
-def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, prob = 0.8):
+def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2,maxSpot,prob = 1.0):
     ##### Probability that they will not crossover ####################
     if (random.random() > prob):
         return parent1,parent2
@@ -71,8 +71,8 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, prob
     usedReqs2 = set(usedReqs2)
     reqsToInsert2 = totalReqs - usedReqs2
     ### Insert the remaining requests into the children ########
-    modify.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS)
-    modify.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS)
+    modify.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
+    modify.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
 
     return child1,child2
 

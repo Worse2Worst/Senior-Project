@@ -1,6 +1,7 @@
 import time
 from random import shuffle
 from pdp_lib import processing as proc
+from pdp_lib import util
 from GA_lib import GA
 from GA_lib import operation as op
 from GA_lib import evaluate
@@ -65,3 +66,4 @@ print('Violate time windows:' + str(evaluate.time_violated(best_tour, DURATIONS,
 print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestType, pickupSiblings)))
 print(" cal time --- %s seconds ---" % (cal_time))
 print ('Have equal nodes:'+str(set(tour)==set(best_tour)))
+

@@ -20,7 +20,7 @@ def remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS):
                     route.remove(deliveryNode)
 
 # This function insert requests into a chromosome
-def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS):
+def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot):
     reqsIndexToInsert = list(reqsIndexToInsert)
     ## Random things we want to insert.
     random.shuffle(reqsIndexToInsert)
@@ -32,7 +32,7 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
         countVehicle = 0
         for (i,gene) in enumerate(chromosome):
             route = gene[2]
-            newRoute = evaluate.new_tour_after_insert_requests(insertingReq, route, DISTANCES, DURATIONS, timeWindows)
+            newRoute = evaluate.new_tour_after_insert_requests(insertingReq, route, DISTANCES, DURATIONS, timeWindows,maxSpot)
             if(len(newRoute) > 0): # Can insert
                 # Insert !!
                 chromosome[i][1].append(reqIndex)

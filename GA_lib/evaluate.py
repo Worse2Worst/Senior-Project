@@ -48,12 +48,12 @@ def tour_distance(tour, DISTANCES, depot=0):
 
 # Calculate a new tour after inserting a request in to an existing tour
 # Return empty if cannot insert
-def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,maxSpot=10000):
+def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,maxSpot):
     if(len(tour)==0):
         return [req[0],req[1]]
     ## Restrict the maximum number of spots to be visited
-    # if(len(tour)+2>maxSpot):
-    #     return []
+    if(len(tour)+2>maxSpot):
+        return []
     candidate = []
     min_dist = 99999999999999999
     min_index = -999999

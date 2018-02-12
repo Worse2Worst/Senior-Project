@@ -73,7 +73,7 @@ def createDistanceTable(locations):
 
 # calculate duration of traveling between a pair of nodes
 def duration(v1,v2,distances,serviceTimes,speed):
-    return distance(v1,v2)/speed
+    return (distance(v1,v2)/speed + serviceTimes[v1])
 
 
 # Create a table that memo all durations of traveling bewtween any 2 nodes in the map

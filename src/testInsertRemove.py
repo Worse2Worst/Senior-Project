@@ -16,9 +16,9 @@ start_time = time.time()
 filename = 'pdp_instances/LiLim/pdp_100/lr202.txt'
 
 maxSpot = 1000
-numVehicles, loadCapacities, speed, data = proc.load_file(filename)
+numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
 locations = data[0]
-demands = data[1]
+DEMANDS = data[1]
 timeWindows = data[2]
 serviceTimes = data[3]
 pickupSiblings = data[4]
@@ -53,7 +53,7 @@ print('Tour Requests index : '+str(tourReqsIndex))
 
 chromosome = [[10,tourReqsIndex,tour]]
 ################################ INSERTION!!!!!!!! #######################################################
-modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
+modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
 
 tour = chromosome[0][2]
 cal_time = time.time() - start_time

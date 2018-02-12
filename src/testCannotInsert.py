@@ -15,9 +15,9 @@ start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/Worse2Worst/trivial01.txt'
 
-numVehicles, loadCapacities, speed, data = proc.load_file(filename)
+numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
 locations = data[0]
-demands = data[1]
+DEMANDS = data[1]
 timeWindows = data[2]
 serviceTimes = data[3]
 pickupSiblings = data[4]
@@ -45,11 +45,11 @@ insertingReqsIndex  = [REQUESTS.index(item) for item in insertingReqs]
 
 chromosome = [[0,[],[]],[1,[],[]]]
 ################################ INSERTION!!!!!!!! #######################################################
-modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS,maxSpot)
+modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
 
 print (chromosome)
 cal_time = time.time() - start_time
 
 print ('Newly created chromosome below')
-chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles)
+chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
 print (chromosome)

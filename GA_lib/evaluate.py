@@ -17,6 +17,14 @@ def precedence_violated(tour,requestType, pickupSiblings):
             visited.append(v)
     return False
 
+def load_capacities_violated(tour, DEMANDS, LoadCapacities):
+    cur_load = 0
+    for i in range(len(tour)):
+        cur_node = tour[i]
+        cur_load += DEMANDS[cur_node]
+        if(cur_load > LoadCapacities):
+            return True
+    return False
 
 
 def time_violated(tour,durations,timeWindows):
@@ -48,7 +56,7 @@ def tour_distance(tour, DISTANCES, depot=0):
 
 # Calculate a new tour after inserting a request in to an existing tour
 # Return empty if cannot insert
-def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,maxSpot):
+def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows, DEMANDS, LoadCapacities,maxSpot):
     ## Restrict the maximum number of spots to be visited
     if (len(tour) + 2 > maxSpot):
         return []
@@ -64,6 +72,8 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
     for i in range(len(tour)+1):
         # Inserting 1
         temp1 = tour[:i]+[req[0]]+tour[i:]
+        if (load_capacities_violated(temp1, DEMANDS, LoadCapacities)):
+            pass
         if(time_violated(temp1, DURATIONS, timeWindows)):
             pass
         for j in range(i+1,len(temp1)+1):
@@ -72,7 +82,10 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
             # now remove the bad ones
             # Assume that precedence not violated
             # Check if temp2 violate the time-window constraints
+            if (load_capacities_violated(temp2, DEMANDS, LoadCapacities)):
+                pass
             if (not time_violated(temp2, DURATIONS, timeWindows)):
+                # return temp2
                 dist = tour_distance(temp2, DISTANCES)
                 if(dist<min_dist):
                     min_dist = dist

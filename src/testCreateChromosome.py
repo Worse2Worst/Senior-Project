@@ -73,12 +73,19 @@ print('Child1 Distances of chromosome: '+str(dist))
 print (child2)
 dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
 print('Child2 Distances of chromosome: '+str(dist))
-util.draw_tours(child2,LOCATIONS)
-################### Unoptimized  ############################
-unlimitedVehicles=300
-chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,unlimitedVehicles, DEMANDS, LoadCapacities,maxSpot=2)
-dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
-print('Unoptimized distances is: '+str(dist))
-util.draw_tours(chromosome,LOCATIONS)
-#######################################################
+# util.draw_tours(child2,LOCATIONS)
 
+child2 = operation.mutate(child2,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
+dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
+print('Child2 Distances of chromosome: '+str(dist))
+print (child2)
+
+#
+# ################### Unoptimized  ############################
+# unlimitedVehicles=300
+# chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,unlimitedVehicles, DEMANDS, LoadCapacities,maxSpot=2)
+# dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
+# print('Unoptimized distances is: '+str(dist))
+# util.draw_tours(chromosome,LOCATIONS)
+# #######################################################
+#

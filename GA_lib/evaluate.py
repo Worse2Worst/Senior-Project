@@ -105,5 +105,31 @@ def chromosomeRoutesDistance(chromosome, DISTANCES, depot=0):
         total_distances += tour_distance(tour, DISTANCES)
     return total_distances
 
+def waitingTime(tour,DURATIONS,timeWindows):
+    if(len(tour)<=0):
+        return 0
+    cur_time = timeWindows[tour[0]][0] # first node ET
+    waitTime = 0
+    for i in range(len(tour) - 1):
+        cur_node = tour[i]
+        next_node = tour[i + 1]
+        cur_ET = timeWindows[cur_node][0]
+        next_ET = timeWindows[next_node][0]
+        next_LT = timeWindows[next_node][1]
+        cur_time = max(cur_time, cur_ET)
+        arrival_time = cur_time + DURATIONS[tour[i]][tour[i + 1]]
+        if (arrival_time > next_LT):
+            print ('ERRORR - Time Violated!!')
+        waitTime += (next_ET - arrival_time)
+    return waitTime
+
+def chromosomeWatingTime(chromosome,DURATIONS,timeWindows):
+    totalWatingTime = 0
+    for num,reqs,route in chromosome:
+        totalWatingTime += waitingTime(route,DURATIONS,timeWindows)
+    return totalWatingTime
+
+
 def chromosomeFitness(chromosome,DISTANCES,depot=0):
     return 1.0/chromosomeRoutesDistance(chromosome,DISTANCES,depot)
+

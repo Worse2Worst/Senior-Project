@@ -78,4 +78,12 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
 
 
 
-def mutate(chromosome,):
+def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 0.2):
+    if (random.random() > prob):
+        return chromosome
+    num = random.randrange(1,len(chromosome))
+    reqs = chromosome[num][1]
+    modify.remove_requests(chromosome, [], reqs, REQUESTS)
+    modify.insert_requests_into_chromosome(chromosome, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
+                                           LoadCapacities, maxSpot)
+    return chromosome

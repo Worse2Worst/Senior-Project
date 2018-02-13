@@ -12,5 +12,7 @@ def initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,nu
     chromosome = initialize_EMPTY_chromosome(num_vehicles)
     reqsIndexToInsert = [i for i in range(len(REQUESTS))] # Every requests,HARD Code!!!
     chromosome = modify.insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
+    # Trim the empty gene
+    # chromosome = [gene for gene in chromosome if (len(gene[1])>0)]
     return chromosome
 

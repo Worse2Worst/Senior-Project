@@ -78,4 +78,4 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
 
 
 
-
+def mutate(chromosome,):

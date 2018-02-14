@@ -35,11 +35,10 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
         for (i,gene) in enumerate(chromosome):
             route = gene[2]
             newRoute,newCost = evaluate.new_tour_after_insert_requests(insertingReq, route, DISTANCES, DURATIONS, timeWindows, DEMANDS, LoadCapacities,maxSpot)
-            if(newRoute): # Can insert
-                if(newCost < minCost):
-                    minCost = newCost
-                    minIndex = i
-                    minRoute = newRoute
+            if(newRoute and (newCost < minCost)): # Should insert
+                minCost = newCost
+                minIndex = i
+                minRoute = newRoute
         # Can insert
         if(minIndex>=0):
             chromosome[minIndex][1].append(reqIndex)

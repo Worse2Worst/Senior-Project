@@ -74,7 +74,7 @@ start_time = time.time()
 # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
 
 ## Initialize the populations
-population_size = 20
+population_size = 50
 populations = []
 for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
@@ -83,7 +83,7 @@ print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 pop2 = populations[0]
 ## Crossovers and mutate
 start_time = time.time()
-generations = 100
+generations = 1000
 fitness = []
 maxSpot = 1000
 for gen in range(generations):

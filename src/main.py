@@ -74,7 +74,7 @@ start_time = time.time()
 # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
 
 ## Initialize the populations
-population_size = 50
+population_size = 120
 populations = []
 for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
@@ -83,7 +83,9 @@ print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 pop2 = populations[0]
 ## Crossovers and mutate
 start_time = time.time()
-generations = 1000
+bestFitness =9999999999999999999
+bestFitGen = 0
+generations = 6000
 fitness = []
 maxSpot = 1000
 for gen in range(generations):
@@ -99,14 +101,21 @@ for gen in range(generations):
     # parent1,parent2 = populations[id1],populations[id2]
     parent1,parent2 = elite1,elite2
     child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
-    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.2)
-    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.2)
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    f = evaluate.chromosomeFitness(child1,DISTANCES)
+    f = min(f,evaluate.chromosomeFitness(child2,DISTANCES))
+    f = min(f,evaluate.chromosomeFitness(elite1,DISTANCES))
+    f = min(f,evaluate.chromosomeFitness(elite2,DISTANCES))
     populations.append(child1)
     populations.append(child2)
     populations.append(elite1)
     populations.append(elite2)
-
-
+    if(f<bestFitness):
+        bestFitness = f
+        bestFitGen = gen
+    if(bestFitGen-gen >= 3000):
+        break
 fitness=[]
 for chromosome in populations:
     fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))

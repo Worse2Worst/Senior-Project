@@ -64,7 +64,6 @@ print('Best Solution Distance: '+str(dist))
 print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(chromosome,DURATIONS,timeWindows)))
 
 
-unlimitedVehicles=300
 chromosome = GA.initialize_WorstCase_Chromosome(REQUESTS)
 dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
 print (chromosome)

@@ -28,8 +28,8 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
     # random.shuffle(child2)
 
     # Generate random range for crossover
-    range1 = random.randint(1,len(parent1))
-    range2 = random.randint(1,len(parent2))
+    range1 = random.randrange(len(parent1))
+    range2 = random.randrange(len(parent2))
     # Subpart 1,2 for crossover
     partFrom1 = random.sample(parent1,range1)
     partFrom2 = random.sample(parent2, range2)

@@ -67,16 +67,17 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
     usedReqs1 = [item for sublist in usedReqs1 for item in sublist]
     usedReqs1 = set(usedReqs1)
     reqsToInsert1 = totalReqs - usedReqs1
+    reqsToInsert1 = list(reqsToInsert1)
     usedReqs2 = [reqs for [vehicle, reqs, route] in child2]
     usedReqs2 = [item for sublist in usedReqs2 for item in sublist]
     usedReqs2 = set(usedReqs2)
     reqsToInsert2 = totalReqs - usedReqs2
+    reqsToInsert2 = list(reqsToInsert2)
     ### Insert the remaining requests into the children ########
     GA_lib.GA.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
     GA_lib.GA.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
 
     return child1,child2
-
 
 
 def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 0.2):

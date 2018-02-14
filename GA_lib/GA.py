@@ -22,7 +22,6 @@ def initialize_WorstCase_Chromosome(REQUESTS):
 
 # This function insert requests into a chromosome
 def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,DEMANDS, LoadCapacities,maxSpot):
-    reqsIndexToInsert = list(reqsIndexToInsert)
     ## Random things we want to insert.
     random.shuffle(reqsIndexToInsert)
     while(reqsIndexToInsert): # while 'reqsIndexToInsert' is not empty

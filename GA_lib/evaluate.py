@@ -67,7 +67,8 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
     candidate = []
     min_dist = inf
     min_index = -999999
-    # generate all possibilities of insertions
+
+    ## Generate all possibilities of insertions
     new_vehicle_dist = tour_distance(req, DISTANCES)
     old_tour_dist =  tour_distance(tour, DISTANCES)
     for i in range(len(tour)+1):
@@ -75,27 +76,24 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
         # temp1 = tour[:i]+[req[0]]+tour[i:]
         temp1 = tour[:]
         temp1[i:i] = [req[0]]
-        if (load_capacities_violated(temp1, DEMANDS, LoadCapacities)):
+        if (load_capacities_violated(temp1, DEMANDS, LoadCapacities) or time_violated(temp1, DURATIONS, timeWindows)):
             pass
-        if(time_violated(temp1, DURATIONS, timeWindows)):
-            pass
-
-        for j in range(i+1,len(temp1)+1):
-            ### Inserting 2
-            # temp2 = temp1[:j] + [req[1]] + temp1[j:]
-            temp2 = temp1[:]
-            temp2[j:j] = [req[1]]
-            # now remove the bad ones
-            # Assume that precedence not violated
-            # Check if temp2 violate the constraints
-            if (load_capacities_violated(temp2, DEMANDS, LoadCapacities)):
-                pass
-            if (not time_violated(temp2, DURATIONS, timeWindows)):
-                # return temp2
-                dist = tour_distance(temp2, DISTANCES)
-                if(dist<min_dist):
-                    min_dist = dist
-                    candidate = temp2
+        else:
+            for j in range(i+1,len(temp1)+1):
+                ### Inserting 2
+                # temp2 = temp1[:j] + [req[1]] + temp1[j:]
+                temp2 = temp1[:]
+                temp2[j:j] = [req[1]]
+                # now remove the bad ones
+                # Assume that precedence not violated
+                # Check if temp2 violate the constraints
+                if (load_capacities_violated(temp2, DEMANDS, LoadCapacities) or time_violated(temp2, DURATIONS, timeWindows)):
+                    pass
+                else:
+                    dist = tour_distance(temp2, DISTANCES)
+                    if(dist < min_dist):
+                        min_dist = dist
+                        candidate = temp2
     # if no feasible paths!!!, return empty
     if(not candidate):
         return ([],inf)

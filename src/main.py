@@ -80,7 +80,7 @@ for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
     populations.append(chromosome)
 print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
-
+pop2 = populations[0]
 ## Crossovers and mutate
 start_time = time.time()
 generations = 100
@@ -99,8 +99,8 @@ for gen in range(generations):
     # parent1,parent2 = populations[id1],populations[id2]
     parent1,parent2 = elite1,elite2
     child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
-    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
-    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.2)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.2)
     populations.append(child1)
     populations.append(child2)
     populations.append(elite1)
@@ -124,3 +124,18 @@ print('Distances of the worst chromosome: '+str(dist))
 print(populations[len(populations)-1])
 #
 # #################################################################################################
+
+
+tour1 = []
+for [_,_,arr] in populations[0]:
+    for x in arr:
+        tour1.append(x)
+tour1 = set(tour1)
+tour2 = []
+for [_,_,arr] in pop2:
+    for x in arr:
+        tour2.append(x)
+tour2 = set(tour2)
+print ('Have equal nodes:'+str(set(tour1)==set(tour2)))
+
+print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(populations[0],DURATIONS,timeWindows)))

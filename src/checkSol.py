@@ -5,7 +5,6 @@ from pdp_lib import util
 from GA_lib import GA
 from GA_lib import operation
 from GA_lib import evaluate
-from GA_lib import modify
 
 def routeToreqs(route,REQUESTS):
     reqs = set()

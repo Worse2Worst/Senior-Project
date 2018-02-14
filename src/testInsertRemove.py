@@ -1,12 +1,11 @@
 import time
 from random import shuffle
+
+import GA_lib.GA
 from pdp_lib import processing as proc
 from GA_lib import GA
 from GA_lib import operation as op
 from GA_lib import evaluate
-from GA_lib import modify
-
-
 
 
 
@@ -53,7 +52,7 @@ print('Tour Requests index : '+str(tourReqsIndex))
 
 chromosome = [[10,tourReqsIndex,tour]]
 ################################ INSERTION!!!!!!!! #######################################################
-modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
+GA_lib.GA.insert_requests_into_chromosome(chromosome, insertingReqsIndex, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
 
 tour = chromosome[0][2]
 cal_time = time.time() - start_time
@@ -81,7 +80,7 @@ start_time = time.time()
 chromosome = [[0,[],[]],[1,[],[]],[10,tourReqsIndex,tour]]
 tabooVehicles = {0}
 reqsToRemove = [47,0]
-modify.remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS)
+GA_lib.GA.remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS)
 removedTour = chromosome[2][2]
 print ('My Tour after remove is : '+str(removedTour))
 print('Violate time windows:' + str(evaluate.time_violated(removedTour, DURATIONS, timeWindows)))

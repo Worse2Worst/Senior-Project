@@ -1,6 +1,7 @@
 import copy
 import random
-from GA_lib import modify
+
+import GA_lib.GA
 import collections
 
 
@@ -59,8 +60,8 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
     child1 += partFrom2
     child2 += partFrom1
     # Remove the duplicate requests in children,
-    modify.remove_requests(child1, vehiclesFrom2, reqsFrom2, REQUESTS)
-    modify.remove_requests(child2, vehiclesFrom1, reqsFrom1, REQUESTS)
+    GA_lib.GA.remove_requests(child1, vehiclesFrom2, reqsFrom2, REQUESTS)
+    GA_lib.GA.remove_requests(child2, vehiclesFrom1, reqsFrom1, REQUESTS)
     # Calculate remaining requests to insert
     usedReqs1 = [reqs for [vehicle, reqs, route] in child1]
     usedReqs1 = [item for sublist in usedReqs1 for item in sublist]
@@ -71,8 +72,8 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
     usedReqs2 = set(usedReqs2)
     reqsToInsert2 = totalReqs - usedReqs2
     ### Insert the remaining requests into the children ########
-    modify.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
-    modify.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
+    GA_lib.GA.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
+    GA_lib.GA.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
 
     return child1,child2
 
@@ -81,9 +82,9 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
 def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 0.2):
     if (random.random() > prob):
         return chromosome
-    num = random.randrange(1,len(chromosome))
+    num = random.randrange(len(chromosome))
     reqs = chromosome[num][1]
-    modify.remove_requests(chromosome, [], reqs, REQUESTS)
-    modify.insert_requests_into_chromosome(chromosome, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
-                                           LoadCapacities, maxSpot)
+    GA_lib.GA.remove_requests(chromosome, [], reqs, REQUESTS)
+    GA_lib.GA.insert_requests_into_chromosome(chromosome, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
+                                              LoadCapacities, maxSpot)
     return chromosome

@@ -1,10 +1,12 @@
 import time
 from random import shuffle
+
+import GA_lib.GA
 from pdp_lib import processing as proc
 from GA_lib import GA
 from GA_lib import operation as op
 from GA_lib import evaluate
-from GA_lib import modify
+
 
 
 
@@ -45,7 +47,7 @@ insertingReqsIndex  = [REQUESTS.index(item) for item in insertingReqs]
 
 chromosome = [[0,[],[]],[1,[],[]]]
 ################################ INSERTION!!!!!!!! #######################################################
-modify.insert_requests_into_chromosome(chromosome, insertingReqsIndex , DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities,maxSpot)
+GA_lib.GA.insert_requests_into_chromosome(chromosome, insertingReqsIndex, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
 
 print (chromosome)
 cal_time = time.time() - start_time

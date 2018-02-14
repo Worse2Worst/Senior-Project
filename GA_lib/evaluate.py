@@ -57,14 +57,18 @@ def tour_distance(tour, DISTANCES, depot=0):
 # Calculate a new tour after inserting a request in to an existing tour
 # Return empty if cannot insert
 def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows, DEMANDS, LoadCapacities,maxSpot):
+    inf = 9999999999999
     ## Restrict the maximum number of spots to be visited
-    if (len(tour) + 2 > maxSpot):
-        return []
+    # if (len(tour) + 2 > maxSpot):
+    #     return ([],inf)
+
     ## If the tour is empty, insert without thinking.
     if(len(tour)==0):
-        return [req[0],req[1]]
+        tour = [req[0],req[1]]
+        cost = tour_distance(tour, DISTANCES)
+        return ([req[0],req[1]],cost)
     candidate = []
-    min_dist = 99999999999999999
+    min_dist = inf
     min_index = -999999
     # generate all possibilities of insertions
     new_vehicle_dist = tour_distance(req, DISTANCES)
@@ -92,12 +96,13 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
                     candidate = temp2
     # if no feasible paths!!!, return empty
     if(len(candidate) == 0):
-        return []
+        return ([],inf)
     # if inserting can reduce cost, then insert
-    if(min_dist - old_tour_dist < new_vehicle_dist):
-        return candidate
+    new_cost = min_dist - old_tour_dist
+    if(new_cost < new_vehicle_dist):
+        return (candidate,new_cost)
     # else, just don't insert and return empty
-    return []
+    return ([],inf)
 
 def chromosomeRoutesDistance(chromosome, DISTANCES, depot=0):
     total_distances = 0

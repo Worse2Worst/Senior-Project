@@ -5,7 +5,7 @@ from pdp_lib import util
 from GA_lib import GA
 from GA_lib import operation
 from GA_lib import evaluate
-from GA_lib import modify
+
 
 
 
@@ -40,7 +40,7 @@ start_time = time.time()
 
 print ('Newly created chromosome below')
 # chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles)
-chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=10)
+chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
 # chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles,maxSpot=2)
 
 print (chromosome)
@@ -54,31 +54,33 @@ fitness = evaluate.chromosomeFitness(chromosome,DISTANCES)
 print('Tour Fitness of the chromosome: '+str(fitness))
 print("Fitness Calculation time --- %s seconds ---" % (time.time()-start_time))
 
-# util.draw_original_nodes(LOCATIONS, REQUESTS)
-# util.draw_requests(LOCATIONS, REQUESTS)
-# util.draw_tours(chromosome,LOCATIONS)
-parent1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=1000)
-parent2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=1000)
-dist = evaluate.chromosomeRoutesDistance(parent1,DISTANCES)
-print('Parent1 Distances of chromosome: '+str(dist))
-dist = evaluate.chromosomeRoutesDistance(parent2,DISTANCES)
-print('Parent2 Distances of chromosome: '+str(dist))
-start_time = time.time()
-maxSpot = 1000
-child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
-print("Chromosome crossover time --- %s seconds ---" % (time.time()-start_time))
-print (child1)
-dist = evaluate.chromosomeRoutesDistance(child1,DISTANCES)
-print('Child1 Distances of chromosome: '+str(dist))
-print (child2)
-dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
-print('Child2 Distances of chromosome: '+str(dist))
-# util.draw_tours(child2,LOCATIONS)
 
-child2 = operation.mutate(child2,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
-dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
-print('Child2 Distances of chromosome: '+str(dist))
-print (child2)
+#
+util.draw_original_nodes(LOCATIONS, REQUESTS)
+util.draw_requests(LOCATIONS, REQUESTS)
+util.draw_tours(chromosome,LOCATIONS)
+# parent1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=1000)
+# parent2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=1000)
+# dist = evaluate.chromosomeRoutesDistance(parent1,DISTANCES)
+# print('Parent1 Distances of chromosome: '+str(dist))
+# dist = evaluate.chromosomeRoutesDistance(parent2,DISTANCES)
+# print('Parent2 Distances of chromosome: '+str(dist))
+# start_time = time.time()
+# maxSpot = 1000
+# child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
+# print("Chromosome crossover time --- %s seconds ---" % (time.time()-start_time))
+# print (child1)
+# dist = evaluate.chromosomeRoutesDistance(child1,DISTANCES)
+# print('Child1 Distances of chromosome: '+str(dist))
+# print (child2)
+# dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
+# print('Child2 Distances of chromosome: '+str(dist))
+# # util.draw_tours(child2,LOCATIONS)
+#
+# child2 = operation.mutate(child2,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
+# dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
+# print('Child2 Distances of chromosome: '+str(dist))
+# print (child2)
 
 #
 # ################### Unoptimized  ############################

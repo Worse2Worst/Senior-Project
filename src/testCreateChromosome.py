@@ -48,7 +48,7 @@ cal_time = time.time() - start_time
 print("Chromosome initializing time --- %s seconds ---" % (cal_time))
 start_time = time.time()
 dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
-print('Tour Distances of chromosome(restricted maxSpot=10): '+str(dist))
+print('Tour Distances of chromosome: '+str(dist))
 print("Distance Calculation time --- %s seconds ---" % (time.time()-start_time))
 fitness = evaluate.chromosomeFitness(chromosome,DISTANCES)
 print('Tour Fitness of the chromosome: '+str(fitness))
@@ -56,26 +56,41 @@ print("Fitness Calculation time --- %s seconds ---" % (time.time()-start_time))
 
 
 #
-util.draw_original_nodes(LOCATIONS, REQUESTS)
-util.draw_requests(LOCATIONS, REQUESTS)
-util.draw_tours(chromosome,LOCATIONS)
-# parent1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=1000)
-# parent2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities,maxSpot=1000)
-# dist = evaluate.chromosomeRoutesDistance(parent1,DISTANCES)
-# print('Parent1 Distances of chromosome: '+str(dist))
-# dist = evaluate.chromosomeRoutesDistance(parent2,DISTANCES)
-# print('Parent2 Distances of chromosome: '+str(dist))
-# start_time = time.time()
-# maxSpot = 1000
-# child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
-# print("Chromosome crossover time --- %s seconds ---" % (time.time()-start_time))
-# print (child1)
-# dist = evaluate.chromosomeRoutesDistance(child1,DISTANCES)
-# print('Child1 Distances of chromosome: '+str(dist))
-# print (child2)
-# dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
-# print('Child2 Distances of chromosome: '+str(dist))
-# # util.draw_tours(child2,LOCATIONS)
+# util.draw_original_nodes(LOCATIONS, REQUESTS)
+# util.draw_requests(LOCATIONS, REQUESTS)
+# util.draw_tours(chromosome,LOCATIONS)
+parent1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
+parent2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
+dist = evaluate.chromosomeRoutesDistance(parent1,DISTANCES)
+print('Parent1 Distances of chromosome: '+str(dist))
+dist = evaluate.chromosomeRoutesDistance(parent2,DISTANCES)
+print('Parent2 Distances of chromosome: '+str(dist))
+start_time = time.time()
+maxSpot = 1000
+child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
+print("Chromosome crossover time --- %s seconds ---" % (time.time()-start_time))
+print (child1)
+dist = evaluate.chromosomeRoutesDistance(child1,DISTANCES)
+print('Child1 Distances of chromosome: '+str(dist))
+print (child2)
+dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)
+print('Child2 Distances of chromosome: '+str(dist))
+
+tour1 = []
+for [_,_,arr] in parent1:
+    for x in arr:
+        tour1.append(x)
+tour1 = set(tour1)
+tour2 = []
+for [_,_,arr] in child2:
+    for x in arr:
+        tour2.append(x)
+tour2 = set(tour2)
+print ('Have equal nodes:'+str(set(tour1)==set(tour2)))
+
+print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(child1,DURATIONS,timeWindows)))
+print (len(child1))
+# util.draw_tours(child2,LOCATIONS)
 #
 # child2 = operation.mutate(child2,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
 # dist = evaluate.chromosomeRoutesDistance(child2,DISTANCES)

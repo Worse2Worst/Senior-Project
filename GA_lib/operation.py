@@ -9,7 +9,7 @@ import collections
 
 # A Chromosome(parents) is an array of genes(vehicles)
 # A Gene is an array of indices of requests(pickup-delivery)
-def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob = 1.0):
+def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot=10000,prob = 1.0):
     ##### Probability that they will not crossover ####################
     if (random.random() > prob):
         return parent1,parent2
@@ -83,8 +83,9 @@ def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadC
     if (random.random() > prob):
         return chromosome
     num = random.randrange(len(chromosome))
+    vehicleNum = chromosome[num][0]
     reqs = chromosome[num][1]
-    GA_lib.GA.remove_requests(chromosome, [], reqs, REQUESTS)
+    chromosome[num] = [vehicleNum,[],[]]
     GA_lib.GA.insert_requests_into_chromosome(chromosome, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
                                               LoadCapacities, maxSpot)
     return chromosome

@@ -65,7 +65,8 @@ print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(chromosome,
 
 
 unlimitedVehicles=300
-chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,unlimitedVehicles, DEMANDS, LoadCapacities,maxSpot=2)
+chromosome = GA.initialize_WorstCase_Chromosome(REQUESTS)
 dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
+print (chromosome)
 print('Unoptimized distances is: '+str(dist))
 print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(chromosome,DURATIONS,timeWindows)))

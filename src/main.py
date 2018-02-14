@@ -74,7 +74,7 @@ start_time = time.time()
 # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
 
 ## Initialize the populations
-population_size = 10
+population_size = 20
 populations = []
 for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
@@ -83,7 +83,7 @@ print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 
 ## Crossovers and mutate
 start_time = time.time()
-generations = 10
+generations = 100
 fitness = []
 maxSpot = 1000
 for gen in range(generations):
@@ -111,7 +111,10 @@ fitness=[]
 for chromosome in populations:
     fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))
 populations = [x for _,x in sorted(zip(fitness,populations),reverse=True)]
-print("Crossovers time --- %s seconds ---" % (time.time()-start_time))
+print("GA time --- %s seconds ---" % (time.time()-start_time))
+
+
+
 
 dist = evaluate.chromosomeRoutesDistance(populations[0],DISTANCES)
 print('Distances of the best chromosome: '+str(dist))

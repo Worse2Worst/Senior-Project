@@ -23,9 +23,6 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
     parent1 = [gene for gene in parent1 if (len(gene[1]) > 0)]
     parent2 = [gene for gene in parent2 if (len(gene[1]) > 0)]
 
-    # # Shuffle(not necessary)
-    # random.shuffle(child1)
-    # random.shuffle(child2)
 
     # Generate random range for crossover
     range1 = random.randrange(len(parent1))

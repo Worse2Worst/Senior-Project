@@ -13,7 +13,7 @@ start_time = time.time()
 filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
-locations = data[0]
+LOCATIONS = data[0]
 DEMANDS = data[1]
 timeWindows = data[2]
 serviceTimes = data[3]
@@ -21,10 +21,9 @@ pickupSiblings = data[4]
 deliverySiblings = data[5]
 requestType = data[6]
 REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
-DISTANCES = proc.createDistanceTable(locations)
-DURATIONS = proc.createDurationTable(locations, DISTANCES, serviceTimes, speed)
+DISTANCES = proc.createDistanceTable(LOCATIONS)
+DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
 
-print(requestType[96])
 
 print(" processing time --- %s seconds ---" % (time.time() - start_time))
 
@@ -74,7 +73,7 @@ start_time = time.time()
 # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
 
 ## Initialize the populations
-population_size = 120
+population_size = 20
 populations = []
 for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
@@ -85,7 +84,7 @@ pop2 = populations[0]
 start_time = time.time()
 bestFitness =9999999999999999999
 bestFitGen = 0
-generations = 6000
+generations = 500
 fitness = []
 maxSpot = 1000
 for gen in range(generations):
@@ -100,9 +99,17 @@ for gen in range(generations):
     # id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
     # parent1,parent2 = populations[id1],populations[id2]
     parent1,parent2 = elite1,elite2
-    child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot)
-    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
-    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
+    if(not evaluate.haveEqualNodes(child1,child2,LOCATIONS)):
+        print('note have Equal nodes, Crossover Bug!!!!!')
+        break
+
+    # child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    # child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    # if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
+    #     print('note have Equal nodes, Mutation Bug!!!!!')
+    #     break
+
     f = evaluate.chromosomeFitness(child1,DISTANCES)
     f = min(f,evaluate.chromosomeFitness(child2,DISTANCES))
     f = min(f,evaluate.chromosomeFitness(elite1,DISTANCES))
@@ -134,17 +141,22 @@ print(populations[len(populations)-1])
 #
 # #################################################################################################
 
+allNodes = set([x for x in range(len(LOCATIONS))])
+allNodes -={0}
+tour1 = set()
+for [_,req,arr] in parent1:
+    for x in arr:
+        if(x in tour1):
+            print('Duplicated!!')
+        tour1.add(x)
 
-tour1 = []
-for [_,_,arr] in populations[0]:
+tour2 = set()
+for [_,_,arr] in parent2:
     for x in arr:
-        tour1.append(x)
-tour1 = set(tour1)
-tour2 = []
-for [_,_,arr] in pop2:
-    for x in arr:
-        tour2.append(x)
-tour2 = set(tour2)
-print ('Have equal nodes:'+str(set(tour1)==set(tour2)))
+        if (x in tour2):
+            print('Duplicated!!')
+        tour2.add(x)
+print ('Parents have equal nodes:'+str(set(tour1)==set(tour2)))
+
 
 print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(populations[0],DURATIONS,timeWindows)))

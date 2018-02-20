@@ -104,11 +104,11 @@ for gen in range(generations):
         print('note have Equal nodes, Crossover Bug!!!!!')
         break
 
-    # child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
-    # child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
-    # if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
-    #     print('note have Equal nodes, Mutation Bug!!!!!')
-    #     break
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
+        print('note have Equal nodes, Mutation Bug!!!!!')
+        break
 
     f = evaluate.chromosomeFitness(child1,DISTANCES)
     f = min(f,evaluate.chromosomeFitness(child2,DISTANCES))

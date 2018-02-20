@@ -38,32 +38,13 @@ start_time = time.time()
 
 ############################### INSERTION!!!!!!!! #######################################################
 
-print ('Newly created chromosome below')
-chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
-print (chromosome)
-
-cal_time = time.time() - start_time
-print("Chromosome initializing time --- %s seconds ---" % (cal_time))
-start_time = time.time()
-dist = evaluate.chromosomeRoutesDistance(chromosome,DISTANCES)
-print('Tour Distances of chromosome: '+str(dist))
-# print("Distance Calculation time --- %s seconds ---" % (time.time()-start_time))
-# fitness = evaluate.chromosomeFitness(chromosome,DISTANCES)
-# print('Tour Fitness of the chromosome: '+str(fitness))
-# print("Fitness Calculation time --- %s seconds ---" % (time.time()-start_time))
 
 
-# util.draw_original_nodes(LOCATIONS, REQUESTS)
-# util.draw_requests(LOCATIONS, REQUESTS)
-# util.draw_tours(chromosome,LOCATIONS)
 
 # for _ in range(100):
-parent1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
-parent2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
-# dist = evaluate.chromosomeRoutesDistance(parent1,DISTANCES)
-# print('Parent1 Distances of chromosome: '+str(dist))
-# dist = evaluate.chromosomeRoutesDistance(parent2,DISTANCES)
-# print('Parent2 Distances of chromosome: '+str(dist))
+parent1 = [[0, [10, 0, 12, 3, 20, 7, 16, 14, 8, 6, 15, 17, 18, 19], [20, 24, 25, 13, 17, 18, 33, 32, 31, 27, 29, 35, 37, 38, 39, 101, 30, 28, 16, 14, 12, 36, 34, 6, 4, 1, 75, 21]], [1, [34, 21, 47, 24, 28, 22, 35, 29, 33, 27, 30, 32, 31, 26, 25, 37, 23], [43, 42, 67, 65, 63, 90, 83, 62, 41, 40, 54, 55, 57, 53, 56, 58, 44, 60, 72, 61, 103, 45, 46, 48, 50, 51, 59, 68, 69, 66, 47, 105, 49, 52]], [2, [48, 46, 41, 43, 13, 45, 49, 39, 11, 50, 40, 51, 44, 36, 42, 52], [98, 96, 95, 87, 86, 81, 104, 78, 76, 70, 71, 82, 94, 92, 93, 97, 85, 84, 73, 79, 77, 80, 88, 89, 99, 100, 106, 23, 102, 26, 22, 91]], [3, [5, 4, 2, 1, 9], [5, 3, 7, 8, 10, 19, 15, 11, 9, 2]], [4, [38], [74, 64]]]
+parent2 = [[0, [19, 14, 25, 8, 20, 15, 10, 27, 26, 12, 16, 18, 23, 21, 17, 22, 24], [41, 42, 43, 20, 24, 25, 17, 18, 32, 33, 35, 31, 44, 40, 27, 29, 30, 28, 46, 45, 38, 37, 39, 101, 36, 34, 51, 48, 52, 50, 49, 47, 105, 21]], [1, [3, 41, 34, 36, 43, 37, 44, 28, 42, 30, 38, 29, 33, 35, 40, 39, 11], [67, 65, 63, 55, 57, 54, 81, 104, 78, 76, 71, 70, 53, 56, 62, 74, 72, 60, 77, 73, 84, 85, 89, 79, 80, 64, 23, 102, 6, 4, 91, 66, 68, 69]], [2, [2, 6, 1, 5, 9, 0, 4, 7], [5, 3, 7, 13, 10, 8, 19, 15, 16, 14, 11, 12, 9, 2, 1, 75]], [3, [46, 31, 48, 49, 50, 13, 47, 51, 32, 52, 45], [90, 87, 86, 98, 96, 95, 94, 92, 82, 83, 93, 61, 103, 58, 59, 88, 97, 100, 106, 99, 26, 22]]]
+
 
 
 
@@ -79,6 +60,8 @@ maxSpot = 1000
 child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob=1.0)
 child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.0)
 child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.0)
+
+
 # print("Chromosome crossover time --- %s seconds ---" % (time.time()-start_time))
 # print (child1)
 # dist = evaluate.chromosomeRoutesDistance(child1,DISTANCES)

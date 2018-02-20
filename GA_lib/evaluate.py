@@ -174,6 +174,8 @@ def haveEqualNodes(parent1,parent2,LOCATIONS):
     for [_, req, arr] in parent1:
         for x in arr:
             if (x in tour1):
+                print('Duplicated-1!!!')
+                print(x)
                 return False
             tour1.add(x)
 
@@ -181,6 +183,8 @@ def haveEqualNodes(parent1,parent2,LOCATIONS):
     for [_, _, arr] in parent2:
         for x in arr:
             if (x in tour2):
+                print('Duplicated-2!!!')
+                print(x)
                 return False
             tour2.add(x)
     return tour1 == tour2

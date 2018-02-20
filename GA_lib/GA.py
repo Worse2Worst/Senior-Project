@@ -25,6 +25,7 @@ def initialize_WorstCase_Chromosome(REQUESTS):
 def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,DEMANDS, LoadCapacities,maxSpot):
     ## Random things we want to insert.
     random.shuffle(reqsIndexToInsert)
+    carNumsSet = set()
     while(reqsIndexToInsert): # while 'reqsIndexToInsert' is not empty
         # reqIndex = reqsIndexToInsert.pop(random.randrange(len(reqsIndexToInsert)))
         inf = 999999999
@@ -35,6 +36,7 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
         insertingReq = REQUESTS[reqIndex]
         for (i,gene) in enumerate(chromosome):
             route = gene[2]
+            carNumsSet.add(gene[0])
             newRoute,newCost = evaluate.new_tour_after_insert_requests(insertingReq, route, DISTANCES, DURATIONS, timeWindows, DEMANDS, LoadCapacities,maxSpot)
             if(newRoute and (newCost <minCost)): # Should insert
                 minCost = newCost
@@ -45,7 +47,11 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
             chromosome[minIndex][1].append(reqIndex)
             chromosome[minIndex][2] = minRoute
         else: # cannot insert, so we allocate a new vehicle
-            chromosome.append([len(chromosome),[reqIndex],[REQUESTS[reqIndex][0],REQUESTS[reqIndex][1]]])
+            nonNegNum = set([i for i in range(100)])
+            s = nonNegNum - carNumsSet
+            carNum = next(iter(s))
+            # print('Debug at GA;Chromosome L is:'+str(len(chromosome))+',Carnum is:'+str(carNum))
+            chromosome.append([carNum,[reqIndex],[REQUESTS[reqIndex][0],REQUESTS[reqIndex][1]]])
     return chromosome
 
 # This function remove requests from a chromosome
@@ -61,6 +67,7 @@ def remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS):
                     deliveryNode = REQUESTS[removingReq][1]
                     route.remove(pickupNode)
                     route.remove(deliveryNode)
+
 
 
 

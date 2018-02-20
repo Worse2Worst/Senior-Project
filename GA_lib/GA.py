@@ -7,7 +7,7 @@ from GA_lib import evaluate
 
 def initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,num_vehicles, DEMANDS, LoadCapacities,maxSpot = 1000):
     chromosome = [[0,[],[]]]
-    reqsIndexToInsert = [i for i in range(len(REQUESTS))] # Every requests,HARD Code!!!
+    reqsIndexToInsert = [*REQUESTS] # Every requests!!!
     chromosome = insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
     # Trim the empty gene
     # chromosome = [gene for gene in chromosome if (len(gene[1])>0)]
@@ -15,14 +15,30 @@ def initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,nu
 
 def initialize_WorstCase_Chromosome(REQUESTS):
     chromosome = []
-    for i,req in enumerate(REQUESTS):
-        num = i
-        tour = [req[0],req[1]]
-        chromosome.append([num,[req],tour])
+    i = 0
+    for req, val in REQUESTS.items():
+        # tour = [req[0],req[1]]
+        tour = [val[0],val[1]]
+        chromosome.append([i,[req],tour])
+        i+=1
     return chromosome
 
 # This function insert requests into a chromosome
 def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,DEMANDS, LoadCapacities,maxSpot):
+
+    if(not reqsIndexToInsert):
+        return chromosome
+
+    # Debugging,
+    oldReqsIndex = [reqs for [_,reqs,_] in chromosome]
+    oldReqsIndex = set([item for sublist in oldReqsIndex for item in sublist])
+    reqsSetToInsert = set(reqsIndexToInsert)
+    # if((oldReqsIndex & reqsSetToInsert) != set()):
+    #     print ('GA-Debug Inserting:Dups-Bug!!')
+    #     print('Intersect:'+str(oldReqsIndex & reqsSetToInsert))
+
+    reqsIndexToInsert = list(reqsSetToInsert - (oldReqsIndex & reqsSetToInsert))
+
     ## Random things we want to insert.
     random.shuffle(reqsIndexToInsert)
     carNumsSet = set()
@@ -30,7 +46,7 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
         # reqIndex = reqsIndexToInsert.pop(random.randrange(len(reqsIndexToInsert)))
         inf = 999999999
         minCost = inf
-        minIndex = -999999999
+        minIndex = -99999
         minRoute = []
         reqIndex = reqsIndexToInsert.pop()
         insertingReq = REQUESTS[reqIndex]
@@ -55,18 +71,18 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
     return chromosome
 
 # This function remove requests from a chromosome
-def remove_requests(chromosome, tabooVehicles, reqsToRemove, REQUESTS):
+def remove_requests(chromosome, tabooVehicles, reqsIndexToRemove, REQUESTS):
     for i,[num, reqs, route] in enumerate(chromosome):
         # Not removing the requests in the 'TABOO' Vehicles
         if (not num in tabooVehicles):
-            for removingReq in reqsToRemove:
+            for removingReq in reqsIndexToRemove:
                 if (removingReq in reqs):
-                    reqs.remove(removingReq)
+                    chromosome[i][1].remove(removingReq)
                     ## Also, remove the removing requests from the route
                     pickupNode = REQUESTS[removingReq][0]
                     deliveryNode = REQUESTS[removingReq][1]
-                    route.remove(pickupNode)
-                    route.remove(deliveryNode)
+                    chromosome[i][2].remove(pickupNode)
+                    chromosome[i][2].remove(deliveryNode)
 
 
 

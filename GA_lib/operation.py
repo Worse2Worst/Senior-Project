@@ -1,6 +1,7 @@
 import copy
 import random
 import GA_lib.GA
+from GA_lib import evaluate
 import collections
 
 
@@ -14,8 +15,8 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
         return parent1,parent2
     ##### Else, crossover #########################
 
-    # All couples indices to visit
-    totalReqs = set([i for i in range(len(REQUESTS))])
+    # All indices of REQUESTS to visit
+    totalReqs = set([*REQUESTS])
     rep1,rep2 = copy.deepcopy(parent1) ,copy.deepcopy(parent2)
 
     # Trim out the empty vehicles
@@ -37,9 +38,9 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
 
     # reqsFrom1 is a set contains all requests in partFrom1, reqsFrom2 contains all requests in partFrom2
     listOfList1 = [reqs for [vehicle,reqs,route] in partFrom1]
-    reqsFrom1 = [item for sublist in listOfList1 for item in sublist]
+    reqsIndexFrom1 = [item for sublist in listOfList1 for item in sublist]
     listOfList2 = [reqs for [vehicle, reqs, route] in partFrom2]
-    reqsFrom2 = [item for sublist in listOfList2 for item in sublist]
+    reqsIndexFrom2 = [item for sublist in listOfList2 for item in sublist]
 
 
     ############## Crossing!!! #################
@@ -67,9 +68,9 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
 
 
     # Remove the duplicate requests in children,
-    GA_lib.GA.remove_requests(child1, vehiclesFrom2, reqsFrom2, REQUESTS)
+    GA_lib.GA.remove_requests(child1, vehiclesFrom2, reqsIndexFrom2, REQUESTS)
     # compare = lambda x, y: collections.Counter(x) == collections.Counter(y)
-    GA_lib.GA.remove_requests(child2, vehiclesFrom1, reqsFrom1, REQUESTS)
+    GA_lib.GA.remove_requests(child2, vehiclesFrom1, reqsIndexFrom1, REQUESTS)
 
     # Calculate remaining requests to insert
     usedReqs1 = [reqs for [vehicle, reqs, route] in child1]
@@ -86,17 +87,19 @@ def crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMA
     ### Insert the remaining requests into the children ########
     GA_lib.GA.insert_requests_into_chromosome(child1, reqsToInsert1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
     GA_lib.GA.insert_requests_into_chromosome(child2, reqsToInsert2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
-
     return child1,child2
 
 
-def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 0.2):
+def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadCapacities,maxSpot,prob = 0.4):
     if (random.random() > prob):
         return chromosome
-    num = random.randrange(len(chromosome))
-    vehicleNum = chromosome[num][0]
-    reqs = chromosome[num][1]
-    chromosome[num] = [vehicleNum,[],[]]
-    GA_lib.GA.insert_requests_into_chromosome(chromosome, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
+    res = copy.deepcopy(chromosome)
+    index = random.randrange(len(res))
+    vehicleNum = res[index][0]
+    reqs = res[index][1]
+    res[index] = [vehicleNum,[],[]]
+    # GA_lib.GA.remove_requests(res, [], reqs, REQUESTS)
+    # print(res)
+    GA_lib.GA.insert_requests_into_chromosome(res, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
                                               LoadCapacities, maxSpot)
-    return chromosome
+    return res

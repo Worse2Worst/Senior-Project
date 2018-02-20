@@ -41,6 +41,8 @@ def load_file(filename):
     timeWindows[0] = [0,9999999999999999]
     requestType[0] = 'DEPOT'
 
+    locations = dict(enumerate(locations))
+
     data = [locations,demands,timeWindows,ServiceTimes,pickupSiblings,deliverySiblings,requestType]
     return numVehicles, loadCapacities, speed,data
 
@@ -50,7 +52,7 @@ def generate_request(pickupSiblings,deliverySiblings,requestType):
     for i in range(len(requestType)):
         if(requestType[i]=='pickup'):
             requests.append((i,deliverySiblings[i]))
-    return requests
+    return dict(enumerate(requests))
 
 
 # calculate Euclidean distances between nodes

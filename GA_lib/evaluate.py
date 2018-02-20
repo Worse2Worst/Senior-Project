@@ -34,13 +34,19 @@ def load_capacities_violated(tour, DEMANDS, LoadCapacities):
 
 def time_violated(tour,durations,timeWindows):
     cur_time = 0
+    if (not tour):
+        return False
     for cur_node, next_node in zip(tour, tour[1:]):
         cur_ET = timeWindows[cur_node][0]
         next_LT = timeWindows[next_node][1]
         cur_time = max(cur_time,cur_ET)
+        # Arraival time at nextNode
         arrival_time = cur_time+durations[cur_node][next_node]
+        # If Violated, return
         if(arrival_time > next_LT):
             return True
+        # Update the current time
+        cur_time = arrival_time
     return False
 
 
@@ -67,9 +73,10 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
 
     ## If the tour is empty, insert without thinking.
     if(not tour):
+        # req is the Request, NOT index.
         tour = [req[0],req[1]]
         cost = tour_distance(tour, DISTANCES)
-        return ([req[0],req[1]],cost)
+        return (tour,cost)
     candidate = []
     min_dist = inf
     min_index = -999999
@@ -90,14 +97,12 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
         # temp1 = tour[:i]+[req[0]]+tour[i:]
         temp1 = tour[:]
         temp1[i:i] = [req[0]]
-
         if (not (load_capacities_violated(temp1, DEMANDS, LoadCapacities)) and not(time_violated(temp1, DURATIONS, timeWindows))):
             for j in range(i+1,len(temp1)+1):
                 ### Inserting 2
                 # temp2 = temp1[:j] + [req[1]] + temp1[j:]
                 temp2 = temp1[:]
                 temp2[j:j] = [req[1]]
-
                 # now remove the bad ones
                 # Assume that precedence not violated
                 # Check if temp2 violate the constraints
@@ -111,7 +116,7 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
                         min_cost = cost
                         candidate = temp2
     # if no feasible paths!!!, return empty
-    if(not candidate):
+    if(not candidate or min_cost==inf):
         return ([],inf)
     # if inserting can reduce cost, then insert
     new_cost = min_cost - old_tour_cost
@@ -139,8 +144,10 @@ def waitingTime(tour,DURATIONS,timeWindows):
         arrival_time = cur_time+DURATIONS[cur_node][next_node]
         if(arrival_time > next_LT):
             print('Evaluate-Waaiting time - ERRORR - Time Violated!!')
+        cur_time = arrival_time
         if (arrival_time < next_ET):
             waitTime += (next_ET - arrival_time)
+    ######
     # cur_time = timeWindows[tour[0]][0] # first node ET
     # waitTime = 0
     # for i in range(len(tour) - 1):
@@ -187,4 +194,6 @@ def haveEqualNodes(parent1,parent2,LOCATIONS):
                 print(x)
                 return False
             tour2.add(x)
+    if(tour1 != tour2):
+        print('No dups,but not Equal!!')
     return tour1 == tour2

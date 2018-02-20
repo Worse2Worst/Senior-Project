@@ -11,6 +11,7 @@ from GA_lib import evaluate
 start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
+# filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
 LOCATIONS = data[0]
@@ -31,43 +32,6 @@ print(" processing time --- %s seconds ---" % (time.time() - start_time))
 # solving the problems !!!!
 start_time = time.time()
 
-#
-#
-# maxSpot = 1000
-#
-#
-# start_time = time.time()
-# tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
-# reqs = [(tour[i],deliverySiblings[tour[i]]) for i in range(len(tour)) if requestType[tour[i]]=='pickup']
-# print('The Requests are :'+str(reqs))
-# tour = []
-# shuffle(reqs)
-# for r in reqs:
-#     tour = evaluate.new_tour_after_insert_requests(r, tour, DISTANCES, DURATIONS, timeWindows,DEMANDS, LoadCapacities,maxSpot)
-# cal_time = time.time() - start_time
-#
-#
-# print (tour)
-# print('My Solution is :' + str(tour))
-# print('my Solution:' + str(evaluate.tour_distance(tour, DISTANCES)))
-# print('Violate time windows:' + str(evaluate.time_violated(tour, DURATIONS, timeWindows)))
-# print('Violate time precedence:'+str(evaluate.precedence_violated(tour,requestType, pickupSiblings)))
-# print('Violate load capacities:'+str(evaluate.load_capacities_violated(tour,DEMANDS, LoadCapacities)))
-#
-# best_tour = [96,59,92,98,85,91,14,42,2,75,39,23,15,38,44,16,61,99,18,8,84,86,5,6,94,95,97,43,56,4,54,55,25,24,80,12,26,58]
-# print (best_tour)
-#
-# print('best solution : ' + str(evaluate.tour_distance(best_tour, DISTANCES)))
-# print('Violate time windows:' + str(evaluate.time_violated(best_tour, DURATIONS, timeWindows)))
-# print('Violate time precedence:'+str(evaluate.precedence_violated(best_tour,requestType, pickupSiblings)))
-# print('Violate load capacities:'+str(evaluate.load_capacities_violated(best_tour,DEMANDS, LoadCapacities)))
-# print(" cal time --- %s seconds ---" % (cal_time))
-# print ('Have equal nodes:'+str(set(tour)==set(best_tour)))
-#
-
-
-
-
 
 #
 # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
@@ -79,12 +43,11 @@ for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
     populations.append(chromosome)
 print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
-pop2 = populations[0]
 ## Crossovers and mutate
 start_time = time.time()
-bestFitness =9999999999999999999
-bestFitGen = 0
-generations = 500
+# bestFitness =9999999999999999999
+# bestFitGen = 0
+generations = 100
 fitness = []
 maxSpot = 1000
 for gen in range(generations):
@@ -96,18 +59,23 @@ for gen in range(generations):
     populations.pop()
     elite1 = populations.pop(0)
     elite2 = populations.pop(0)
+
     # id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
     # parent1,parent2 = populations[id1],populations[id2]
     parent1,parent2 = elite1,elite2
-    child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
-    if(not evaluate.haveEqualNodes(child1,child2,LOCATIONS)):
-        print('note have Equal nodes, Crossover Bug!!!!!')
+    if (not evaluate.haveEqualNodes(parent1, parent2, LOCATIONS)):
+        print('note have Equal nodes, Elite Bug!!!!!' + str(gen))
         break
 
-    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
-    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob = 1.0)
+    if(not evaluate.haveEqualNodes(child1,child2,LOCATIONS)):
+        print('note have Equal nodes, Crossover Bug!!!!!'+ str(gen))
+        break
+
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.0)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.0)
     if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
-        print('note have Equal nodes, Mutation Bug!!!!!')
+        print('note have Equal nodes, Mutation Bug!!!!!'+ str(gen))
         break
 
     f = evaluate.chromosomeFitness(child1,DISTANCES)
@@ -118,11 +86,11 @@ for gen in range(generations):
     populations.append(child2)
     populations.append(elite1)
     populations.append(elite2)
-    if(f<bestFitness):
-        bestFitness = f
-        bestFitGen = gen
-    if(bestFitGen-gen >= 3000):
-        break
+    # if(f<bestFitness):
+    #     bestFitness = f
+    #     bestFitGen = gen
+    # if(bestFitGen-gen >= 3000):
+    #     break
 fitness=[]
 for chromosome in populations:
     fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))
@@ -141,22 +109,7 @@ print(populations[len(populations)-1])
 #
 # #################################################################################################
 
-allNodes = set([x for x in range(len(LOCATIONS))])
-allNodes -={0}
-tour1 = set()
-for [_,req,arr] in parent1:
-    for x in arr:
-        if(x in tour1):
-            print('Duplicated!!')
-        tour1.add(x)
 
-tour2 = set()
-for [_,_,arr] in parent2:
-    for x in arr:
-        if (x in tour2):
-            print('Duplicated!!')
-        tour2.add(x)
-print ('Parents have equal nodes:'+str(set(tour1)==set(tour2)))
 
 
 print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(populations[0],DURATIONS,timeWindows)))

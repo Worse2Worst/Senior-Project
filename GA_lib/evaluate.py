@@ -194,6 +194,12 @@ def haveEqualNodes(parent1,parent2,LOCATIONS):
                 print(x)
                 return False
             tour2.add(x)
-    if(tour1 != tour2):
-        print('No dups,but not Equal!!')
+    missing1 = allNodes-tour1
+    missing2 = allNodes-tour2
+    ## Debugging
+    if(tour1 != tour2 or tour1!=allNodes or tour2!=allNodes):
+        print('Ch1:'+str(parent1))
+        print('Missing1:'+str(missing1))
+        print('Ch2:'+str(parent2))
+        print('Missing2:' + str(missing2))
     return tour1 == tour2

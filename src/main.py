@@ -11,6 +11,7 @@ from GA_lib import evaluate
 start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lrc201.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
@@ -25,7 +26,7 @@ REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
 DISTANCES = proc.createDistanceTable(LOCATIONS)
 DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
 
-
+print(filename)
 print(" processing time --- %s seconds ---" % (time.time() - start_time))
 
 
@@ -37,7 +38,7 @@ start_time = time.time()
 # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
 
 ## Initialize the populations
-population_size = 50
+population_size = 100
 populations = []
 for i in range(population_size):
     chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
@@ -47,7 +48,7 @@ print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 start_time = time.time()
 # bestFitness =9999999999999999999
 # bestFitGen = 0
-generations = 100
+generations = 1000
 fitness = []
 maxSpot = 1000
 for gen in range(generations):
@@ -72,8 +73,8 @@ for gen in range(generations):
         print('note have Equal nodes, Crossover Bug!!!!!'+ str(gen))
         break
 
-    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.0)
-    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.0)
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.7)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.7)
     if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
         print('note have Equal nodes, Mutation Bug!!!!!'+ str(gen))
         break

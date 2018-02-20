@@ -25,19 +25,21 @@ def initialize_WorstCase_Chromosome(REQUESTS):
 
 # This function insert requests into a chromosome
 def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,DEMANDS, LoadCapacities,maxSpot):
-
     if(not reqsIndexToInsert):
+        # print('inserting -RouteEmpty - BuggED')
         return chromosome
 
     # Debugging,
-    oldReqsIndex = [reqs for [_,reqs,_] in chromosome]
-    oldReqsIndex = set([item for sublist in oldReqsIndex for item in sublist])
-    reqsSetToInsert = set(reqsIndexToInsert)
+    # oldReqsIndex = [reqs for [_,reqs,_] in chromosome]
+    # oldReqsIndex = set([item for sublist in oldReqsIndex for item in sublist])
+    # reqsSetToInsert = set(reqsIndexToInsert)
     # if((oldReqsIndex & reqsSetToInsert) != set()):
     #     print ('GA-Debug Inserting:Dups-Bug!!')
     #     print('Intersect:'+str(oldReqsIndex & reqsSetToInsert))
+    #     print('Chromosome:'+str(chromosome))
+    #     return 'BUG'
 
-    reqsIndexToInsert = list(reqsSetToInsert - (oldReqsIndex & reqsSetToInsert))
+    # reqsIndexToInsert = list(reqsSetToInsert - (oldReqsIndex & reqsSetToInsert))
 
     ## Random things we want to insert.
     random.shuffle(reqsIndexToInsert)
@@ -63,7 +65,7 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
             chromosome[minIndex][1].append(reqIndex)
             chromosome[minIndex][2] = minRoute
         else: # cannot insert, so we allocate a new vehicle
-            nonNegNum = set([i for i in range(100)])
+            nonNegNum = set([i for i in range(300)])
             s = nonNegNum - carNumsSet
             carNum = next(iter(s))
             # print('Debug at GA;Chromosome L is:'+str(len(chromosome))+',Carnum is:'+str(carNum))

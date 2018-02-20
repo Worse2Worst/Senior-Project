@@ -64,20 +64,21 @@ print('Parent2:'+str(parent2))
 start_time = time.time()
 maxSpot = 1000
 
-print('------------------CROSSOVER-----------------')
-child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob=1.0)
-print ('Parent1-Parent2 have equal nodes:'+str(evaluate.haveEqualNodes(parent1,parent2,LOCATIONS)))
-print ('Child1-Child2 have equal nodes:'+str(evaluate.haveEqualNodes(child1,child2,LOCATIONS)))
-print ('Child1-Parent1 have equal nodes:'+str(evaluate.haveEqualNodes(child1,parent1,LOCATIONS)))
-print ('Child1-Parent2 have equal nodes:'+str(evaluate.haveEqualNodes(child1,parent2,LOCATIONS)))
-print ('Child2-Parent1 have equal nodes:'+str(evaluate.haveEqualNodes(child2,parent1,LOCATIONS)))
-print ('Child2-Parent2 have equal nodes:'+str(evaluate.haveEqualNodes(child2,parent2,LOCATIONS)))
+for i in range(100):
+    print('------------------CROSSOVER-----------------')
 
-print('------------------MUTATE-----------------')
-child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 1.0)
-child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 1.0)
-child1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
-child2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
+    child1,child2 = operation.crossover(DISTANCES, DURATIONS, timeWindows,REQUESTS, parent1, parent2, DEMANDS, LoadCapacities,maxSpot,prob=1.0)
+    if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
+        print('BUGG:' + str(i))
+        break
+    print('------------------MUTATE-----------------')
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 1.0)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 1.0)
+    child1 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
+    child2 = GA.initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,numVehicles, DEMANDS, LoadCapacities)
+    if(not evaluate.haveEqualNodes(child1,child2,LOCATIONS)):
+        print('BUGG:' + str(i))
+        break
 
 #########################################################################################
 # print("Chromosome crossover time --- %s seconds ---" % (time.time()-start_time))

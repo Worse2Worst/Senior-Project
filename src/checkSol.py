@@ -20,8 +20,8 @@ def routeToreqs(route,REQUESTS):
 
 start_time = time.time()
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
-solution_path = 'pdp_instances/LiLim/solutions/pdp_100/lc107.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+solution_path = 'pdp_instances/LiLim/solutions/pdp_100/lc101.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
 locations = data[0]

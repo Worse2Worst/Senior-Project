@@ -17,7 +17,6 @@ def routeToreqs(route,REQUESTS):
 
 
 
-
 start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'

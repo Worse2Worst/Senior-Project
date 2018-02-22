@@ -16,6 +16,11 @@ def routeToreqs(route,REQUESTS):
     return reqs
 
 
+def print_solution(chromosome):
+    num = 1
+    for [_,_,tour]in chromosome:
+        print('Route '+str(num)+': '+str(tour))
+        num += 1
 
 
 start_time = time.time()
@@ -86,3 +91,6 @@ for [num,reqs,tour] in MY_chromosome:
         print('time Violated!!')
 
 print('Have same nodes:' + str(evaluate.haveEqualNodes(best_chromosome, MY_chromosome, LOCATIONS)))
+
+
+print_solution(MY_chromosome)

@@ -11,7 +11,7 @@ from GA_lib import evaluate
 start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
-filename = 'pdp_instances/LiLim/pdp_100/lrc201.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)

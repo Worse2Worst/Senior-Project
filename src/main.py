@@ -1,5 +1,5 @@
 import time
-from random import shuffle
+import random
 from pdp_lib import processing as proc
 from pdp_lib import util
 from GA_lib import GA
@@ -10,7 +10,7 @@ from GA_lib import evaluate
 
 start_time = time.time()
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_100/lc107.txt'
+filename = 'pdp_instances/LiLim/pdp_600/LRC2_6_1.txt'
 filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
@@ -46,9 +46,9 @@ for i in range(population_size):
 print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 ## Crossovers and mutate
 start_time = time.time()
-# bestFitness =9999999999999999999
-# bestFitGen = 0
-generations = 1000
+bestFitness =9999999999999999999
+bestFitGen = 0
+generations = 3000
 fitness = []
 maxSpot = 1000
 for gen in range(generations):
@@ -61,9 +61,9 @@ for gen in range(generations):
     elite1 = populations.pop(0)
     elite2 = populations.pop(0)
 
-    # id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
-    # parent1,parent2 = populations[id1],populations[id2]
-    parent1,parent2 = elite1,elite2
+    id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
+    parent1,parent2 = populations[id1],populations[id2]
+    # parent1,parent2 = elite1,elite2
     if (not evaluate.haveEqualNodes(parent1, parent2, LOCATIONS)):
         print('note have Equal nodes, Elite Bug!!!!!' + str(gen))
         break
@@ -87,11 +87,11 @@ for gen in range(generations):
     populations.append(child2)
     populations.append(elite1)
     populations.append(elite2)
-    # if(f<bestFitness):
-    #     bestFitness = f
-    #     bestFitGen = gen
-    # if(bestFitGen-gen >= 3000):
-    #     break
+    if(f<bestFitness):
+        bestFitness = f
+        bestFitGen = gen
+    if(bestFitGen-gen >= 500):
+        break
 fitness=[]
 for chromosome in populations:
     fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))

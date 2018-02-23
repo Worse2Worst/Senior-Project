@@ -10,8 +10,8 @@ from GA_lib import evaluate
 
 start_time = time.time()
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_600/LRC2_6_1.txt'
-# filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+# filename = 'pdp_instances/LiLim/pdp_600/LRC2_6_1.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lc106.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
@@ -45,17 +45,17 @@ for i in range(population_size):
     populations.append(chromosome)
 print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 ## Crossovers and mutate
-start_time = time.time()
-best_fitness_so_far =9999999999999999999
+GA_time = time.time()
+best_fitness_so_far = -999999
 bestFitGen = 0
 generations = 3000
-fitness = []
+fitness_table = []
 maxSpot = 1000
 for gen in range(generations):
-    fitness=[]
+    fitness_table=[]
     for chromosome in populations:
-        fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))
-    populations = [x for _,x in sorted(zip(fitness,populations),reverse=True)]
+        fitness_table.append(evaluate.chromosomeFitness(chromosome, DISTANCES))
+    populations = [x for _,x in sorted(zip(fitness_table, populations), reverse=True)]
     populations.pop()
     populations.pop()
     elite1 = populations.pop(0)
@@ -79,24 +79,31 @@ for gen in range(generations):
         print('note have Equal nodes, Mutation Bug!!!!!'+ str(gen))
         break
 
-    f = evaluate.chromosomeFitness(child1,DISTANCES)
-    f = min(f,evaluate.chromosomeFitness(child2,DISTANCES))
-    f = min(f,evaluate.chromosomeFitness(elite1,DISTANCES))
-    f = min(f,evaluate.chromosomeFitness(elite2,DISTANCES))
+    current_fitness = evaluate.chromosomeFitness(child1, DISTANCES)
+    current_fitness = max(current_fitness, evaluate.chromosomeFitness(child2, DISTANCES))
+    current_fitness = max(current_fitness, evaluate.chromosomeFitness(elite1, DISTANCES))
+    current_fitness = max(current_fitness, evaluate.chromosomeFitness(elite2, DISTANCES))
     populations.append(child1)
     populations.append(child2)
     populations.append(elite1)
     populations.append(elite2)
-    if(f<best_fitness_so_far):
-        best_fitness_so_far = f
+    if(current_fitness>best_fitness_so_far):
+        best_fitness_so_far = current_fitness
         bestFitGen = gen
-    if(bestFitGen-gen >= 500):
+        print('#### New Best Fitness !! , Best so far is :' + str(10000.0/best_fitness_so_far)+'#####')
+        print('#### This Generation: ' + str(gen) + '#######')
+    if(gen - bestFitGen >= 500):
         break
-fitness=[]
+    # print('############# Generation:' +str(gen+1)+' #########################')
+    # print('############# BestFitGen:' +str(bestFitGen)+' #########################')
+    # print('This Gen Fitness :'+str(10000.0 / current_fitness))
+
+fitness_table=[]
 for chromosome in populations:
-    fitness.append(evaluate.chromosomeFitness(chromosome,DISTANCES))
-populations = [x for _,x in sorted(zip(fitness,populations),reverse=True)]
-print("GA time --- %s seconds ---" % (time.time()-start_time))
+    fitness_table.append(evaluate.chromosomeFitness(chromosome, DISTANCES))
+populations = [x for _,x in sorted(zip(fitness_table, populations), reverse=True)]
+print("GA time --- %s seconds ---" % (time.time()- GA_time))
+print("Total Calculation time --- %s seconds ---" % (time.time()- start_time))
 
 
 
@@ -111,6 +118,6 @@ print(populations[len(populations)-1])
 # #################################################################################################
 
 
-
+print(filename)
 
 print ('Chromosome waiting time :'+str(evaluate.chromosomeWatingTime(populations[0],DURATIONS,timeWindows)))

@@ -172,7 +172,7 @@ def chromosomeWatingTime(chromosome,DURATIONS,timeWindows):
 
 
 def chromosomeFitness(chromosome,DISTANCES,depot=0):
-    return 1.0/chromosomeRoutesDistance(chromosome,DISTANCES,depot)
+    return 10000.0/chromosomeRoutesDistance(chromosome,DISTANCES,depot)
 
 def haveEqualNodes(parent1,parent2,LOCATIONS):
     allNodes = set([x for x in range(len(LOCATIONS))])

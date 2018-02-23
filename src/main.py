@@ -11,7 +11,7 @@ from GA_lib import evaluate
 start_time = time.time()
 # use 'relative path' in filename
 filename = 'pdp_instances/LiLim/pdp_600/LRC2_6_1.txt'
-filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+# filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
@@ -46,7 +46,7 @@ for i in range(population_size):
 print("Populations creation time --- %s seconds ---" % (time.time()-start_time))
 ## Crossovers and mutate
 start_time = time.time()
-bestFitness =9999999999999999999
+best_fitness_so_far =9999999999999999999
 bestFitGen = 0
 generations = 3000
 fitness = []
@@ -73,8 +73,8 @@ for gen in range(generations):
         print('note have Equal nodes, Crossover Bug!!!!!'+ str(gen))
         break
 
-    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.7)
-    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.7)
+    child1 = operation.mutate(child1, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
+    child2 = operation.mutate(child2, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot,prob = 0.5)
     if (not evaluate.haveEqualNodes(child1, child2, LOCATIONS)):
         print('note have Equal nodes, Mutation Bug!!!!!'+ str(gen))
         break
@@ -87,8 +87,8 @@ for gen in range(generations):
     populations.append(child2)
     populations.append(elite1)
     populations.append(elite2)
-    if(f<bestFitness):
-        bestFitness = f
+    if(f<best_fitness_so_far):
+        best_fitness_so_far = f
         bestFitGen = gen
     if(bestFitGen-gen >= 500):
         break

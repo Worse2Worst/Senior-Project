@@ -11,7 +11,7 @@ from GA_lib import evaluate
 start_time = time.time()
 # use 'relative path' in filename
 # filename = 'pdp_instances/LiLim/pdp_600/LRC2_6_1.txt'
-filename = 'pdp_instances/LiLim/pdp_100/lc106.txt'
+filename = 'pdp_instances/LiLim/pdp_200/LR1_2_9.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
@@ -93,6 +93,7 @@ for gen in range(generations):
         print('#### New Best Fitness !! , Best so far is :' + str(10000.0/best_fitness_so_far)+'#####')
         print('#### This Generation: ' + str(gen) + '#######')
     if(gen - bestFitGen >= 500):
+        print('#### Break Generation: ' + str(gen) + '#######')
         break
     # print('############# Generation:' +str(gen+1)+' #########################')
     # print('############# BestFitGen:' +str(bestFitGen)+' #########################')

@@ -137,22 +137,22 @@ def maximum_distance_in_requests(requests):
 def make_depots(nodes):
     depots=[]
     index=len(nodes)
-    size = -1
-    if (len(nodes)>=1000): size=500
-    elif (len(nodes)>=800):size=400
-    elif (len(nodes)>=600):size=300
-    elif (len(nodes)>=400):size=200
-    elif (len(nodes)>=200):size=140
-    else:size=100
+    width = -1
+    if (len(nodes)>=1000): width=500
+    elif (len(nodes)>=800):width=400
+    elif (len(nodes)>=600):width=300
+    elif (len(nodes)>=400):width=200
+    elif (len(nodes)>=200):width=140
+    else:width=100
     d0 = nodes[0]
-    d1 = preprocessing.Node(d0.index, int(size/4),int(size/4),d0.demand,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
-    d2 = preprocessing.Node(d0.index, int(size*3/4),int(size/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
-    d3 = preprocessing.Node(d0.index, int(size/4),int(size*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
-    d4 = preprocessing.Node(d0.index, int(size*3/4),int(size*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d1 = preprocessing.Node(d0.index, int(width/4),int(width/4),d0.demand,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d2 = preprocessing.Node(d0.index, int(width*3/4),int(width/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d3 = preprocessing.Node(d0.index, int(width/4),int(width*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
+    d4 = preprocessing.Node(d0.index, int(width*3/4),int(width*3/4),d0.demand ,d0.ET,d0.LT,d0.service_time,d0.p_sib,d0.d_sib)
 
     '''
-    # special case for size = 100
-    if (size==100):
+    # special case for width = 100
+    if (width==100):
         d0.x+=10
     '''
 

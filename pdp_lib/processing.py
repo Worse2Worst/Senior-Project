@@ -95,6 +95,51 @@ def createDurationTable(locations, DISTANCES, serviceTimes, speed=1.0):
 
 
 
+def create_depots(LOCATIONS):
+    DEPOTS = []
+    width = -1
+    if (len(LOCATIONS) >= 1000):
+        width = 500
+    elif (len(LOCATIONS) >= 800):
+        width = 400
+    elif (len(LOCATIONS) >= 600):
+        width = 300
+    elif (len(LOCATIONS) >= 400):
+        width = 200
+    elif (len(LOCATIONS) >= 200):
+        width = 140
+    else:
+        width = 100
+    # Depot-0 , at center
+    dep0 = copy.deepcopy(LOCATIONS[0])
+    DEPOTS.append(dep0)
+
+    # Depot-1 , at upper left
+    dep1 = [int(width/4),int(3*width/4)]
+    DEPOTS.append(dep1)
+
+    # Depot-2 , at upper right
+    dep2 = [int(3*width / 4), int(3*width / 4)]
+    DEPOTS.append(dep2)
+
+    # Depot-3 , at lower left
+    dep3 = [int(width / 4), int(width / 4)]
+    DEPOTS.append(dep3)
+
+    # Depot-4 , at lower right
+    dep4 = [int(3*width / 4), int(width / 4)]
+    DEPOTS.append(dep4)
+
+    DEPOTS = dict(enumerate(DEPOTS))
+    return DEPOTS
 
 
 
+# def distances_to_depots():
+
+
+
+# def simple_assign_depots(LOCATIONS,DEPOTS):
+#
+#
+# def KNN_assign_depots():

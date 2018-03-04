@@ -134,10 +134,13 @@ def create_depots(LOCATIONS):
     return DEPOTS
 
 
+'''
+def distances_from_depots(DEPOTS,LOCATIONS):
+    depot_distances = []
+    for dep_num, dep_location in DEPOTS.items():
 
-# def distances_to_depots():
-
-
+    return depot_distances
+'''
 
 # def simple_assign_depots(LOCATIONS,DEPOTS):
 #

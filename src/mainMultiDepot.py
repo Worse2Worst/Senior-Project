@@ -10,7 +10,7 @@ from GA_lib import evaluate_multi_depot as evaluate
 
 start_time = time.time()
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+filename = 'pdp_instances/LiLim/pdp_100/lrc203.txt'
 # filename = 'pdp_instances/LiLim/pdp_200/LR1_2_9.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
@@ -26,7 +26,7 @@ REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
 DISTANCES = proc.createDistanceTable(LOCATIONS)
 DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
 DEPOTS = proc.create_depots(LOCATIONS)
-
+# DEPOT_DISTANCES = proc.distances_from_depots(DEPOTS,LOCATIONS)
 
 print(filename)
 print(" processing time --- %s seconds ---" % (time.time() - start_time))
@@ -34,9 +34,9 @@ print(" processing time --- %s seconds ---" % (time.time() - start_time))
 
 # solving the problems !!!!
 start_time = time.time()
-
 print (DEPOTS)
-
+util.draw_original_nodes(LOCATIONS,REQUESTS)
+util.draw_nodes_with_added_depots(LOCATIONS,REQUESTS,DEPOTS)
 
 '''
 #

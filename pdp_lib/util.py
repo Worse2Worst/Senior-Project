@@ -9,7 +9,7 @@ import numpy as np
 import mplcursors
 # Unfinished!!!!!
 
-def draw_original_nodes(locations,REQUESTS):
+def draw_original_nodes(LOCATIONS, REQUESTS):
     # Description text
     fig, ax = plt.subplots()
     ax.set_title("The original nodes")
@@ -22,17 +22,41 @@ def draw_original_nodes(locations,REQUESTS):
     #plt.legend(handles=[blue_patch])
     plt.legend([red_patch, blue_patch], ['Pickup nodes', 'Delivery nodes'])
 
-    for req in REQUESTS:
+    for req in REQUESTS.values():
         p,d = req[0],req[1]
-        pX,pY = locations[p][0],locations[p][1]
-        dX,dY = locations[d][0],locations[d][1]
+        pX,pY = LOCATIONS[p][0], LOCATIONS[p][1]
+        dX,dY = LOCATIONS[d][0], LOCATIONS[d][1]
         plt.scatter(pX, pY, c='red')
         plt.scatter(dX, dY, c='blue')
-    plt.scatter(locations[depot][0],locations[depot][1] , c='silver')  # draw the depot
-    figtext(.02, .02, 'Have ' + str(len(locations) - 1) + ' nodes (not counting the depot)')
+    plt.scatter(LOCATIONS[depot][0], LOCATIONS[depot][1], c='silver')  # draw the depot
+    figtext(.02, .02, 'Have ' + str(len(LOCATIONS) - 1) + ' nodes (not counting the depot)')
     mplcursors.cursor(hover=True)
     plt.show()
 
+
+def draw_nodes_with_added_depots(LOCATIONS, REQUESTS,DEPOTS):
+    # Description text
+    fig, ax = plt.subplots()
+    ax.set_title("The original nodes")
+    nodes=[]
+    #gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
+    ##### Legends ###############################
+    red_patch = patches.Patch(color='red', label='Pickup nodes')
+    blue_patch = patches.Patch(color='blue', label='Delivery nodes')
+    #plt.legend(handles=[blue_patch])
+    plt.legend([red_patch, blue_patch], ['Pickup nodes', 'Delivery nodes'])
+
+    for req in REQUESTS.values():
+        p,d = req[0],req[1]
+        pX,pY = LOCATIONS[p][0], LOCATIONS[p][1]
+        dX,dY = LOCATIONS[d][0], LOCATIONS[d][1]
+        plt.scatter(pX, pY, c='red')
+        plt.scatter(dX, dY, c='blue')
+    for i,dep in enumerate(DEPOTS.values()):
+        plt.scatter(DEPOTS[i][0], DEPOTS[i][1], c='silver')  # draw the depot
+    figtext(.02, .02, 'Have ' + str(len(LOCATIONS) - 1) + ' nodes (not counting the depot)')
+    mplcursors.cursor(hover=True)
+    plt.show()
 
 
 

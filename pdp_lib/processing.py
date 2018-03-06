@@ -64,13 +64,13 @@ def distance(location1,location2):
     return math.sqrt(((x1-x2)**2) +((y1-y2)**2))
 
 # Create a table that memo all distances bewtween any 2 nodes in the map
-def createDistanceTable(locations):
-    n = len(locations)
+def createDistanceTable(LOCATIONS):
+    n = len(LOCATIONS)
     distances = np.zeros((n, n))
     # create nxn matrix to memo the distances between nodes
     for i in range(n):
         for j in range(n):
-            distances[i][j] = distance(locations[i], locations[j])
+            distances[i][j] = distance(LOCATIONS[i], LOCATIONS[j])
     return distances
 
 # calculate duration of traveling between a pair of nodes
@@ -134,15 +134,30 @@ def create_depots(LOCATIONS):
     return DEPOTS
 
 
-'''
 def distances_from_depots(DEPOTS,LOCATIONS):
-    depot_distances = []
-    for dep_num, dep_location in DEPOTS.items():
-
+    n = len(LOCATIONS)
+    m = len(DEPOTS)
+    depot_distances = np.zeros(shape=(n,m))
+    for i in range(n):
+        for j in range(m):
+            depot_distances[i][j] = distance(LOCATIONS[i],DEPOTS[j])
     return depot_distances
-'''
 
-# def simple_assign_depots(LOCATIONS,DEPOTS):
-#
-#
+
+def simple_assign_depots(LOCATIONS,DEPOTS,DEPOTS_DISTANCES):
+    dep_nums = np.zeros(shape=(len(LOCATIONS)))
+    n = len(LOCATIONS)
+    m = len(DEPOTS)
+    for i in range(n):
+        minDist = 9999999999
+        minDep = 99
+        for j in range(m):
+            dist = DEPOTS_DISTANCES[i][j]
+            if(dist < minDist):
+                minDist = dist
+                minDep = j
+        dep_nums[i] = minDep
+    return dep_nums
+
+
 # def KNN_assign_depots():

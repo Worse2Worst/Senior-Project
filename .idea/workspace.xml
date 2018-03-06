@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/pdp_lib/util.py" line="152" mnemonic="9" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="682dc0ce-ca07-4e1f-b163-87d1c255c537" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdp_lib/processing.py" afterPath="$PROJECT_DIR$/pdp_lib/processing.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdp_lib/util.py" afterPath="$PROJECT_DIR$/pdp_lib/util.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainMultiDepot.py" afterPath="$PROJECT_DIR$/src/mainMultiDepot.py" />
@@ -19,8 +21,8 @@
       <file leaf-file-name="mainMultiDepot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+            <state relative-caret-position="296">
+              <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -31,8 +33,8 @@
       <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="56" column="42" lean-forward="false" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
+            <state relative-caret-position="313">
+              <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -41,11 +43,9 @@
       <file leaf-file-name="processing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="142" column="3" lean-forward="false" selection-start-line="142" selection-start-column="3" selection-end-line="142" selection-end-column="3" />
-              <folding>
-                <marker date="1520157384746" expanded="true" signature="3994:4178" ph="..." />
-              </folding>
+            <state relative-caret-position="109">
+              <caret line="147" column="43" lean-forward="false" selection-start-line="147" selection-start-column="43" selection-end-line="147" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -53,7 +53,7 @@
       <file leaf-file-name="processing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/oldCodes/old_pdp_libs/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2414">
+            <state relative-caret-position="681">
               <caret line="147" column="63" lean-forward="false" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="63" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -182,14 +182,14 @@
         <option value="$PROJECT_DIR$/src/checkMyChromosome.py" />
         <option value="$PROJECT_DIR$/pdp_instances/LiLim/solutions/pdp_200/LR1_2_9" />
         <option value="$PROJECT_DIR$/oldCodes/old_pdp_libs/processing.py" />
-        <option value="$PROJECT_DIR$/pdp_lib/processing.py" />
         <option value="$PROJECT_DIR$/oldCodes/old_pdp_libs/util.py" />
-        <option value="$PROJECT_DIR$/pdp_lib/util.py" />
+        <option value="$PROJECT_DIR$/pdp_lib/processing.py" />
         <option value="$PROJECT_DIR$/src/mainMultiDepot.py" />
+        <option value="$PROJECT_DIR$/pdp_lib/util.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="width" value="1386" />
     <option name="height" value="788" />
@@ -232,7 +232,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -243,30 +242,13 @@
             <path>
               <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
-              <item name="LiLim" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
-              <item name="LiLim" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_100" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
               <item name="pdp_lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -452,25 +434,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.120625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32506528" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32755905" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32506528" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994778" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994778" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -702,9 +685,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/oldCodes/old_pdp_libs/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="88" column="29" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/oldCodes/old_pdp_libs/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2414">
+        <state relative-caret-position="681">
           <caret line="147" column="63" lean-forward="false" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="63" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -714,36 +704,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="142" column="3" lean-forward="false" selection-start-line="142" selection-start-column="3" selection-end-line="142" selection-end-column="3" />
-          <folding>
-            <marker date="1520157384746" expanded="true" signature="3994:4178" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oldCodes/old_pdp_libs/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="88" column="29" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="109">
+          <caret line="147" column="43" lean-forward="false" selection-start-line="147" selection-start-column="43" selection-end-line="147" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="56" column="42" lean-forward="false" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
+        <state relative-caret-position="313">
+          <caret line="156" column="0" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
+        <state relative-caret-position="296">
+          <caret line="33" column="65" lean-forward="false" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

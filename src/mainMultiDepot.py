@@ -26,17 +26,18 @@ REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
 DISTANCES = proc.createDistanceTable(LOCATIONS)
 DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
 DEPOTS = proc.create_depots(LOCATIONS)
-# DEPOT_DISTANCES = proc.distances_from_depots(DEPOTS,LOCATIONS)
-
+DEPOT_DISTANCES = proc.distances_from_depots(DEPOTS,LOCATIONS)
+DEPOT_NUMBERS = proc.simple_assign_depots(LOCATIONS,DEPOTS,DEPOT_DISTANCES)
 print(filename)
 print(" processing time --- %s seconds ---" % (time.time() - start_time))
-
+print(DEPOT_NUMBERS)
+util.draw_simple_assigned_depots(LOCATIONS, DEPOTS, DEPOT_NUMBERS)
 
 # solving the problems !!!!
 start_time = time.time()
-print (DEPOTS)
-util.draw_original_nodes(LOCATIONS,REQUESTS)
-util.draw_nodes_with_added_depots(LOCATIONS,REQUESTS,DEPOTS)
+
+# util.draw_original_nodes(LOCATIONS,REQUESTS)
+# util.draw_nodes_with_added_depots(LOCATIONS,REQUESTS,DEPOTS)
 
 '''
 #

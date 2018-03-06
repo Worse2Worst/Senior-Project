@@ -87,7 +87,7 @@ def draw_requests(LOCATIONS,REQUESTS):
     plt.savefig(save_path)
     '''
 
-
+################### DRAW A TOUR ######################
 def draw_tours(chromosome, LOCATIONS, depot=0):
     line_array = []
     x_depot, y_depot = LOCATIONS[depot][0], LOCATIONS[depot][1]
@@ -112,10 +112,6 @@ def draw_tours(chromosome, LOCATIONS, depot=0):
             lines.append((dep,last_point)) # Draw a line that connects last point to depot
             numberOfTours += 1
             line_array.append(lines)
-    # flat out list
-    #flat_list = [item for sublist in line_array for item in sublist]
-
-
     fig, ax = pl.subplots()
     ax.set_title("The Routes(Tours), separated by colors")
     # gca().set_position((.1, .3, .8, .6))  # to make a bit of room for extra text
@@ -137,3 +133,31 @@ def draw_tours(chromosome, LOCATIONS, depot=0):
             'Have ' + str(numberOfTours) + ' tours. ')
     plt.show()
 
+
+########### DRAW SIMPLE ASSIGNED DEPOTS ###############################
+def draw_simple_assigned_depots(LOCATIONS, DEPOTS, DEPOT_NUMBERS):
+    # Description text
+    fig, ax = plt.subplots()
+    ax.set_title("ASSIGNED DEPOTS SEPARATED BY COLORS")
+    ############ Legends ###############################
+    red_patch = patches.Patch(color='red', label='DEPOTS 0')
+    blue_patch = patches.Patch(color='blue', label='DEPOTS 1')
+    green_patch = patches.Patch(color='green', label='DEPOTS 2')
+    yellow_patch = patches.Patch(color='yellow', label='DEPOTS 3')
+    purple_patch = patches.Patch(color='purple', label='DEPOTS 4')
+    plt.legend([red_patch, blue_patch,green_patch,yellow_patch,purple_patch], ['DEPOT-0', 'DEPOT-1','DEPOT-2','DEPOT-3','DEPOT-4'])
+
+    # Draw the locations
+    colors = {0: 'red', 1: 'blue', 2: 'green', 3: 'yellow', 4: 'purple'}
+    n = len(LOCATIONS)
+    for i in range(n):
+        node = LOCATIONS[i]
+        X,Y = node[0], node[1]
+        plt.scatter(X, Y, c=colors[DEPOT_NUMBERS[i]])
+
+    # Draw the depot, in gray color
+    for i,dep in enumerate(DEPOTS.values()):
+        plt.scatter(DEPOTS[i][0], DEPOTS[i][1], c='silver')
+    figtext(.02, .02, 'Have ' + str(len(LOCATIONS) - 1) + ' nodes (not counting the depot)')
+    mplcursors.cursor(hover=True)
+    plt.show()

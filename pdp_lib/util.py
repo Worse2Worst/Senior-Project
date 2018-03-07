@@ -135,7 +135,7 @@ def draw_tours(chromosome, LOCATIONS, depot=0):
 
 
 ########### DRAW SIMPLE ASSIGNED DEPOTS ###############################
-def draw_simple_assigned_depots(LOCATIONS, DEPOTS, DEPOT_NUMBERS):
+def draw_simple_assigned_depots(REQUESTS,LOCATIONS, DEPOTS, DEPOT_NUMBERS):
     # Description text
     fig, ax = plt.subplots()
     ax.set_title("ASSIGNED DEPOTS SEPARATED BY COLORS")
@@ -149,11 +149,14 @@ def draw_simple_assigned_depots(LOCATIONS, DEPOTS, DEPOT_NUMBERS):
 
     # Draw the locations
     colors = {0: 'red', 1: 'blue', 2: 'green', 3: 'yellow', 4: 'purple'}
-    n = len(LOCATIONS)
+    n = len(REQUESTS)
     for i in range(n):
-        node = LOCATIONS[i]
-        X,Y = node[0], node[1]
-        plt.scatter(X, Y, c=colors[DEPOT_NUMBERS[i]])
+        pickupNode = LOCATIONS[REQUESTS[i][0]]
+        deliveryNode = LOCATIONS[REQUESTS[i][1]]
+        pX,pY = pickupNode[0], pickupNode[1]
+        dX,dY = deliveryNode[0], deliveryNode[1]
+        plt.scatter(pX, pY, c=colors[DEPOT_NUMBERS[i]])
+        plt.scatter(dX, dY, c=colors[DEPOT_NUMBERS[i]])
 
     # Draw the depot, in gray color
     for i,dep in enumerate(DEPOTS.values()):

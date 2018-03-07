@@ -112,24 +112,32 @@ def create_depots(LOCATIONS):
         width = 100
     # Depot-0 , at center
     dep0 = copy.deepcopy(LOCATIONS[0])
-    DEPOTS.append(dep0)
 
     # Depot-1 , at upper left
     dep1 = [int(width/4),int(3*width/4)]
-    DEPOTS.append(dep1)
 
     # Depot-2 , at upper right
     dep2 = [int(3*width / 4), int(3*width / 4)]
-    DEPOTS.append(dep2)
 
     # Depot-3 , at lower left
     dep3 = [int(width / 4), int(width / 4)]
-    DEPOTS.append(dep3)
 
     # Depot-4 , at lower right
     dep4 = [int(3*width / 4), int(width / 4)]
-    DEPOTS.append(dep4)
 
+    # Special case for small size map (apporx. 100 nodes) ##
+    if(len(LOCATIONS)<150):
+        dep1[0]-=10
+        dep2[0]-=10
+        dep3[0]-=10
+        dep4[0]-=10
+
+    ## Put every depots into the array ##
+    DEPOTS.append(dep0)
+    DEPOTS.append(dep1)
+    DEPOTS.append(dep2)
+    DEPOTS.append(dep3)
+    DEPOTS.append(dep4)
     DEPOTS = dict(enumerate(DEPOTS))
     return DEPOTS
 
@@ -144,15 +152,17 @@ def distances_from_depots(DEPOTS,LOCATIONS):
     return depot_distances
 
 
-def simple_assign_depots(LOCATIONS,DEPOTS,DEPOTS_DISTANCES):
-    dep_nums = np.zeros(shape=(len(LOCATIONS)))
-    n = len(LOCATIONS)
+def simple_assign_depots(REQUESTS,LOCATIONS,DEPOTS,DEPOTS_DISTANCES):
+    dep_nums = np.zeros(shape=(len(REQUESTS)))
+    n = len(REQUESTS)
     m = len(DEPOTS)
-    for i in range(n):
+    for i in range(n): # loop in requests
         minDist = 9999999999
         minDep = 99
-        for j in range(m):
-            dist = DEPOTS_DISTANCES[i][j]
+        for j in range(m): # loop in depots
+            distPickup = DEPOTS_DISTANCES[REQUESTS[i][0]][j]
+            distDelivery = DEPOTS_DISTANCES[REQUESTS[i][1]][j]
+            dist = distPickup + distDelivery
             if(dist < minDist):
                 minDist = dist
                 minDep = j

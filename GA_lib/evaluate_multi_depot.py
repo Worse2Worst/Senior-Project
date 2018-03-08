@@ -52,20 +52,20 @@ def time_violated(tour,durations,timeWindows):
 
 
 # distance of just one 'job' by one vehicle
-def tour_distance(tour, DISTANCES, depot=0):
+def tour_distance(tour, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, depot):
     if(not tour):
         return 0
     dist = 0
     for cur_node, next_node in zip(tour, tour[1:]):
         dist += DISTANCES[cur_node][next_node]
-    dist += DISTANCES[depot][tour[0]] + DISTANCES[tour[-1]][depot]
+    dist += DISTANCES_FROM_DEPOTS[depot][tour[0]] + DISTANCES_TO_DEPOTS[tour[-1]][depot]
     return dist
 
 
 
 # Calculate a new tour after inserting a request in to an existing tour
 # Return empty if cannot insert
-def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows, DEMANDS, LoadCapacities,maxSpot):
+def new_tour_after_insert_requests(req, tour, DISTANCES,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, DEPOT, DURATIONS, timeWindows, DEMANDS, LoadCapacities):
     inf = 9999999999999
     ## Restrict the maximum number of spots to be visited
     # if (len(tour) + 2 > maxSpot):
@@ -75,7 +75,7 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
     if(not tour):
         # req is the Request, NOT index.
         tour = [req[0],req[1]]
-        cost = tour_distance(tour, DISTANCES)
+        cost = tour_distance(tour, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT)
         return (tour,cost)
     candidate = []
     min_dist = inf
@@ -84,11 +84,11 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
     min_cost = inf
 
     ## Generate all possibilities of insertions
-    new_vehicle_dist = tour_distance(req, DISTANCES)
+    new_vehicle_dist = tour_distance(req, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT)
     new_vehicle_waitTime = waitingTime(req, DURATIONS, timeWindows)
     # new_vehicle_cost = new_vehicle_waitTime + 1*new_vehicle_dist
     new_vehicle_cost = new_vehicle_dist
-    old_tour_dist =  tour_distance(tour, DISTANCES)
+    old_tour_dist =  tour_distance(tour, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT)
     old_tour_waitTime =  waitingTime(tour, DURATIONS, timeWindows)
     # old_tour_cost = old_tour_waitTime + 1*old_tour_dist
     old_tour_cost = old_tour_dist
@@ -108,7 +108,7 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
                 # Check if temp2 violate the constraints
                 if (not load_capacities_violated(temp2, DEMANDS, LoadCapacities) and not time_violated(temp2, DURATIONS, timeWindows)):
                 # if (load_capacities_violated(temp2NP, DEMANDS, LoadCapacities) or time_violated(temp2NP, DURATIONS, timeWindows)):
-                    dist = tour_distance(temp2, DISTANCES)
+                    dist = tour_distance(temp2, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT)
                     waitTime =  waitingTime(temp2, DURATIONS, timeWindows)
                     # cost = waitTime + 1.0*dist
                     cost = dist
@@ -125,10 +125,10 @@ def new_tour_after_insert_requests(req, tour, DISTANCES, DURATIONS, timeWindows,
     # else, just don't insert and return empty
     return ([],inf)
 
-def chromosomeRoutesDistance(chromosome, DISTANCES, depot=0):
+def chromosomeRoutesDistance(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot):
     total_distances = 0
     for [num, reqs, tour] in chromosome:
-        total_distances += tour_distance(tour, DISTANCES)
+        total_distances += tour_distance(tour, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot)
     return total_distances
 
 def waitingTime(tour,DURATIONS,timeWindows):
@@ -171,11 +171,11 @@ def chromosomeWatingTime(chromosome,DURATIONS,timeWindows):
     return totalWatingTime
 
 
-def chromosomeFitness(chromosome,DISTANCES,depot=0):
-    return 10000.0/chromosomeRoutesDistance(chromosome,DISTANCES,depot)
+def chromosomeFitness(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot):
+    return 10000.0/chromosomeRoutesDistance(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot)
 
 def haveEqualNodes(parent1,parent2,LOCATIONS):
-    allNodes = set([x for x in range(len(LOCATIONS))])
+    allNodes = set([x for x in LOCATIONS.keys()])
     allNodes -= {0}
     tour1 = set()
     for [_, req, arr] in parent1:

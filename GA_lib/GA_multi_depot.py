@@ -1,14 +1,14 @@
 import math
 import random
 import numpy as np
-from GA_lib import evaluate
+from GA_lib import evaluate_multi_depot as evaluate
 
 
 
-def initialize_Feasible_chromosome(DISTANCES, DURATIONS, timeWindows,REQUESTS,num_vehicles, DEMANDS, LoadCapacities,maxSpot = 1000):
+def initialize_Feasible_chromosome(DISTANCES, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, DEPOT, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities):
     chromosome = [[0,[],[]]]
     reqsIndexToInsert = [*REQUESTS] # Every requests!!!
-    chromosome = insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities, maxSpot)
+    chromosome = insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities)
     # Trim the empty gene
     # chromosome = [gene for gene in chromosome if (len(gene[1])>0)]
     return chromosome
@@ -24,7 +24,7 @@ def initialize_WorstCase_Chromosome(REQUESTS):
     return chromosome
 
 # This function insert requests into a chromosome
-def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DURATIONS, timeWindows, REQUESTS,DEMANDS, LoadCapacities,maxSpot):
+def insert_requests_into_chromosome(chromosome, reqsIndexToInsert,DISTANCES, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities):
     if(not reqsIndexToInsert):
         # print('inserting -RouteEmpty - BuggED')
         return chromosome
@@ -55,7 +55,7 @@ def insert_requests_into_chromosome(chromosome, reqsIndexToInsert, DISTANCES, DU
         for (i,gene) in enumerate(chromosome):
             route = gene[2]
             carNumsSet.add(gene[0])
-            newRoute,newCost = evaluate.new_tour_after_insert_requests(insertingReq, route, DISTANCES, DURATIONS, timeWindows, DEMANDS, LoadCapacities,maxSpot)
+            newRoute,newCost = evaluate.new_tour_after_insert_requests(insertingReq, route,DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT, DURATIONS, timeWindows, DEMANDS, LoadCapacities)
             if(newRoute and (newCost <minCost)): # Should insert
                 minCost = newCost
                 minIndex = i

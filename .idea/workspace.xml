@@ -2,15 +2,17 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/pdp_lib/util.py" line="152" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py" line="77" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="682dc0ce-ca07-4e1f-b163-87d1c255c537" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GA_lib/solver.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pics/dummy01.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdp_lib/processing.py" afterPath="$PROJECT_DIR$/pdp_lib/processing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdp_lib/util.py" afterPath="$PROJECT_DIR$/pdp_lib/util.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mainMultiDepot.py" afterPath="$PROJECT_DIR$/src/mainMultiDepot.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/GA_lib/GA_multi_depot.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/GA_lib/operation_multi_depot.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/GA_lib/GA.py" afterPath="$PROJECT_DIR$/GA_lib/GA.py" />
+      <change beforePath="$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py" afterPath="$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py" />
+      <change beforePath="$PROJECT_DIR$/pdp_lib/processing.py" afterPath="$PROJECT_DIR$/pdp_lib/processing.py" />
+      <change beforePath="$PROJECT_DIR$/src/mainMultiDepot.py" afterPath="$PROJECT_DIR$/src/mainMultiDepot.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,8 +26,8 @@
       <file leaf-file-name="mainMultiDepot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="123" column="45" lean-forward="false" selection-start-line="123" selection-start-column="45" selection-end-line="123" selection-end-column="45" />
+            <state relative-caret-position="111">
+              <caret line="174" column="7" lean-forward="false" selection-start-line="174" selection-start-column="7" selection-end-line="174" selection-end-column="7" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -33,11 +35,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="solver.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GA_lib/solver.py">
+      <file leaf-file-name="evaluate_multi_depot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="2958">
+              <caret line="174" column="113" lean-forward="false" selection-start-line="174" selection-start-column="113" selection-end-line="174" selection-end-column="113" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="processing.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="149" column="29" lean-forward="true" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -45,11 +59,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainLoopAverage.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
+      <file leaf-file-name="operation_multi_depot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GA_lib/operation_multi_depot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="119" column="18" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="119" selection-end-column="18" />
+            <state relative-caret-position="187">
+              <caret line="11" column="142" lean-forward="true" selection-start-line="11" selection-start-column="142" selection-end-line="11" selection-end-column="147" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GA_multi_depot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GA_lib/GA_multi_depot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="26" column="184" lean-forward="false" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="184" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -60,31 +86,9 @@
       <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="160" column="35" lean-forward="true" selection-start-line="160" selection-start-column="35" selection-end-line="160" selection-end-column="35" />
+            <state relative-caret-position="42">
+              <caret line="137" column="72" lean-forward="true" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="72" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="evaluate_multi_depot.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="evaluate.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/GA_lib/evaluate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="174" column="18" lean-forward="false" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -102,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pdp_instances/LiLim/pdp_100/lrc201.txt</find>
       <find>tw_d</find>
       <find>tw_dura</find>
       <find>prece</find>
@@ -132,6 +135,7 @@
       <find>20</find>
       <find>print</find>
       <find>requests</find>
+      <find>prin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,9 +144,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/run_benchmark.py" />
-        <option value="$PROJECT_DIR$/pdp_lib/GA2.py" />
-        <option value="$PROJECT_DIR$/src/testGeocodes.py" />
         <option value="$PROJECT_DIR$/src/create_real_map.py" />
         <option value="$PROJECT_DIR$/src/create_real_distance_matrix.py" />
         <option value="$PROJECT_DIR$/src/testDistanceMatrix.py" />
@@ -175,8 +176,6 @@
         <option value="$PROJECT_DIR$/src/testCannotInsert.py" />
         <option value="$PROJECT_DIR$/src/testInsertRemove.py" />
         <option value="$PROJECT_DIR$/src/testRemoveReqs.py" />
-        <option value="$PROJECT_DIR$/GA_lib/operation.py" />
-        <option value="$PROJECT_DIR$/GA_lib/GA.py" />
         <option value="$PROJECT_DIR$/src/testCreateChromosome.py" />
         <option value="$PROJECT_DIR$/src/testCrossover.py" />
         <option value="$PROJECT_DIR$/src/mainLoopAverage.py" />
@@ -189,7 +188,12 @@
         <option value="$PROJECT_DIR$/oldCodes/old_pdp_libs/util.py" />
         <option value="$PROJECT_DIR$/GA_lib/solver.py" />
         <option value="$PROJECT_DIR$/pdp_lib/util.py" />
+        <option value="$PROJECT_DIR$/GA_lib/GA.py" />
+        <option value="$PROJECT_DIR$/GA_lib/operation.py" />
+        <option value="$PROJECT_DIR$/GA_lib/GA_multi_depot.py" />
         <option value="$PROJECT_DIR$/pdp_lib/processing.py" />
+        <option value="$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py" />
+        <option value="$PROJECT_DIR$/GA_lib/operation_multi_depot.py" />
         <option value="$PROJECT_DIR$/src/mainMultiDepot.py" />
       </list>
     </option>
@@ -236,6 +240,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -256,19 +262,6 @@
             <path>
               <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
               <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
-              <item name="LiLim" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
-              <item name="LiLim" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_100" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
               <item name="pdp_lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -280,8 +273,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -290,16 +281,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\GA_lib" />
-      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\" />
-      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\GA_lib" />
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\src" />
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\pdp_lib" />
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\pdp_instances\Worse2Worst" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\GA_lib" />
+      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\" />
+      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -315,22 +306,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.mainMultiDepot">
-    <configuration name="Senior-Project" type="Python.Ipnb" factoryName="Jupyter Notebook">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Worse2Worst\AppData\Local\Programs\Python\Python36\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Senior-Project" />
-      <option name="additionalOptions" value="" />
-      <option name="ipnbHost" value="127.0.0.1" />
-      <option name="ipnbPort" value="8888" />
-    </configuration>
     <configuration name="checkMyChromosome" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -347,6 +322,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="main-SingleDepot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -364,23 +340,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="C:\Users\Worse2Worst\AppData\Local\Programs\Python\Python36\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Senior-Project" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="mainLoopAverage" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -398,6 +358,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="mainMultiDepot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -405,9 +366,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Worse2Worst\AppData\Local\Programs\Python\Python36\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Senior-Project" />
@@ -415,6 +376,7 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="testCrossover" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -432,21 +394,39 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="Senior-Project" type="Python.Ipnb" factoryName="Jupyter Notebook">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Worse2Worst\AppData\Local\Programs\Python\Python36\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Senior-Project" />
+      <option name="additionalOptions" value="" />
+      <option name="ipnbHost" value="127.0.0.1" />
+      <option name="ipnbPort" value="8888" />
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Jupyter Notebook.Senior-Project" />
-      <item index="1" class="java.lang.String" itemvalue="Python.main" />
+      <item index="1" class="java.lang.String" itemvalue="Python.main-SingleDepot" />
       <item index="2" class="java.lang.String" itemvalue="Python.testCrossover" />
       <item index="3" class="java.lang.String" itemvalue="Python.checkMyChromosome" />
       <item index="4" class="java.lang.String" itemvalue="Python.mainLoopAverage" />
       <item index="5" class="java.lang.String" itemvalue="Python.mainMultiDepot" />
     </list>
     <recent_temporary>
-      <list size="4">
+      <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.mainMultiDepot" />
-        <item index="1" class="java.lang.String" itemvalue="Python.checkMyChromosome" />
-        <item index="2" class="java.lang.String" itemvalue="Python.mainLoopAverage" />
-        <item index="3" class="java.lang.String" itemvalue="Python.testCrossover" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main-SingleDepot" />
+        <item index="2" class="java.lang.String" itemvalue="Python.checkMyChromosome" />
+        <item index="3" class="java.lang.String" itemvalue="Python.mainLoopAverage" />
+        <item index="4" class="java.lang.String" itemvalue="Python.testCrossover" />
       </list>
     </recent_temporary>
   </component>
@@ -473,21 +453,21 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.120625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32724902" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32755905" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32506528" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32464147" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3994778" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -500,14 +480,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/ortools-6.5.4527-py3.6-win-amd64.egg/ortools/constraint_solver/pywrapcp.py" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/pdp_100/lr102.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="74" column="34" lean-forward="false" selection-start-line="74" selection-start-column="34" selection-end-line="74" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test_overflow.py" />
     <entry file="file://$PROJECT_DIR$/GA_lib/GA_time_repair.py" />
     <entry file="file://$PROJECT_DIR$/src/main_time_repair.py" />
@@ -639,13 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/GA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/testCrossover.py" />
     <entry file="file://$PROJECT_DIR$/src/testRemoveReqs.py" />
     <entry file="file://$PROJECT_DIR$/src/testCreateChromosome.py">
@@ -659,13 +624,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1309">
           <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/operation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="78" column="47" lean-forward="false" selection-start-line="78" selection-start-column="47" selection-end-line="78" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -709,24 +667,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-748">
           <caret line="147" column="63" lean-forward="false" selection-start-line="147" selection-start-column="37" selection-end-line="147" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#11#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
+    <entry file="file://$PROJECT_DIR$/GA_lib/solver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="160" column="35" lean-forward="true" selection-start-line="160" selection-start-column="35" selection-end-line="160" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/evaluate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="174" column="18" lean-forward="false" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/GA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="87" column="0" lean-forward="true" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/operation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1887">
+          <caret line="115" column="14" lean-forward="false" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="119" column="18" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="119" selection-end-column="18" />
+        <state relative-caret-position="154">
+          <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="137" column="72" lean-forward="true" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="149" column="29" lean-forward="true" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/GA_multi_depot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="26" column="184" lean-forward="false" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="184" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/operation_multi_depot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="142" lean-forward="true" selection-start-line="11" selection-start-column="142" selection-end-line="11" selection-end-column="147" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -735,44 +745,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="18" lean-forward="true" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/evaluate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="174" column="18" lean-forward="false" selection-start-line="174" selection-start-column="11" selection-end-line="174" selection-end-column="18" />
+        <state relative-caret-position="2958">
+          <caret line="174" column="113" lean-forward="false" selection-start-line="174" selection-start-column="113" selection-end-line="174" selection-end-column="113" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="132" column="12" lean-forward="false" selection-start-line="132" selection-start-column="12" selection-end-line="132" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/solver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2091">
-          <caret line="123" column="45" lean-forward="false" selection-start-line="123" selection-start-column="45" selection-end-line="123" selection-end-column="45" />
+        <state relative-caret-position="111">
+          <caret line="174" column="7" lean-forward="false" selection-start-line="174" selection-start-column="7" selection-end-line="174" selection-end-column="7" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

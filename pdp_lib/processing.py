@@ -1,4 +1,5 @@
 import math
+from itertools import chain
 import numpy as np
 import copy
 
@@ -141,18 +142,45 @@ def create_depots(LOCATIONS):
     DEPOTS = dict(enumerate(DEPOTS))
     return DEPOTS
 
+def locations_of_this_depot(dep,REQ_BY_DEPOTS,LOCATIONS):
+    THIS_DEP_REQS = REQ_BY_DEPOTS[dep]
+    THIS_LOCATIONS_INDEX = THIS_DEP_REQS.values()
+    THIS_LOCATIONS_INDEX = list(chain(*THIS_LOCATIONS_INDEX))
+    THIS_DEP_LOCATIONS = {idx: LOCATIONS[idx] for idx in THIS_LOCATIONS_INDEX}
+    return THIS_DEP_LOCATIONS
 
-def distances_from_depots(DEPOTS,LOCATIONS):
+
+def distances_to_depots(DEPOTS, LOCATIONS):
+    # distances_to_depots[i][j] = location_i to depot_j
     n = len(LOCATIONS)
     m = len(DEPOTS)
-    depot_distances = np.zeros(shape=(n,m))
+    distances_to_depots = np.zeros(shape=(n,m))
     for i in range(n):
         for j in range(m):
-            depot_distances[i][j] = distance(LOCATIONS[i],DEPOTS[j])
-    return depot_distances
+            distances_to_depots[i][j] = distance(LOCATIONS[i],DEPOTS[j])
+    return distances_to_depots
 
+def distances_from_depots(DEPOTS, LOCATIONS):
+    # distances_from_depots[i][j] = depots_i to location_j
+    n = len(DEPOTS)
+    m = len(LOCATIONS)
+    distances_from_depots = np.zeros(shape=(n,m))
+    for i in range(n):
+        for j in range(m):
+            distances_from_depots[i][j] = distance(DEPOTS[i],LOCATIONS[j])
+    return distances_from_depots
 
-def simple_assign_depots(REQUESTS,LOCATIONS,DEPOTS,DEPOTS_DISTANCES):
+def requests_by_depots(DEPOTS,REQUESTS,DEPOT_NUMBERS):
+    REQ_BY_DEPOTS = []
+    for i in range(len(DEPOTS)):
+        temp = {}
+        for id, req in REQUESTS.items():
+            if (DEPOT_NUMBERS[id] == i):
+                temp[id] = req
+        REQ_BY_DEPOTS.append(temp)
+    return REQ_BY_DEPOTS
+
+def simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS):
     dep_nums = np.zeros(shape=(len(REQUESTS)))
     n = len(REQUESTS)
     m = len(DEPOTS)
@@ -160,8 +188,8 @@ def simple_assign_depots(REQUESTS,LOCATIONS,DEPOTS,DEPOTS_DISTANCES):
         minDist = 9999999999
         minDep = 99
         for j in range(m): # loop in depots
-            distPickup = DEPOTS_DISTANCES[REQUESTS[i][0]][j]
-            distDelivery = DEPOTS_DISTANCES[REQUESTS[i][1]][j]
+            distPickup = DISTANCES_FROM_DEPOTS[j][REQUESTS[i][0]]
+            distDelivery = DISTANCES_TO_DEPOTS[REQUESTS[i][1]][j]
             dist = distPickup + distDelivery
             if(dist < minDist):
                 minDist = dist
@@ -171,3 +199,5 @@ def simple_assign_depots(REQUESTS,LOCATIONS,DEPOTS,DEPOTS_DISTANCES):
 
 
 # def KNN_assign_depots():
+
+

@@ -12,9 +12,9 @@ from GA_lib import evaluate_multi_depot as evaluate
 
 
 
-def solve_and_print(filename,rounds = 2,population_size = 100,generations=2000,crossoverRate=1.0,mutationRate=0.5):
+def solve_and_print(filepath, rounds = 2, population_size = 100, generations=2000, crossoverRate=1.0, mutationRate=0.5):
     process_time = time.time()
-    numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
+    numVehicles, LoadCapacities, speed, data = proc.load_file(filepath)
     LOCATIONS = data[0]
     DEMANDS = data[1]
     timeWindows = data[2]
@@ -31,7 +31,7 @@ def solve_and_print(filename,rounds = 2,population_size = 100,generations=2000,c
     DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS, REQUESTS, DEPOT_NUMBERS)
 
-    print('----------------Instance name: '+str(filename)+'-----------------------------------')
+    print('----------------Instance name: ' + str(filepath) + '-----------------------------------')
     print(" processing time --- %s seconds ---" % (time.time() - process_time))
 
     total_results = []
@@ -150,14 +150,15 @@ def solve_and_print(filename,rounds = 2,population_size = 100,generations=2000,c
 
 
 ######################### MAIN ########################################################
-start_time = time.time()
+
 # use 'relative path' in filename
-filename = 'pdp_instances/LiLim/pdp_400/LRC2_4_6.txt'
-filename = 'pdp_instances/LiLim/pdp_100/lc101.txt'
+filepath = 'pdp_instances/LiLim/pdp_400/LRC2_4_6.txt'
+filepath = 'pdp_instances/LiLim/pdp_100/lc101.txt'
 # filename = 'pdp_instances/LiLim/pdp_200/LR1_2_9.txt'
 # filename = 'pdp_instances/Worse2Worst/dummy01.txt'
 
-numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
+start_time = time.time()
+numVehicles, LoadCapacities, speed, data = proc.load_file(filepath)
 LOCATIONS = data[0]
 DEMANDS = data[1]
 timeWindows = data[2]
@@ -175,9 +176,9 @@ DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS,DISTANCES_
 REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS,REQUESTS,DEPOT_NUMBERS)
 
 
-print(filename)
+print(filepath)
 print(" processing time --- %s seconds ---" % (time.time() - start_time))
-results = solve_and_print(filename)
+results = solve_and_print(filepath)
 
 print('================= RESULT =====================')
 print(results[0][0])

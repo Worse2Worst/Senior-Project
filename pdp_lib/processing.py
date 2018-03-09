@@ -4,8 +4,8 @@ import numpy as np
 import copy
 
 # Loading a file
-def load_file(filename):
-    file = open(filename, 'rt')
+def load_file(filepath):
+    file = open(filepath, 'rt')
     line = file.readline()
 
     numVehicles, loadCapacities, speed = [int(num) for num in line.split()]

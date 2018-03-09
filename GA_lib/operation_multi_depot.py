@@ -113,3 +113,6 @@ def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadC
     # print(res)
     GA.insert_requests_into_chromosome(res,reqs, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS, DEPOT, DURATIONS, timeWindows, REQUESTS, DEMANDS, LoadCapacities)
     return res
+
+def tournament_selection(candidate1,candidate2,f1,f2):
+    return candidate1 if(f1 > f2) else candidate2

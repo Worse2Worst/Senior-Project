@@ -61,7 +61,9 @@ for gen in range(generations):
     elite1 = populations.pop(0)
     elite2 = populations.pop(0)
 
-    id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
+    id1, id2, id3, id4 = random.sample(range(0, len(populations)), 4)
+    # id1,id2 = random.randrange(0,len(populations)),random.randrange(0,len(populations))
+
     parent1,parent2 = populations[id1],populations[id2]
     # parent1,parent2 = elite1,elite2
     if (not evaluate.haveEqualNodes(parent1, parent2, LOCATIONS)):

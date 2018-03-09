@@ -114,3 +114,5 @@ def mutate(chromosome,DISTANCES, DURATIONS, timeWindows,REQUESTS, DEMANDS, LoadC
     GA_lib.GA.insert_requests_into_chromosome(res, reqs, DISTANCES, DURATIONS, timeWindows, REQUESTS, DEMANDS,
                                               LoadCapacities, maxSpot)
     return res
+
+

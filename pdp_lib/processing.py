@@ -126,12 +126,12 @@ def create_depots(LOCATIONS):
     # Depot-4 , at lower right
     dep4 = [int(3*width / 4), int(width / 4)]
 
-    # Special case for small size map (apporx. 100 nodes) ##
-    if(len(LOCATIONS)<150):
-        dep1[0]-=10
-        dep2[0]-=10
-        dep3[0]-=10
-        dep4[0]-=10
+    # # Special case for small size map (apporx. 100 nodes) ##
+    # if(len(LOCATIONS)<150):
+    #     dep1[0]-=10
+    #     dep2[0]-=10
+    #     dep3[0]-=10
+    #     dep4[0]-=10
 
     ## Put every depots into the array ##
     DEPOTS.append(dep0)

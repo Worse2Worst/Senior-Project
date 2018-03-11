@@ -6,8 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="682dc0ce-ca07-4e1f-b163-87d1c255c537" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/pdp_lib/processing.py" afterPath="$PROJECT_DIR$/pdp_lib/processing.py" />
+      <change beforePath="$PROJECT_DIR$/Results.xlsx" afterPath="$PROJECT_DIR$/Results.xlsx" />
+      <change beforePath="$PROJECT_DIR$/pics/lc101-added depots.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/mainMultiDepot.py" afterPath="$PROJECT_DIR$/src/mainMultiDepot.py" />
       <change beforePath="$PROJECT_DIR$/src/multi-depot_Notebook.ipynb" afterPath="$PROJECT_DIR$/src/multi-depot_Notebook.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,8 +23,8 @@
       <file leaf-file-name="mainMultiDepot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+            <state relative-caret-position="249">
+              <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="13" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -35,7 +36,17 @@
         <entry file="file://$PROJECT_DIR$/src/multi-depot_Notebook.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
-              <selected id="24" />
+              <selected id="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainLoopAverage.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,7 +54,7 @@
       <file leaf-file-name="processing.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="2227">
               <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -150,9 +161,9 @@
         <option value="$PROJECT_DIR$/src/mainSingleDepot.py" />
         <option value="$PROJECT_DIR$/GA_lib/operation.py" />
         <option value="$PROJECT_DIR$/GA_lib/operation_multi_depot.py" />
-        <option value="$PROJECT_DIR$/src/mainMultiDepot.py" />
         <option value="$PROJECT_DIR$/src/create_real_map.py" />
         <option value="$PROJECT_DIR$/pdp_lib/processing.py" />
+        <option value="$PROJECT_DIR$/src/mainMultiDepot.py" />
         <option value="$PROJECT_DIR$/src/multi-depot_Notebook.ipynb" />
       </list>
     </option>
@@ -199,6 +210,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -229,7 +241,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -405,6 +416,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -674,13 +686,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/create_real_map.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -704,7 +709,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="2227">
           <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -712,10 +717,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+        <state relative-caret-position="249">
+          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="13" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -725,7 +738,7 @@
     <entry file="file://$PROJECT_DIR$/src/multi-depot_Notebook.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="24" />
+          <selected id="36" />
         </state>
       </provider>
     </entry>

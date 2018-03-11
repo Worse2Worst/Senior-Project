@@ -22,7 +22,7 @@ def solve_and_print(filepath, rounds = 2, population_size = 100, generations=200
     pickupSiblings = data[4]
     deliverySiblings = data[5]
     requestType = data[6]
-    REQS_TO_SOLVE = proc.generate_request(pickupSiblings, deliverySiblings, requestType)
+    REQUESTS = proc.generate_request(pickupSiblings, deliverySiblings, requestType)
     DISTANCES = proc.createDistanceTable(LOCATIONS)
     DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
     DEPOTS = proc.create_depots(LOCATIONS)

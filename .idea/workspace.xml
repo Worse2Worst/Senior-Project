@@ -6,9 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="682dc0ce-ca07-4e1f-b163-87d1c255c537" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Results.xlsx" afterPath="$PROJECT_DIR$/Results.xlsx" />
-      <change beforePath="$PROJECT_DIR$/pics/lc101-added depots.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/mainMultiDepot.py" afterPath="$PROJECT_DIR$/src/mainMultiDepot.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/multi-depot_Notebook.ipynb" afterPath="$PROJECT_DIR$/src/multi-depot_Notebook.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,7 +21,7 @@
       <file leaf-file-name="mainMultiDepot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
+            <state relative-caret-position="221">
               <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="13" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -44,7 +42,7 @@
       <file leaf-file-name="mainLoopAverage.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="391">
               <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="31" />
               <folding />
             </state>
@@ -168,7 +166,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="width" value="1386" />
     <option name="height" value="788" />
@@ -210,7 +208,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,13 +231,14 @@
               <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
               <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
               <item name="LiLim" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_100" type="462c0819:PsiDirectoryNode" />
+              <item name="doing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -415,7 +413,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -423,7 +421,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32724902" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32464147" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32464147" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -719,7 +717,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="391">
           <caret line="31" column="31" lean-forward="false" selection-start-line="31" selection-start-column="4" selection-end-line="31" selection-end-column="31" />
           <folding />
         </state>
@@ -727,7 +725,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
+        <state relative-caret-position="221">
           <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="13" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />

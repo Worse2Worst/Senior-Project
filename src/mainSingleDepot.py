@@ -9,10 +9,8 @@ from GA_lib import evaluate
 
 
 start_time = time.time()
-# use 'relative path' in filename
-# filename = 'pdp_instances/LiLim/pdp_600/LRC2_6_1.txt'
-filename = 'pdp_instances/LiLim/pdp_200/LR1_2_9.txt'
-# filename = 'pdp_instances/Worse2Worst/dummy01.txt'
+
+filename = 'pdp_instances/LiLim/pdp_100/lr204.txt'
 
 numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
 LOCATIONS = data[0]

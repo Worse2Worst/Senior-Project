@@ -197,7 +197,60 @@ def simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS,DISTANCES_FROM_DEPOTS, DIST
         dep_nums[i] = minDep
     return dep_nums
 
+def can_route(req1,req2,DISTANCES,DURATIONS,timeWindows):
+    p1 = req1[0]
+    d1 = req1[1]
+    p2 = req2[0]
+    d2 = req2[1]
+    p1_tw = timeWindows[p1]
+    d1_tw = timeWindows[d1]
+    p2_tw = timeWindows[p2]
+    d2_tw = timeWindows[d2]
+    if(d1_tw[0] + DURATIONS[d1][p2] <= p2_tw[1]):
+        return True
+    if (p1_tw[0] + DURATIONS[p1][p2] <= p2_tw[1] and p2_tw[0] + DURATIONS[p2][d1] <= d1_tw[1] and d1_tw[0] + DURATIONS[d1][d2] <= d2_tw[1]):
+        return True
+    return  False
 
-# def KNN_assign_depots():
+def can_merge_requests(REQUESTS,DISTANCES,timeWindows,DURATIONS,key1,key2):
+    req1 = REQUESTS[key1]
+    req2 = REQUESTS[key2]
+    return can_route(req1,req2,DISTANCES,DURATIONS,timeWindows) or can_route(req2,req1,DISTANCES,DURATIONS,timeWindows)
+
+def worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS):
+    LOCATIONS = []
+    dep_nums = np.zeros(shape=(len(REQUESTS)))
+    old_dep_nums = simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    n = len(REQUESTS)
+    m = len(DEPOTS)
+
+    LT = []
+    for key, value in REQUESTS.items():
+        LT.append((key, timeWindows[value[0]][1]))
+    LT = sorted(LT, key=lambda x: x[1])
+
+    for key1,_ in LT:
+        old_dep = int(old_dep_nums[key1])
+        value = REQUESTS[key1]
+        min_cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
+        # print('Min cost = '+str(min_cost))
+        minDep = old_dep
+        p1 = value[0]
+        d1 = value[1]
+        for key2,val2 in REQUESTS.items():
+            p2 = val2[0]
+            d2 = val2[1]
+            if(key1 != key2 and can_merge_requests(REQUESTS,DISTANCES,timeWindows,DURATIONS,key1,key2)):
+                cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
+                if(cost < min_cost):
+                    # print('found!!!!')
+                    # print('Cost = ' + str(cost))
+                    min_cost = cost
+                    minDep = old_dep_nums[key2]
+        dep_nums[key1] = minDep
+        old_dep_nums[key1] = minDep
+    return dep_nums
+
+# def KNN_assign_depots(REQUESTS, timeWindows, DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS):
 
 

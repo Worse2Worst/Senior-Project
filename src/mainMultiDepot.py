@@ -1,5 +1,7 @@
 import time
 import random
+import os
+import pandas as pd
 import csv
 import numpy as np
 from itertools import chain
@@ -12,7 +14,7 @@ from GA_lib import evaluate_multi_depot as evaluate
 
 
 
-def solve_and_print(filepath, rounds = 2, population_size = 100, generations=2000, crossoverRate=1.0, mutationRate=0.5):
+def solve_and_print(filepath, rounds = 10, population_size = 100, generations=2000, crossoverRate=1.0, mutationRate=0.5):
     process_time = time.time()
     numVehicles, LoadCapacities, speed, data = proc.load_file(filepath)
     LOCATIONS = data[0]
@@ -28,7 +30,8 @@ def solve_and_print(filepath, rounds = 2, population_size = 100, generations=200
     DEPOTS = proc.create_depots(LOCATIONS)
     DISTANCES_FROM_DEPOTS = proc.distances_from_depots(DEPOTS, LOCATIONS)
     DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
-    DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    # DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS, REQUESTS, DEPOT_NUMBERS)
 
     print('----------------Instance name: ' + str(filepath) + '-----------------------------------')
@@ -51,7 +54,7 @@ def solve_and_print(filepath, rounds = 2, population_size = 100, generations=200
             for _ in range(population_size):
                 chromosome = GA.initialize_Feasible_chromosome(DISTANCES, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, id_depot, DURATIONS, timeWindows, THIS_DEP_REQS, DEMANDS, LoadCapacities)
                 populations.append(chromosome)
-            print("Populations creation time --- %s seconds ---" % (time.time() - pops_create_time))
+            # print("Populations creation time --- %s seconds ---" % (time.time() - pops_create_time))
             ## Crossovers and mutate ##
             GA_time = time.time()
 
@@ -119,10 +122,10 @@ def solve_and_print(filepath, rounds = 2, population_size = 100, generations=200
                 if (current_fitness > best_fitness_so_far):
                     best_fitness_so_far = current_fitness
                     bestFitGen = gen
-                    print('#### New Best Fitness !! , Best so far is :' + str(10000.0 / best_fitness_so_far) + '#####')
-                    print('#### This Generation: ' + str(gen) + '#######')
+                    # print('#### New Best Fitness !! , Best so far is :' + str(10000.0 / best_fitness_so_far) + '#####')
+                    # print('#### This Generation: ' + str(gen) + '#######')
                 if (gen - bestFitGen >= 500):
-                    print('#### Break Generation: ' + str(gen) + '#######')
+                    # print('#### Break Generation: ' + str(gen) + '#######')
                     break
                 # print('############# Round-'+str(round+1) +',DEPOT-'+str(id_depot)+','+ 'Generation:' + str(gen + 1) + ' #########################')
                 # print('This Gen Distance :' + str(10000.0 / current_fitness))
@@ -133,13 +136,13 @@ def solve_and_print(filepath, rounds = 2, population_size = 100, generations=200
                 fitness_table.append(
                     evaluate.chromosomeFitness(chromosome, DISTANCES, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, id_depot))
             populations = [x for _, x in sorted(zip(fitness_table, populations), reverse=True)]
-            print("GA time --- %s seconds ---" % (time.time() - GA_time))
+            # print("GA time --- %s seconds ---" % (time.time() - GA_time))
             best_chromosome = populations[0]
             computational_time = time.time() - calculation_time
-            print("Total Calculation time --- %s seconds ---" % (computational_time))
+            # print("Total Calculation time --- %s seconds ---" % (computational_time))
             distance = evaluate.chromosomeRoutesDistance(best_chromosome,DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,id_depot)
-            print('Distances of the best chromosome: ' + str(distance))
-            print(best_chromosome)
+            # print('Distances of the best chromosome: ' + str(distance))
+            # print(best_chromosome)
 
             ## Memo the results ##
             results_all_depots.append(best_chromosome)
@@ -149,44 +152,49 @@ def solve_and_print(filepath, rounds = 2, population_size = 100, generations=200
     return total_results
 
 
+def mean_results(results):
+    solutions = []
+    cal_times = []
+    distances = []
+    for round, round_result in enumerate(results):
+        sol = results[round][0]
+        dist = results[round][1]
+        ct = results[round][2]
+
+        solutions.append(sol)
+        distances.append(dist)
+        cal_times.append(ct)
+    distances = np.array(distances)
+    distances = pd.DataFrame(distances)
+    distances = np.mean(distances, axis=0)
+    cal_times = np.array(cal_times)
+    cal_times = pd.DataFrame(cal_times)
+    cal_times = np.mean(cal_times, axis=0)
+    return distances, cal_times
+
 ######################### MAIN ########################################################
 
-# use 'relative path' in filename
-filepath = 'pdp_instances/LiLim/pdp_400/LRC2_4_6.txt'
-filepath = 'pdp_instances/LiLim/pdp_100/lc101.txt'
-# filename = 'pdp_instances/LiLim/pdp_200/LR1_2_9.txt'
-# filename = 'pdp_instances/Worse2Worst/dummy01.txt'
+path = 'pdp_instances/LiLim/doing/'
+FILENAMES = next(os.walk(path))[2]
 
-start_time = time.time()
-numVehicles, LoadCapacities, speed, data = proc.load_file(filepath)
-LOCATIONS = data[0]
-DEMANDS = data[1]
-timeWindows = data[2]
-serviceTimes = data[3]
-pickupSiblings = data[4]
-deliverySiblings = data[5]
-requestType = data[6]
-REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
-DISTANCES = proc.createDistanceTable(LOCATIONS)
-DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
-DEPOTS = proc.create_depots(LOCATIONS)
-DISTANCES_FROM_DEPOTS = proc.distances_from_depots(DEPOTS,LOCATIONS)
-DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
-DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS,DISTANCES_FROM_DEPOTS ,DISTANCES_TO_DEPOTS)
-REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS,REQUESTS,DEPOT_NUMBERS)
+all_results = []
+
+for name in FILENAMES:
+    filepath = path + name
+    results = solve_and_print(filepath)
+    distances,cal_times = mean_results(results)
+    all_results.append((name,distances,cal_times))
 
 
-print(filepath)
-print(" processing time --- %s seconds ---" % (time.time() - start_time))
-results = solve_and_print(filepath)
+distances,cal_times = mean_results(results)
 
-print('================= RESULT =====================')
-print(results[0][0])
-print('=================Distances =====================')
-print(results[0][1])
-print('=================TIME =====================')
-print(results[0][2])
+dist = [dist for _,dist,_ in all_results]
+dist = np.array(dist)
+df = pd.DataFrame(dist)
+df.to_csv('distances_df.csv')
 
-
-
+CT = [ct for _,_,ct in all_results]
+CT = np.array(CT)
+df_CT = pd.DataFrame(CT)
+df_CT.to_csv('CT_df.csv')
 

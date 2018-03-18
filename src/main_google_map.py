@@ -5,7 +5,7 @@ import pandas as pd
 import csv
 import numpy as np
 from itertools import chain
-from pdp_lib import processing as proc
+from pdp_lib import processing_google_map as proc
 from pdp_lib import util
 from GA_lib import GA_multi_depot as GA
 from GA_lib import operation_multi_depot as operation
@@ -14,7 +14,7 @@ from GA_lib import evaluate_multi_depot as evaluate
 
 
 
-def solve_and_print(filepath, rounds = 10, population_size = 100, generations=2000, crossoverRate=1.0, mutationRate=0.5):
+def solve_and_print(filepath, rounds = 1, population_size = 100, generations=2000, crossoverRate=1.0, mutationRate=0.5):
     process_time = time.time()
     numVehicles, LoadCapacities, speed, data = proc.load_file(filepath)
     LOCATIONS = data[0]
@@ -25,11 +25,11 @@ def solve_and_print(filepath, rounds = 10, population_size = 100, generations=20
     deliverySiblings = data[5]
     requestType = data[6]
     REQUESTS = proc.generate_request(pickupSiblings, deliverySiblings, requestType)
-    DISTANCES = proc.createDistanceTable(LOCATIONS)
-    DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
-    DEPOTS = proc.create_depots(LOCATIONS)
-    DISTANCES_FROM_DEPOTS = proc.distances_from_depots(DEPOTS, LOCATIONS)
-    DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
+    DISTANCES = proc.createDistanceTable('real_map/DISTANCES.csv')
+    DURATIONS = proc.createDurationTable('real_map/DURATIONS.csv')
+    DEPOTS = proc.create_depots('real_map/depots.csv')
+    DISTANCES_FROM_DEPOTS = proc.distances_from_depots('real_map/DISTANCES_FROM_DEPOTS.csv')
+    DISTANCES_TO_DEPOTS = proc.distances_to_depots('real_map/DISTANCES_TO_DEPOTS.csv')
     # DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS, REQUESTS, DEPOT_NUMBERS)
@@ -174,28 +174,32 @@ def mean_results(results):
 
 ######################### MAIN ########################################################
 
+#
+# path = 'pdp_instances/GOO'
+# FILENAMES = next(os.walk(path))[2]
+#
+# all_results = []
+#
+# for name in FILENAMES:
+#     filepath = path + name
+#     results = solve_and_print(filepath)
+#     distances,cal_times = mean_results(results)
+#     all_results.append((name,distances,cal_times))
+#
+#
+# distances,cal_times = mean_results(results)
+#
+# dist = [dist for _,dist,_ in all_results]
+# dist = np.array(dist)
+# df = pd.DataFrame(dist)
+# df.to_csv('distances_df.csv')
+#
+# CT = [ct for _,_,ct in all_results]
+# CT = np.array(CT)
+# df_CT = pd.DataFrame(CT)
+# df_CT.to_csv('CT_df.csv')
 
-path = 'pdp_instances/LiLim/doing/'
-FILENAMES = next(os.walk(path))[2]
+filepath = 'pdp_instances/GOO/goo1.csv'
+df = pd.read_csv(filepath,header =None ,delimiter=',')
 
-all_results = []
-
-for name in FILENAMES:
-    filepath = path + name
-    results = solve_and_print(filepath)
-    distances,cal_times = mean_results(results)
-    all_results.append((name,distances,cal_times))
-
-
-distances,cal_times = mean_results(results)
-
-dist = [dist for _,dist,_ in all_results]
-dist = np.array(dist)
-df = pd.DataFrame(dist)
-df.to_csv('distances_df.csv')
-
-CT = [ct for _,_,ct in all_results]
-CT = np.array(CT)
-df_CT = pd.DataFrame(CT)
-df_CT.to_csv('CT_df.csv')
-
+res = solve_and_print(filepath)

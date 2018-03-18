@@ -1,28 +1,31 @@
 import math
 from itertools import chain
 import numpy as np
+import pandas as pd
 import copy
 
 # Loading a file
 def load_file(filepath):
-    file = open(filepath, 'rt')
-    line = file.readline()
+    df = pd.read_csv(filepath, header=None, delimiter=',',names =['Places','Lat','Long','Demands','ET','LT','serviceTime','pickup','delivery'] )
 
-    numVehicles, loadCapacities, speed = [int(num) for num in line.split()]
+    numVehicles, loadCapacities, speed = 100,90,1
 
     # Initialized necessary variables
-    locations = []
-    demands = []
-    timeWindows = []
-    ServiceTimes = []
-    pickupSiblings = []
-    deliverySiblings = []
-    requestType = []
+    locations = [[0,0]]
+    demands = [0]
+    timeWindows = [[0,9999999999999]]
+    ServiceTimes = [0]
+    pickupSiblings = [0]
+    deliverySiblings = [0]
+    requestType = ['Invalid']
 
-    ######  Read the file ################
-    line = file.readline()
-    while line:
-        index, x, y, demand, earliestTime, latestTime, service_time, p_sibling, d_sibling = [int(num) for num in line.split()]
+
+    ######  loop the file ################
+    for idx in range(1,len(df)):
+        index, x, y = idx,float(df['Lat'][idx]), float(df['Long'][idx])
+        demand = int(df['Demands'][idx])
+        earliestTime, latestTime, service_time = int(df['ET'][idx]), int(df['LT'][idx]), int(df['serviceTime'][idx])
+        p_sibling, d_sibling = int(df['pickup'][idx]), int(df['delivery'][idx])
         locations.append([x,y])
         demands.append(demand)
         timeWindows.append([earliestTime,latestTime])
@@ -33,14 +36,10 @@ def load_file(filepath):
             requestType.append('pickup')
         else :
             requestType.append('delivery')
-        # Read the next line
-        line = file.readline()
-    # close the file
-    file.close()
 
-    # the depot have unlimit time windows
-    timeWindows[0] = [0,9999999999999999]
-    requestType[0] = 'DEPOT'
+    # # the depot have unlimit time windows
+    # timeWindows[0] = [0,9999999999999999]
+    # requestType[0] = 'DEPOT'
 
     locations = dict(enumerate(locations))
 
@@ -56,89 +55,40 @@ def generate_request(pickupSiblings,deliverySiblings,requestType):
     return dict(enumerate(requests))
 
 
-# calculate Euclidean distances between nodes
-def distance(location1,location2):
-    x1 = location1[0]
-    y1 = location1[1]
-    x2 = location2[0]
-    y2 = location2[1]
-    return math.sqrt(((x1-x2)**2) +((y1-y2)**2))
 
 # Create a table that memo all distances bewtween any 2 nodes in the map
-def createDistanceTable(LOCATIONS):
-    n = len(LOCATIONS)
+def createDistanceTable(filename):
+    df = pd.read_csv(filename, header=None)
+    n = len(df)
     distances = np.zeros((n, n))
     # create nxn matrix to memo the distances between nodes
     for i in range(n):
         for j in range(n):
-            distances[i][j] = distance(LOCATIONS[i], LOCATIONS[j])
+            distances[i][j] = float(df[i][j])
     return distances
 
-# calculate duration of traveling between a pair of nodes
-def duration(v1,v2,DISTANCES,serviceTimes,speed):
-    return (DISTANCES[v1][v2]/speed + serviceTimes[v1])
 
 
 # Create a table that memo all durations of traveling bewtween any 2 nodes in the map
-def createDurationTable(locations, DISTANCES, serviceTimes, speed=1.0):
-    # Sometimes, the speed from instances are 'Zeros', so we will make it 'one'
-    if(speed<=0):
-        speed = 1.0
-
-    n = len(locations)
+def createDurationTable(filename):
+    df = pd.read_csv(filename, header=None)
+    n = len(df)
     durations = np.zeros((n, n))
-    # create nxn matrix to memo the distances between nodes
+    # create nxn matrix to memo the durations between nodes
     for i in range(n):
         for j in range(n):
-            durations[i][j] = DISTANCES[i][j]/speed + serviceTimes[i]
-    durations = np.ndarray.tolist(durations)
+            durations[i][j] = float(df[i][j])
     return durations
 
 
 
-def create_depots(LOCATIONS):
+def create_depots(filename):
     DEPOTS = []
-    width = -1
-    if (len(LOCATIONS) >= 1000):
-        width = 500
-    elif (len(LOCATIONS) >= 800):
-        width = 400
-    elif (len(LOCATIONS) >= 600):
-        width = 300
-    elif (len(LOCATIONS) >= 400):
-        width = 200
-    elif (len(LOCATIONS) >= 200):
-        width = 140
-    else:
-        width = 100
-    # Depot-0 , at center
-    dep0 = copy.deepcopy(LOCATIONS[0])
-
-    # Depot-1 , at upper left
-    dep1 = [int(width/4),int(3*width/4)]
-
-    # Depot-2 , at upper right
-    dep2 = [int(3*width / 4), int(3*width / 4)]
-
-    # Depot-3 , at lower left
-    dep3 = [int(width / 4), int(width / 4)]
-
-    # Depot-4 , at lower right
-    dep4 = [int(3*width / 4), int(width / 4)]
-
-    # # Special case for small size map (apporx. 100 nodes) ##
-    # if(len(LOCATIONS)<150):
-    #     dep1[0]-=10
-    #     dep2[0]-=10
-    #     dep3[0]-=10
-    #     dep4[0]-=10
-
-    ## Put every depots into the array ##
-    DEPOTS.append(dep0)
-    DEPOTS.append(dep1)
-    DEPOTS.append(dep2)
-    DEPOTS.append(dep3)
-    DEPOTS.append(dep4)
+    df = pd.read_csv(filename,names=['Places','Lat','Long'])
+    n = len(df)
+    for i in range(1,n):
+        dep = df['Lat'][i],df['Long'][i]
+        DEPOTS.append(dep)
     DEPOTS = dict(enumerate(DEPOTS))
     return DEPOTS
 
@@ -150,25 +100,15 @@ def locations_of_this_depot(dep,REQ_BY_DEPOTS,LOCATIONS):
     return THIS_DEP_LOCATIONS
 
 
-def distances_to_depots(DEPOTS, LOCATIONS):
+def distances_to_depots(filename):
     # distances_to_depots[i][j] = location_i to depot_j
-    n = len(LOCATIONS)
-    m = len(DEPOTS)
-    distances_to_depots = np.zeros(shape=(n,m))
-    for i in range(n):
-        for j in range(m):
-            distances_to_depots[i][j] = distance(LOCATIONS[i],DEPOTS[j])
-    return distances_to_depots
+    arr = np.genfromtxt(filename,delimiter=',')
+    return arr
 
-def distances_from_depots(DEPOTS, LOCATIONS):
+def distances_from_depots(filename):
     # distances_from_depots[i][j] = depots_i to location_j
-    n = len(DEPOTS)
-    m = len(LOCATIONS)
-    distances_from_depots = np.zeros(shape=(n,m))
-    for i in range(n):
-        for j in range(m):
-            distances_from_depots[i][j] = distance(DEPOTS[i],LOCATIONS[j])
-    return distances_from_depots
+    arr = np.genfromtxt(filename, delimiter=',')
+    return arr
 
 def requests_by_depots(DEPOTS,REQUESTS,DEPOT_NUMBERS):
     REQ_BY_DEPOTS = []

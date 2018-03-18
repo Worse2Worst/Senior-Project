@@ -203,3 +203,5 @@ def haveEqualNodes(parent1,parent2,LOCATIONS):
         print('Ch2:'+str(parent2))
         print('Missing2:' + str(missing2))
     return tour1 == tour2
+
+

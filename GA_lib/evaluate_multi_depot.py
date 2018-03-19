@@ -129,6 +129,8 @@ def chromosomeRoutesDistance(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANC
     total_distances = 0
     for [num, reqs, tour] in chromosome:
         total_distances += tour_distance(tour, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot)
+    if(total_distances == 0):
+        print('Chromosome is :'+str(chromosome))
     return total_distances
 
 def waitingTime(tour,DURATIONS,timeWindows):
@@ -172,6 +174,9 @@ def chromosomeWatingTime(chromosome,DURATIONS,timeWindows):
 
 
 def chromosomeFitness(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot):
+    dist = chromosomeRoutesDistance(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot)
+    if(dist ==0):
+        return 0
     return 10000.0/chromosomeRoutesDistance(chromosome, DISTANCES,DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,depot)
 
 def haveEqualNodes(parent1,parent2,LOCATIONS):

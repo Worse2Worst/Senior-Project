@@ -31,7 +31,8 @@ def solve_and_print(filepath, rounds = 10, population_size = 100, generations=20
     DISTANCES_FROM_DEPOTS = proc.distances_from_depots(DEPOTS, LOCATIONS)
     DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
     # DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
-    DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    # DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    DEPOT_NUMBERS = proc.KNN_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS, REQUESTS, DEPOT_NUMBERS)
 
     print('----------------Instance name: ' + str(filepath) + '-----------------------------------')
@@ -45,6 +46,11 @@ def solve_and_print(filepath, rounds = 10, population_size = 100, generations=20
         for id_depot in range(len(DEPOTS)):
             THIS_DEP_REQS = REQ_BY_DEPOTS[id_depot]
             NODES_OF_THIS_DEPOT = proc.locations_of_this_depot(id_depot, REQ_BY_DEPOTS, LOCATIONS)
+            if(len(NODES_OF_THIS_DEPOT)==0):
+                results_all_depots.append([])
+                distance_all_depots.append(0)
+                time_all_depots.append(0)
+                continue
             # ############### SOLVING THE PROBLEMS !!!!!!!! ######################################
             pops_create_time = time.time()
             calculation_time = time.time()

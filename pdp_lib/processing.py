@@ -248,6 +248,7 @@ def worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,D
                     # print('Cost = ' + str(cost))
                     min_cost = cost
                     minDep = old_dep_nums[key2]
+        # print((key1,minDep))
         dep_nums[key1] = minDep
         old_dep_nums[key1] = minDep
     return dep_nums
@@ -281,7 +282,11 @@ def KNN_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES
         voter.sort(key=lambda x: x[1])
         voter = voter[:k]
         voter = [int(old_dep_nums[reqIndex]) for (reqIndex,_)  in voter]
-        minDep = mode(voter)
+        # print((reqIndex1,voter))
+        if (len(set(voter)) == len(voter)):
+            minDep = voter[0]
+        else:
+            minDep = mode(voter)
         dep_nums[reqIndex1] = minDep
         old_dep_nums[reqIndex1] = minDep
     return dep_nums

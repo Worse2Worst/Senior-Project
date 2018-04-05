@@ -2,7 +2,7 @@ import math
 from itertools import chain
 import numpy as np
 import copy
-from statistics import mode
+from statistics import mode,StatisticsError
 from operator import itemgetter
 # Loading a file
 def load_file(filepath):
@@ -253,7 +253,26 @@ def worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,D
         old_dep_nums[key1] = minDep
     return dep_nums
 
-def KNN_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS , k=3):
+def closest_from_depot(node,DISTANCES_FROM_DEPOTS):
+    # distances_from_depots[i][j] = depots_i to location_j
+    dist = 999999999999999
+    res = -999
+    for dep in range(len(DISTANCES_FROM_DEPOTS)):
+        if(DISTANCES_FROM_DEPOTS[dep][node] < dist):
+            dist = DISTANCES_FROM_DEPOTS[dep][node]
+            res = dep
+    return res
+
+def closest_to_depot(node, DISTANCES_TO_DEPOTS):
+    dist = 999999999999999
+    res = -999
+    for dep in range(len(DISTANCES_TO_DEPOTS[0])):
+        if(DISTANCES_TO_DEPOTS[node][dep] < dist):
+            dist = DISTANCES_TO_DEPOTS[node][dep]
+            res = dep
+    return res
+
+def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, k=1):
     LOCATIONS = []
     dep_nums = np.zeros(shape=(len(REQUESTS)))
     old_dep_nums = simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
@@ -283,11 +302,64 @@ def KNN_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES
         voter = voter[:k]
         voter = [int(old_dep_nums[reqIndex]) for (reqIndex,_)  in voter]
         # print((reqIndex1,voter))
-        if (len(set(voter)) == len(voter)):
-            minDep = voter[0]
-        else:
+        # if (len(set(voter)) == len(voter)):
+        #     minDep = voter[0]
+        # else:
+        #     minDep = mode(voter)
+        try:
             minDep = mode(voter)
+        except StatisticsError:
+            minDep = voter[0]
         dep_nums[reqIndex1] = minDep
         old_dep_nums[reqIndex1] = minDep
+    return dep_nums
+
+def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, k=1):
+    LOCATIONS = []
+    dep_nums = np.zeros(shape=(len(REQUESTS)))
+    simple_dep_nums = simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    # vote_dep_nums = vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS,k)
+    w2w = worse2worst_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,
+                              DISTANCES_TO_DEPOTS)
+    n = len(REQUESTS)
+    m = len(DEPOTS)
+
+    LT = []
+    for key, value in REQUESTS.items():
+        LT.append((key, timeWindows[value[0]][1]))
+    LT = sorted(LT, key=lambda x: x[1])
+    for reqIndex1, _ in LT:
+        voter = []
+        old_dep = int(simple_dep_nums[reqIndex1])
+        value = REQUESTS[reqIndex1]
+        if(closest_from_depot(value[0],DISTANCES_FROM_DEPOTS) == closest_to_depot(value[1],DISTANCES_TO_DEPOTS)):
+            dep_nums[reqIndex1] = closest_from_depot(value[0],DISTANCES_FROM_DEPOTS)
+            simple_dep_nums[reqIndex1] = closest_from_depot(value[0],DISTANCES_FROM_DEPOTS)
+        else:
+            dep_nums[reqIndex1] = w2w[reqIndex1]
+            # dep_nums[reqIndex1] = vote_dep_nums[reqIndex1]
+            # cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
+            # minDep = old_dep
+            # p1 = value[0]
+            # d1 = value[1]
+            # for reqIndex2, val2 in REQUESTS.items():
+            #     p2 = val2[0]
+            #     d2 = val2[1]
+            #     if (reqIndex1 != reqIndex2 and can_merge_requests(REQUESTS, DISTANCES, timeWindows, DURATIONS, reqIndex1, reqIndex2)):
+            #         cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
+            #     voter.append((reqIndex2,cost))
+            # voter.sort(key=lambda x: x[1])
+            # voter = voter[:k]
+            # voter = [int(simple_dep_nums[reqIndex]) for (reqIndex,_)  in voter]
+            # # if (len(set(voter)) == len(voter)):
+            # #     minDep = voter[0]
+            # # else:
+            # #     minDep = mode(voter)
+            # try:
+            #     minDep = mode(voter)
+            # except StatisticsError:
+            #     minDep = voter[0]
+            # dep_nums[reqIndex1] = minDep
+            # simple_dep_nums[reqIndex1] = minDep
     return dep_nums
 

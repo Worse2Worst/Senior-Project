@@ -272,7 +272,7 @@ def closest_to_depot(node, DISTANCES_TO_DEPOTS):
             res = dep
     return res
 
-def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, k=1):
+def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS, k=3):
     LOCATIONS = []
     dep_nums = np.zeros(shape=(len(REQUESTS)))
     old_dep_nums = simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)

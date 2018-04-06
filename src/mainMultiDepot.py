@@ -32,8 +32,8 @@ def solve_and_print(filepath, rounds = 10, population_size = 100, generations=20
     DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
     # DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     # DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
-    # DEPOT_NUMBERS = proc.vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
-    DEPOT_NUMBERS = proc.final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS)
+    DEPOT_NUMBERS = proc.vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS,k=3)
+    # DEPOT_NUMBERS = proc.final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS)
     REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS, REQUESTS, DEPOT_NUMBERS)
 
     print('----------------Instance name: ' + str(filepath) + '-----------------------------------')

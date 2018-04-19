@@ -217,7 +217,7 @@ def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIST
             d2 = val2[1]
             if (reqIndex1 != reqIndex2 and can_merge_requests(REQUESTS, DISTANCES, timeWindows, DURATIONS, reqIndex1, reqIndex2)):
                 cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
-                voter.append((reqIndex2,cost))
+            voter.append((reqIndex2,cost))
         voter.sort(key=lambda x: x[1])
         voter = voter[:k]
         voter = [int(old_dep_nums[reqIndex]) for (reqIndex,_)  in voter]

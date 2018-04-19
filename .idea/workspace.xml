@@ -8,21 +8,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="682dc0ce-ca07-4e1f-b163-87d1c255c537" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo10.csv" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo11.csv" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc104.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo1.csv" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo2.csv" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo3.csv" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr205.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr206.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr207.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr208.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr209.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr210.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lr211.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/analyze_map.ipynb" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/CT_df.csv" afterPath="$PROJECT_DIR$/CT_df.csv" />
+      <change beforePath="$PROJECT_DIR$/CT_goo12-simple.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/CT_goo12.csv" afterPath="$PROJECT_DIR$/CT_goo12.csv" />
       <change beforePath="$PROJECT_DIR$/Final_Project_Report.6210.1518602759.6743.docx" afterPath="$PROJECT_DIR$/Final_Project_Report.6210.1518602759.6743.docx" />
       <change beforePath="$PROJECT_DIR$/Results-Goo.xlsx" afterPath="$PROJECT_DIR$/Results-Goo.xlsx" />
       <change beforePath="$PROJECT_DIR$/Results-Lilim-100Nodes.xlsx" afterPath="$PROJECT_DIR$/Results-Lilim-100Nodes.xlsx" />
       <change beforePath="$PROJECT_DIR$/distances_df.csv" afterPath="$PROJECT_DIR$/distances_df.csv" />
+      <change beforePath="$PROJECT_DIR$/distances_goo12.csv" afterPath="$PROJECT_DIR$/distances_goo12.csv" />
+      <change beforePath="$PROJECT_DIR$/num_veh_goo.csv" afterPath="$PROJECT_DIR$/num_veh_goo.csv" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo10.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo11.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/GOO/doing/goo12.csv" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc101.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc102.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc103.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc104.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc105.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc106.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc107.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc108.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc109.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc201.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc202.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc203.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc204.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc205.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc206.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc207.txt" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/pdp_instances/LiLim/doing/lc208.txt" afterPath="" />
       <change beforePath="$PROJECT_DIR$/pdp_lib/processing.py" afterPath="$PROJECT_DIR$/pdp_lib/processing.py" />
       <change beforePath="$PROJECT_DIR$/pdp_lib/processing_google_map.py" afterPath="$PROJECT_DIR$/pdp_lib/processing_google_map.py" />
       <change beforePath="$PROJECT_DIR$/src/mainMultiDepot.py" afterPath="$PROJECT_DIR$/src/mainMultiDepot.py" />
-      <change beforePath="$PROJECT_DIR$/src/main_google_map.py" afterPath="$PROJECT_DIR$/src/main_google_map.py" />
       <change beforePath="$PROJECT_DIR$/src/realMap-notebook.ipynb" afterPath="$PROJECT_DIR$/src/realMap-notebook.ipynb" />
-      <change beforePath="$PROJECT_DIR$/~$nal_Project_Report.6210.1518602759.6743.docx" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/visualize_benchmark.ipynb" afterPath="$PROJECT_DIR$/src/visualize_benchmark.ipynb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,8 +67,8 @@
       <file leaf-file-name="mainMultiDepot.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="35" column="142" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="35" selection-end-column="142" />
+            <state relative-caret-position="187">
+              <caret line="35" column="146" lean-forward="true" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="146" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -45,33 +76,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="processing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
+      <file leaf-file-name="analyze_map.ipynb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/analyze_map.ipynb">
+          <provider selected="true" editor-type-id="ipnb-editor">
+            <state>
+              <selected id="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GA_multi_depot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GA_lib/GA_multi_depot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4573">
-              <caret line="274" column="123" lean-forward="false" selection-start-line="274" selection-start-column="123" selection-end-line="274" selection-end-column="123" />
+            <state relative-caret-position="391">
+              <caret line="26" column="184" lean-forward="false" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="184" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="processing_google_map.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pdp_lib/processing_google_map.py">
+      <file leaf-file-name="operation.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/GA_lib/operation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="279" column="23" lean-forward="false" selection-start-line="279" selection-start-column="23" selection-end-line="279" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="realMap-notebook.ipynb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/realMap-notebook.ipynb">
-          <provider selected="true" editor-type-id="ipnb-editor">
-            <state>
-              <selected id="1" />
+            <state relative-caret-position="1428">
+              <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,11 +108,18 @@
       <file leaf-file-name="main_google_map.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main_google_map.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
+            <state relative-caret-position="-340">
               <caret line="36" column="142" lean-forward="false" selection-start-line="36" selection-start-column="142" selection-end-line="36" selection-end-column="142" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="realMap-notebook.ipynb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/realMap-notebook.ipynb">
+          <provider selected="true" editor-type-id="ipnb-editor">
+            <state>
+              <selected id="5" />
             </state>
           </provider>
         </entry>
@@ -139,7 +175,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/GA_lib/time_window.py" />
         <option value="$PROJECT_DIR$/GA_lib/GA_penalty.py" />
         <option value="$PROJECT_DIR$/GA_lib/GA_long.py" />
         <option value="$PROJECT_DIR$/src/main_long.py" />
@@ -185,9 +220,10 @@
         <option value="$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py" />
         <option value="$PROJECT_DIR$/src/create_map_notebook.ipynb" />
         <option value="$PROJECT_DIR$/src/multi-depot_Notebook.ipynb" />
-        <option value="$PROJECT_DIR$/src/mainMultiDepot.py" />
-        <option value="$PROJECT_DIR$/pdp_lib/processing.py" />
         <option value="$PROJECT_DIR$/src/main_google_map.py" />
+        <option value="$PROJECT_DIR$/src/mainMultiDepot.py" />
+        <option value="$PROJECT_DIR$/src/analyze_map.ipynb" />
+        <option value="$PROJECT_DIR$/pdp_lib/processing.py" />
         <option value="$PROJECT_DIR$/pdp_lib/processing_google_map.py" />
         <option value="$PROJECT_DIR$/src/realMap-notebook.ipynb" />
       </list>
@@ -235,6 +271,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,24 +291,10 @@
               <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
               <item name="GOO" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_instances" type="462c0819:PsiDirectoryNode" />
-              <item name="GOO" type="462c0819:PsiDirectoryNode" />
-              <item name="doing" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Senior-Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Senior-Project" type="462c0819:PsiDirectoryNode" />
-              <item name="pdp_lib" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -281,8 +305,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\pdp_instances\GOO\doing" />
-      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\pdp_instances\LiLim\doing" />
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\src" />
+      <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\pdp_instances\LiLim\doing" />
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\pdp_lib" />
       <recent name="C:\Users\Worse2Worst\Desktop\Senior-Project\GA_lib" />
     </key>
@@ -447,14 +471,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32724902" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32724902" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28683183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28683183" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -464,6 +488,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32724902" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -478,21 +503,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/testInsertRemove.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/checkSol.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/solutions/pdp_200/LR1_2_9" />
     <entry file="file://$PROJECT_DIR$/oldCodes/old_pdp_libs/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -511,28 +521,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="137" column="72" lean-forward="true" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/GA_multi_depot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="26" column="184" lean-forward="false" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="184" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/operation_multi_depot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="117" column="49" lean-forward="false" selection-start-line="117" selection-start-column="49" selection-end-line="117" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -558,13 +546,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/pdp_100/lc101.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/leftovers/create_real_distance_matrix.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -580,7 +561,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lr111.txt" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lr101.txt" />
     <entry file="file://$PROJECT_DIR$/GA_lib/GA.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-34">
@@ -595,32 +575,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/operation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1921">
-          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/statistics.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="506" column="0" lean-forward="false" selection-start-line="506" selection-start-column="0" selection-end-line="506" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2992">
-          <caret line="178" column="16" lean-forward="false" selection-start-line="178" selection-start-column="16" selection-end-line="178" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -650,13 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/create_map_notebook.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mainSingleDepot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -665,6 +616,74 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc102.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lr106.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc201.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc105.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc202.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc104.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/GOO/doing/goo6.csv" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/GOO/doing/goo10.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc101.txt" />
+    <entry file="file://$PROJECT_DIR$/src/create_map_notebook.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lrc101.txt" />
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lr101.txt" />
+    <entry file="file://$PROJECT_DIR$/src/mainLoopAverage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lr205.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_lib/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2193">
+          <caret line="137" column="73" lean-forward="false" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/visualize_benchmark.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/pdp_100/lc101.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="18" lean-forward="false" selection-start-line="40" selection-start-column="18" selection-end-line="40" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/operation_multi_depot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="117" column="49" lean-forward="false" selection-start-line="117" selection-start-column="49" selection-end-line="117" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/multi-depot_Notebook.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
@@ -672,22 +691,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lr106.txt" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc201.txt" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lrc101.txt" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc101.txt" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc105.txt" />
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc202.txt">
+    <entry file="file://$PROJECT_DIR$/GA_lib/evaluate_multi_depot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="485">
+          <caret line="178" column="16" lean-forward="false" selection-start-line="178" selection-start-column="16" selection-end-line="178" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_instances/LiLim/doing/lc104.txt">
+    <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="35" column="146" lean-forward="true" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="146" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/analyze_map.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GA_lib/GA_multi_depot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="26" column="184" lean-forward="false" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="184" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main_google_map.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-340">
+          <caret line="36" column="142" lean-forward="false" selection-start-line="36" selection-start-column="142" selection-end-line="36" selection-end-column="142" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -699,64 +740,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainMultiDepot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="35" column="142" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="35" selection-end-column="142" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main_google_map.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="36" column="142" lean-forward="false" selection-start-line="36" selection-start-column="142" selection-end-line="36" selection-end-column="142" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_instances/GOO/doing/goo6.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pdp_instances/GOO/doing/goo10.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+    <entry file="file://$PROJECT_DIR$/src/realMap-notebook.ipynb">
+      <provider selected="true" editor-type-id="ipnb-editor">
+        <state>
+          <selected id="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_lib/processing_google_map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="279" column="23" lean-forward="false" selection-start-line="279" selection-start-column="23" selection-end-line="279" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="275">
+          <caret line="219" column="16" lean-forward="false" selection-start-line="219" selection-start-column="16" selection-end-line="219" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pdp_lib/processing.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4573">
-          <caret line="274" column="123" lean-forward="false" selection-start-line="274" selection-start-column="123" selection-end-line="274" selection-end-column="123" />
+        <state relative-caret-position="738">
+          <caret line="353" column="16" lean-forward="false" selection-start-line="353" selection-start-column="16" selection-end-line="353" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/realMap-notebook.ipynb">
-      <provider selected="true" editor-type-id="ipnb-editor">
-        <state>
-          <selected id="1" />
+    <entry file="file://$PROJECT_DIR$/GA_lib/operation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="117" column="0" lean-forward="false" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

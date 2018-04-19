@@ -30,10 +30,10 @@ def solve_and_print(filepath, rounds = 10, population_size = 100, generations=20
     DEPOTS = proc.create_depots(LOCATIONS)
     DISTANCES_FROM_DEPOTS = proc.distances_from_depots(DEPOTS, LOCATIONS)
     DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
-    # DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+    DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     # DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
-    DEPOT_NUMBERS = proc.vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS,k=3)
-    # DEPOT_NUMBERS = proc.final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS)
+    # DEPOT_NUMBERS = proc.vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS,k=3)
+    # DEPOT_NUMBERS = proc.final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,k=1)
     REQ_BY_DEPOTS = proc.requests_by_depots(DEPOTS, REQUESTS, DEPOT_NUMBERS)
 
     print('----------------Instance name: ' + str(filepath) + '-----------------------------------')
@@ -206,3 +206,28 @@ CT = np.array(CT)
 df_CT = pd.DataFrame(CT)
 df_CT.to_csv('CT_df.csv')
 
+
+
+
+## Test Drawing #####
+# filename = 'pdp_instances/LiLim/pdp_100/lrc208.txt'
+
+# numVehicles, LoadCapacities, speed, data = proc.load_file(filename)
+# LOCATIONS = data[0]
+# DEMANDS = data[1]
+# timeWindows = data[2]
+# serviceTimes = data[3]
+# pickupSiblings = data[4]
+# deliverySiblings = data[5]
+# requestType = data[6]
+# REQUESTS = proc.generate_request(pickupSiblings,deliverySiblings,requestType)
+# DISTANCES = proc.createDistanceTable(LOCATIONS)
+# DURATIONS = proc.createDurationTable(LOCATIONS, DISTANCES, serviceTimes, speed)
+# DEPOTS = proc.create_depots(LOCATIONS)
+# DISTANCES_FROM_DEPOTS = proc.distances_from_depots(DEPOTS, LOCATIONS)
+# DISTANCES_TO_DEPOTS = proc.distances_to_depots(DEPOTS, LOCATIONS)
+# DEPOT_NUMBERS = proc.simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+# DEPOT_NUMBERS = proc.worse2worst_assign_depots(REQUESTS, timeWindows,DISTANCES,DURATIONS,DEPOTS,DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
+# DEPOT_NUMBERS = proc.vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS,k=3)
+# DEPOT_NUMBERS = proc.final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,DISTANCES_TO_DEPOTS,k=1)
+# util.draw_simple_assigned_depots(REQUESTS,LOCATIONS, DEPOTS, DEPOT_NUMBERS)

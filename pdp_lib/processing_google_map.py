@@ -207,7 +207,7 @@ def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIST
         voter = []
         old_dep = int(old_dep_nums[reqIndex1])
         value = REQUESTS[reqIndex1]
-        cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
+        # cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
         # print('Min cost = '+str(min_cost))
         minDep = old_dep
         p1 = value[0]
@@ -217,7 +217,7 @@ def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIST
             d2 = val2[1]
             if (reqIndex1 != reqIndex2 and can_merge_requests(REQUESTS, DISTANCES, timeWindows, DURATIONS, reqIndex1, reqIndex2)):
                 cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
-            voter.append((reqIndex2,cost))
+                voter.append((reqIndex2,cost))
         voter.sort(key=lambda x: x[1])
         voter = voter[:k]
         voter = [int(old_dep_nums[reqIndex]) for (reqIndex,_)  in voter]
@@ -285,7 +285,7 @@ def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIS
 
 
     for reqIndex1 in problematics:
-        cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
+        # cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
         p1 = value[0]
         d1 = value[1]
         voter = []

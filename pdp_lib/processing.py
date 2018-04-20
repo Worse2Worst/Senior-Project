@@ -287,7 +287,7 @@ def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIST
         voter = []
         old_dep = int(old_dep_nums[reqIndex1])
         value = REQUESTS[reqIndex1]
-        cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
+        # cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
         # print('Min cost = '+str(min_cost))
         minDep = old_dep
         p1 = value[0]
@@ -319,8 +319,7 @@ def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIS
     dep_nums = np.zeros(shape=(len(REQUESTS)))
     simple_dep_nums = simple_assign_depots(REQUESTS, LOCATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS)
     # vote_dep_nums = vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS, DISTANCES_TO_DEPOTS,k)
-    w2w = worse2worst_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DISTANCES_FROM_DEPOTS,
-                                    DISTANCES_TO_DEPOTS)
+
     n = len(REQUESTS)
     m = len(DEPOTS)
 
@@ -341,7 +340,7 @@ def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIS
             # dep_nums[reqIndex1] = w2w[reqIndex1]
 
     for reqIndex1 in problematics:
-        cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
+        # cost = DISTANCES_FROM_DEPOTS[old_dep][value[0]] + DISTANCES_TO_DEPOTS[value[1]][old_dep]
         p1 = value[0]
         d1 = value[1]
         voter = []
@@ -351,7 +350,7 @@ def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIS
             if (reqIndex1 != reqIndex2 and can_merge_requests(REQUESTS, DISTANCES, timeWindows, DURATIONS, reqIndex1,
                                                               reqIndex2)):
                 cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
-            voter.append((reqIndex2, cost))
+                voter.append((reqIndex2, cost))
         voter.sort(key=lambda x: x[1])
         voter = voter[:k]
         voter = [int(simple_dep_nums[reqIndex]) for (reqIndex, _) in voter]

@@ -298,18 +298,19 @@ def vote_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIST
             if (reqIndex1 != reqIndex2 and can_merge_requests(REQUESTS, DISTANCES, timeWindows, DURATIONS, reqIndex1, reqIndex2)):
                 cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
                 voter.append((reqIndex2,cost))
-        voter.sort(key=lambda x: x[1])
-        voter = voter[:k]
-        voter = [int(old_dep_nums[reqIndex]) for (reqIndex,_)  in voter]
-        # print((reqIndex1,voter))
-        # if (len(set(voter)) == len(voter)):
-        #     minDep = voter[0]
-        # else:
-        #     minDep = mode(voter)
-        try:
-            minDep = mode(voter)
-        except StatisticsError:
-            minDep = voter[0]
+        if(voter):
+            voter.sort(key=lambda x: x[1])
+            voter = voter[:k]
+            voter = [int(old_dep_nums[reqIndex]) for (reqIndex,_)  in voter]
+            # print((reqIndex1,voter))
+            # if (len(set(voter)) == len(voter)):
+            #     minDep = voter[0]
+            # else:
+            #     minDep = mode(voter)
+            try:
+                minDep = mode(voter)
+            except StatisticsError:
+                minDep = voter[0]
         dep_nums[reqIndex1] = minDep
         old_dep_nums[reqIndex1] = minDep
     return dep_nums
@@ -332,6 +333,7 @@ def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIS
         voter = []
         old_dep = int(simple_dep_nums[reqIndex1])
         value = REQUESTS[reqIndex1]
+        minDep = old_dep
         if (closest_from_depot(value[0], DISTANCES_FROM_DEPOTS) == closest_to_depot(value[1], DISTANCES_TO_DEPOTS)):
             dep_nums[reqIndex1] = closest_from_depot(value[0], DISTANCES_FROM_DEPOTS)
             simple_dep_nums[reqIndex1] = closest_from_depot(value[0], DISTANCES_FROM_DEPOTS)
@@ -351,13 +353,14 @@ def final_assign_depots(REQUESTS, timeWindows, DISTANCES, DURATIONS, DEPOTS, DIS
                                                               reqIndex2)):
                 cost = DISTANCES[p1][p2] + DISTANCES[d1][d2]
                 voter.append((reqIndex2, cost))
-        voter.sort(key=lambda x: x[1])
-        voter = voter[:k]
-        voter = [int(simple_dep_nums[reqIndex]) for (reqIndex, _) in voter]
-        try:
-            minDep = mode(voter)
-        except StatisticsError:
-            minDep = voter[0]
+        if (voter):
+            voter.sort(key=lambda x: x[1])
+            voter = voter[:k]
+            voter = [int(simple_dep_nums[reqIndex]) for (reqIndex, _) in voter]
+            try:
+                minDep = mode(voter)
+            except StatisticsError:
+                minDep = voter[0]
         dep_nums[reqIndex1] = minDep
         simple_dep_nums[reqIndex1] = minDep
     return dep_nums
